@@ -126,7 +126,7 @@ export default function Dock({
 
   return (
     <motion.div
-      style={{ height, scrollbarWidth: "none" }}
+      style={{ height }}
       className="dock-outer"
     >
       <motion.div

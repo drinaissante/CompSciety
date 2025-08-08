@@ -4,7 +4,7 @@ import PixelTransition from "../extras/PixelTransition.jsx";
 
 function Partners() {
     return (
-        <div className="flex flex-col items-center py-8 bg-gray-50">
+        <div id="partners" className="flex flex-col items-center py-8 bg-gray-50">
             <h2 className="text-2xl fontbold mb-8 text-green-800">Our Partners</h2>
             <div className="flex flex-wrap gap-8 justify-center">
                 <img 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css'
 
 
@@ -15,6 +15,9 @@ import Footer from './components/Footer.jsx';
 import MainContent from './components/MainContent.jsx';
 import Hero from './components/Hero.jsx';
 import Partners from './components/Partners.jsx';
+
+import Particles from './extras/Particles.jsx';
+
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -46,8 +49,6 @@ function App() {
 
           <span className="text-3xl font-bold text-green-700">Welcome to CompSciety!</span>
           <span className='text-black'>GABBY DITO YUNG BROKEN GLASS</span>
-
-
         </motion.div>
       )}
 
@@ -77,7 +78,7 @@ function App() {
           />
 
           <button
-            onClick={() => window.scrollTo({ top: 0 })}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
             className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow"
           >
             <FaArrowUp />
@@ -92,4 +93,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
