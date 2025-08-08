@@ -1,6 +1,6 @@
-import "./css/NavBar.css"
+import "../css/NavBar.css"
 
-import logo from "./assets/CompSciety LOGO.png"
+import logo from "../assets/CompSciety LOGO.png"
 
 function NavBar() {
     return (
