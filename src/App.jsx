@@ -7,12 +7,14 @@ import { motion } from 'framer-motion';
 
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc"
 import Footer from './components/Footer.jsx';
+import MainContent from './components/MainContent.jsx';
+import Hero from './components/Hero.jsx';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowAnimation(false), 1500);
+    const timer = setTimeout(() => setShowAnimation(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,26 +26,38 @@ function App() {
   ];
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col'>
       {showAnimation && (
         <motion.div
-          initial={{opacity: 0, scale: 0.6}}
-          animate={{opacity: 1, scale: 1}}
+          initial={{opacity: 0, scale: 0.4}}
+          animate={{opacity: 1, scale: 1.2}}
           exit={{opacity: 0, scale: 2}}
-          transition={{duration: 1}}
+          transition={{duration: 2}}
           className="fixed inset-0 flex items-center justify-center bg-white z-50"
         >
 
           {/* PUT GLASS BREAKING MATRIX THING ANIMATION HERE */}
 
           <span className="text-3xl font-bold text-green-700">Welcome to CompSciety!</span>
+          <span className='text-black'>GABBY DITO YUNG BROKEN GLASS</span>
+
 
         </motion.div>
       )}
 
       {!showAnimation && (
         <>
+          {/* animated cursor  ?? */}
+
+          {/* header with navbar */}
+
           <NavBar />
+
+          {/* hero */}
+          <Hero />
+
+          {/* CONTENT */}
+          <MainContent />
 
           <Dock 
             items={items}
@@ -52,30 +66,11 @@ function App() {
             magnification={70}
           />
 
+          {/* footer */}
+          <Footer />
+          
         </>
       )}
-
-
-
-      {/* animated cursor  ?? */}
-
-
-      {/* header with navbar */}
-
-      <NavBar />
-
-      {/* main content */}
-
-      <Dock 
-        items={items}
-        panelHeight={68}
-        baseItemSize={50}
-        magnification={70}
-      />
-
-      {/* footer */}
-      <Footer />
-      
     </div>
   )
 }

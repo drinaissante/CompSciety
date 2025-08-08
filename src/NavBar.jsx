@@ -4,31 +4,12 @@ import logo from "./assets/CompSciety LOGO.png"
 
 function NavBar() {
     return (
-    <nav className="navbar fixed top-0 left-0 w-full z-50">
-        <div className="navbar-logo gap-3">
-            {/* compsciety logo */}
-            <img src={logo} alt="CompSciety Logo" 
-            className="h-[50px]" />
-
-            <span className="flex items-center justify-items-center">BulSU Computer Science Society</span>
+        <header className="bg-green-700 text-white p-4 shadow-md flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img src={logo} alt="Logo" className="h-10" />
+          <h1 className="text-xl font-bold">BulSU Computer Science Society</h1>
         </div>
-        <div className="navbar-links">
-            {/* Upon clicked */}
-
-            test changes
-        </div>
-        <div className="hamburger">
-            <span className="cursor-target">
-                Home
-            </span>
-            <span className="cursor-target">
-                About Us
-            </span>
-            <span className="cursor-target">
-                Contact
-            </span>
-        </div>
-    </nav>
+      </header>
     )
 }
 
