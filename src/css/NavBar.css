@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+.navbar-logo {
+    display: flex;
+    padding: 1px;
+    background-color: green;
+    font-size: large;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+}
+
+.hamburger span {
+    height: 5px;
+    width: 28px;
+    background: #fff;
+    margin: 5px 0;
+    border-radius: 2px;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .navbar-logo {
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 30px;
+    }
+
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: green;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
