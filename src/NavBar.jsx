@@ -14,6 +14,8 @@ function NavBar() {
         </div>
         <div className="navbar-links">
             {/* Upon clicked */}
+
+            test changes
         </div>
         <div className="hamburger">
             <span className="cursor-target">
