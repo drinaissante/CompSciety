@@ -9,6 +9,7 @@ import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vs
 import Footer from './components/Footer.jsx';
 import MainContent from './components/MainContent.jsx';
 import Hero from './components/Hero.jsx';
+import Partners from './components/Partners.jsx';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -50,7 +51,6 @@ function App() {
           {/* animated cursor  ?? */}
 
           {/* header with navbar */}
-
           <NavBar />
 
           {/* hero */}
@@ -58,6 +58,9 @@ function App() {
 
           {/* CONTENT */}
           <MainContent />
+
+          {/* organization partners */}
+          <Partners />
 
           <Dock 
             items={items}
