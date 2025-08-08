@@ -4,8 +4,9 @@ import bg from "../assets/bg.png";
 
 function Hero() {
     return (
-    <section className="flex flex-col items-center justify-center min-h-screen">
-        <div className="max-w-full relative">
+    <section className="flex flex-col items-center justify-center min-h-screen 
+                        bg-gradient-to-b from-green-100 to-white">
+        <div className="">
             {/* <GridDistortion
                 imageSrc={bg}
                 grid={10}

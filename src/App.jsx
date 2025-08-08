@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 
+
 import NavBar from './components/NavBar.jsx'
 import Dock from './extras/Dock.jsx';
+
+
 import { motion } from 'framer-motion';
 
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc"
+import { FaArrowUp } from "react-icons/fa"
+
 import Footer from './components/Footer.jsx';
 import MainContent from './components/MainContent.jsx';
 import Hero from './components/Hero.jsx';
@@ -27,13 +32,13 @@ function App() {
   ];
 
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className='min-h-screen flex flex-col scroll-smooth'>
       {showAnimation && (
         <motion.div
           initial={{opacity: 0, scale: 0.4}}
           animate={{opacity: 1, scale: 1.2}}
           exit={{opacity: 0, scale: 2}}
-          transition={{duration: 2}}
+          transition={{duration: 4}}
           className="fixed inset-0 flex items-center justify-center bg-white z-50"
         >
 
@@ -59,6 +64,8 @@ function App() {
           {/* CONTENT */}
           <MainContent />
 
+          {/* events */}
+
           {/* organization partners */}
           <Partners />
 
@@ -68,6 +75,13 @@ function App() {
             baseItemSize={50}
             magnification={70}
           />
+
+          <button
+            onClick={() => window.scrollTo({ top: 0 })}
+            className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow"
+          >
+            <FaArrowUp />
+          </button>
 
           {/* footer */}
           <Footer />

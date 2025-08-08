@@ -9,8 +9,14 @@ function NavBar() {
   return (
     <header className="fixed w-full bg-green-700 text-white pl-50 shadow-md flex items-center justify-between z-50">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-13" />
-          <h1 className="text-sm font-semibold">BulSU Computer Science Society</h1>
+            <img 
+              src={logo}
+               alt="Logo" 
+               className="h-13 cursor-pointer" 
+               onClick={window.scrollTo({ top: 0})}
+              />
+
+          {/* <h1 className="text-sm font-semibold">BulSU Computer Science Society</h1> */}
         </div>
 
         {/* Navigation Links */}
