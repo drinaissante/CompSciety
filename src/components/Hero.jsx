@@ -39,7 +39,7 @@ function Hero() {
         </div>
 
         <TextType 
-            text={["Text typing effect", "for your websites", "Happy coding!"]}
+            text={["Text typing effect", "SUP", "Happy coding!"]}
             typingSpeed={80}
             pauseDuration={1500}
             showCursor={true}

@@ -15,15 +15,24 @@ function NavBar() {
     { label: "Contact", href: "#contact" },
   ];
 
+  function scrollTo(item) {
+    const section = document.getElementById(item.href.replace('#', ''));
+
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth"})
+    }
+  }
+
   return (
-    <header className="fixed w-full bg-green-700 text-white pl-90 shadow-md flex items-center justify-between z-50">
+    <header className="fixed w-full bg-green-700 text-white pl-90 shadow-md 
+        flex items-center justify-between z-50">
         <div className="flex items-center gap-2">
             <img 
               src={logo}
                alt="Logo" 
                className="h-18 cursor-pointer" 
-               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              // TODO SCROLL TO TOPc
+               onClick={() => scrollTo('home')}
+              // TODO SCROLL TO TOP
               />
 
           {/* <h1 className="text-sm font-semibold">BulSU Computer Science Society</h1> */}
