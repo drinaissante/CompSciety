@@ -30,17 +30,17 @@ function Footer() {
                 </a> */}
 
                 <a href="https://www.facebook.com/compscietybulsu2025" target="_blank" rel="noopener noreferrer">
-                    <FaFacebook />
+                    <FaFacebook  size={23}/>
                 </a>
 
                 
                 <a href="https://www.instagram.com/compscietybulsu2025/" target="_blank" rel="noopener noreferrer">
-                    <FaInstagram />
+                    <FaInstagram  size={23}/>
                 </a>
 
                 
                 <a href="https://www.linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
+                    <FaLinkedin  size={23}/>
                 </a>
             </div>
 

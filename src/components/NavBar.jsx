@@ -4,6 +4,9 @@ import logo from "../assets/CompSciety LOGO.png"
 import { useState } from "react";
 
 import GooeyNav from "../extras/GooeyNav.jsx"
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+
+import { MdDarkMode } from "react-icons/md";
 
 function NavBar() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -15,18 +18,11 @@ function NavBar() {
     { label: "Contact", href: "#contact" },
   ];
 
-  function scrollTo(item) {
-    const section = document.getElementById(item.href.replace('#', ''));
 
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth"})
-    }
-  }
 
   return (
-    <header className="fixed w-full bg-green-700 text-white pl-90 shadow-md 
-        flex items-center justify-between z-50">
-        <div className="flex items-center gap-2">
+    <header className="fixed w-full bg-[#2c4330] text-white shadow-md flex items-center z-50">
+        <div className="flex items-center pl-20 gap-2">
             <img 
               src={logo}
                alt="Logo" 
@@ -39,7 +35,7 @@ function NavBar() {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center pr-90 gap-8">
+        <div className="flex items-center pl-30 gap-8">
           <GooeyNav
             items={items}
             particleCount={10}
@@ -59,6 +55,32 @@ function NavBar() {
           <h1 className="py-2">Light / Dark</h1> */}
           {/* TODO LIGHT AND DARK MODE */}
         </div>
+
+        <div className="pl-30 pr-20 flex gap-5">
+            {/* <a href="">
+                <FaYoutube />
+            </a> */}
+
+            <a href="https://www.facebook.com/compscietybulsu2025" target="_blank" rel="noopener noreferrer">
+                <FaFacebook size={23}/>
+            </a>
+
+            
+            <a href="https://www.instagram.com/compscietybulsu2025/" target="_blank" rel="noopener noreferrer">
+                <FaInstagram size={23} />
+            </a>
+
+            
+            <a href="https://www.linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin size={23} />
+            </a>
+        </div>
+        
+        <div className="bg-[#5e936c] text-xl flex text-center px-10 py-1  rounded-full">
+            Join
+        </div>
+
+        <MdDarkMode className="flex pl-3 text-white" size={30}/>
 
         {/* For mobile */}
         <button
