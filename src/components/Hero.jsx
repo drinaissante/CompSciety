@@ -1,13 +1,4 @@
-import GridDistortion from "../extras/GridDistortion.jsx";
-
-import bg from "../assets/bg.png";
-
 import TextType from "../extras/TextTyping.jsx"
-
-import ShinyText from "../extras/ShinyText.jsx";
-
-import ScrollFloat from "../extras/ScrollFloat.jsx";
-
 import Particles from "../extras/Particles.jsx";
 
 

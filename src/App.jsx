@@ -70,19 +70,19 @@ function App() {
           {/* organization partners */}
           <Partners />
 
-          <Dock 
+          {/* <Dock 
             items={items}
             panelHeight={68}
             baseItemSize={50}
             magnification={70}
-          />
+          /> */}
 
-          <button
+          {/* <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
             className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow"
           >
             <FaArrowUp />
-          </button>
+          </button> */}
 
           {/* footer */}
           <Footer />
