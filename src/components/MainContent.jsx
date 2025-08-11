@@ -17,7 +17,8 @@ function MainContent() {
                 Place events left, right etc.
             </p>
         </div>
-{/* 
+        
+        {/* 
         <AnimatedList
             items={items}
             onItemSelect={(item, index) => console.log(item, index)}
