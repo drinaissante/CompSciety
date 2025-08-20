@@ -1,23 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 
-
 import NavBar from './components/NavBar.jsx'
-import Dock from './extras/Dock.jsx';
 
 
 import { motion } from 'framer-motion';
 
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc"
-import { FaArrowUp } from "react-icons/fa"
 
 import Footer from './components/Footer.jsx';
-import MainContent from './components/MainContent.jsx';
 import Hero from './components/Hero.jsx';
 import Partners from './components/Partners.jsx';
 
-import Particles from './extras/Particles.jsx';
-
+import Events from './components/Events.jsx';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -62,10 +57,11 @@ function App() {
           {/* hero */}
           <Hero />
 
-          {/* CONTENT */}
-          <MainContent />
+          {/* separator */}
+          <div className="bg-[#2c4330] p-8"></div>
 
           {/* events */}
+          <Events />
 
           {/* organization partners */}
           <Partners />
