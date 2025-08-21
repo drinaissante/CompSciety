@@ -1,112 +1,124 @@
 import "../css/NavBar.css"
 
 import logo from "../assets/CompSciety.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import GooeyNav from "../extras/GooeyNav.jsx"
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
-import { MdDarkMode } from "react-icons/md";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 function NavBar() {
+  const [isDark, setIsDark] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const items = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Events", href: "#events" },
-    { label: "Partners", href: "#partners" },
-    { label: "Contact", href: "#contact" },
-  ];
 
+  // toggle theme
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }, [isDark]);
 
+  // when the user scrolls, close the menu
+  useEffect(() => {
+    const handleScroll = () => {
+      if (openMenu && window.scrollY > 350) {
+         // 350 lang pinaka-optimal. close the menu when user scrolls 350 pixels below or above
+
+        setOpenMenu(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [openMenu]);
+
+  const navLinks = ['Home', 'About', 'Events', 'Partners', 'Contact'];
 
   return (
-    <header className="fixed w-full bg-[#2c4330] text-white shadow-md flex items-center z-50">
-        <div className="flex items-center pl-20 gap-2">
-            <img 
-              src={logo}
-               alt="Logo" 
-               className="h-18 cursor-pointer" 
-               onClick={() => scrollTo('home')}
-              // TODO SCROLL TO TOP
-              />
+    <header className="fixed w-full z-50 shadow-md bg-[#2c4330] text-black dark:text-white transition-colors">
+      <div className="mx-auto flex items-center justify-between px-6 py-3">
 
-          {/* <h1 className="text-sm font-semibold">BulSU Computer Science Society</h1> */}
-        </div>
-
-        {/* Navigation Links */}
-        <div className="flex items-center pl-30 gap-8">
-          <GooeyNav
-            items={items}
-            particleCount={10}
-            particleDistances={[90, 10]}
-            particleR={100}
-            initialActiveIndex={0}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          />
-
-          {/* <h1 className="py-2">Home</h1>
-          <h1 className="py-2">About</h1>
-          <h1 className="py-2">Events</h1>
-          <h1 className="py-2">Partners</h1>
-          <h1 className="py-2">Contact</h1>
-          <h1 className="py-2">Light / Dark</h1> */}
-          {/* TODO LIGHT AND DARK MODE */}
-        </div>
-
-        <div className="pl-30 pr-20 flex gap-5">
-            {/* <a href="">
-                <FaYoutube />
-            </a> */}
-
-            <a href="https://www.facebook.com/compscietybulsu2025" target="_blank" rel="noopener noreferrer">
-                <FaFacebook size={23}/>
-            </a>
-
-            
-            <a href="https://www.instagram.com/compscietybulsu2025/" target="_blank" rel="noopener noreferrer">
-                <FaInstagram size={23} />
-            </a>
-
-            
-            <a href="https://www.linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank" rel="noopener noreferrer">
-                <FaLinkedin size={23} />
-            </a>
-        </div>
-        
-        <div className="bg-[#5e936c] text-xl flex text-center px-10 py-1  rounded-full">
-            Join
-        </div>
-
-        <MdDarkMode className="flex pl-3 text-white" size={30}/>
-
-        {/* For mobile */}
+        {/* Hamburger menu */}
         <button
-          className="md:hidden flex flex-col justify-center items-center h-10 w-10"
+          className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer"
           onClick={() => setOpenMenu(!openMenu)}
           aria-label="Toggle Menu"
         >
-          <span className="block w-7 h-1 bg-white mb-1 rounded"></span>
-          <span className="block w-7 h-1 bg-white mb-1 rounded"></span>
-          <span className="block w-7 h-1 bg-white mb-1 rounded"></span>
+          <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
+          <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
+          <span className="w-6 h-[2px] bg-current rounded"></span>
         </button>
 
-        {/* Menu */}
-        {openMenu && (
-          <div className="absolute top-full right-0 w-full bg-green-800 flex flex-col items-center, py-4 md:hidden shadow-lg">
-            <h1 className="py-2">Home</h1>
-            <h1 className="py-2">About</h1>
-            <h1 className="py-2">Events</h1>
-            <h1 className="py-2">Partners</h1>
-            <h1 className="py-2">Contact</h1>
-          <h1 className="py-2">Light / Dark</h1>
-          </div>
-        )}
+        {/* Logo */}
+        <img
+          src={logo}
+          alt="Logo"
+          className="lg:ml-80 h-18 cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
 
+        {/* Centered Navigation */}
+        <nav className="hidden lg:flex gap-10 text-lg font-medium">
+          {navLinks.map((link, index) => (
+            <a key={index} href='#' className="hover:text-[#5e936c] transition"
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+              {link}
+            </a>
+          ))}
+        </nav>
+
+        {/* Right controls */}
+        <div className="flex items-center gap-5">
+
+          {/* Social icons */}
+          <div className="hidden md:flex gap-3">
+            <a href="https://facebook.com/compscietybulsu2025/" target="_blank"><FaFacebook size={30} /></a>
+            <a href="https://instagram.com/compscietybulsu2025/" target="_blank"><FaInstagram size={30} /></a>
+            <a href="https://linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank"><FaLinkedin size={30} /></a>
+          </div>
+
+          <div className="bg-[#5e936c] text-xl flex text-center px-10 py-1 rounded-full">
+            Join 
+          </div>
+
+          {/* Dark mode toggle */}
+          <button onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
+            {isDark ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {openMenu && (
+        <div className="lg:hidden flex flex-col items-center gap-4 py-4 bg-[#5e936c] text-white text-lg">
+          {navLinks.map((link, index) => (
+            <a
+              key={index}
+              href='#'
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+
+                setOpenMenu(false);
+              }}
+              className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
+            >
+              {link}
+            </a>
+          ))}
+        </div>
+      )}
+      
     </header>
-  )
+  );
 }
 
 export default NavBar;
