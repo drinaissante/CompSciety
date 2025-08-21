@@ -13,6 +13,8 @@ import Hero from './components/Hero.jsx';
 import Partners from './components/Partners.jsx';
 
 import Events from './components/Events.jsx';
+import Blogs from './components/Blogs.jsx';
+import About from './components/About.jsx';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -62,6 +64,12 @@ function App() {
 
           {/* events */}
           <Events />
+
+          {/* Blogs */}
+          <Blogs />
+
+          {/* About CompSciety */}
+          <About />
 
           {/* organization partners */}
           <Partners />
