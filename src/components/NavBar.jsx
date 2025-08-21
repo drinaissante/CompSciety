@@ -1,6 +1,6 @@
 import "../css/NavBar.css"
 
-import logo from "../assets/CompSciety LOGO.png"
+import logo from "../assets/CompSciety.png"
 import { useState } from "react";
 
 import GooeyNav from "../extras/GooeyNav.jsx"

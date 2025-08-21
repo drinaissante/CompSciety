@@ -1,6 +1,8 @@
 import TextType from "../extras/TextTyping.jsx"
 import Galaxy from "../extras/Galaxy.jsx"
 
+import logo from "../assets/CompSciety.png"
+
 function Hero() {
     return (
     <section 
@@ -14,6 +16,7 @@ function Hero() {
             cursorCharacter="|"
         />
 
+        <img src={logo} className="w-1/4 m-10" />
         {/* TODO LOGO */}
 
         <h1 className="text-5xl font-bold mb-4 bg-gradient-to-t from-white via-green-600 to-green-900 bg-clip-text text-transparent">
@@ -24,7 +27,7 @@ function Hero() {
         </p>
         
         <Galaxy 
-            className="absolute w-full h-full"
+            className="absolute h-full w-full"
             mouseRepulsion={false}
             mouseInteraction={true}
             density={1}
