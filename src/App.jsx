@@ -44,6 +44,9 @@ function App() {
 
           {/* PUT GLASS BREAKING MATRIX THING ANIMATION HERE */}
 
+
+          
+
           <span className="text-3xl font-bold text-green-700">Welcome to CompSciety!</span>
           <span className='text-black'>GABBY DITO YUNG BROKEN GLASS</span>
         </motion.div>
