@@ -39,7 +39,7 @@ const announcements = [
 
 function Events() {
     return (
-        <main className="bg-[#e8ffd7] flex flex-col lg:flex-row justify-center p-5 gap-4">
+        <main id="events" className="bg-[#e8ffd7] flex flex-col lg:flex-row justify-center p-5 gap-4">
             {/* Events Column */}
             <div className="lg:w-1/3 text-2xl text-black font-bold">
                 Events

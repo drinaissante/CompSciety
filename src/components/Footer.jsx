@@ -51,7 +51,7 @@ function Footer() {
         </div>
 
         {/* contact */}
-        <div className="flex flex-col pt-4">
+        <div id="contact" className="flex flex-col pt-4">
             <span>
                 Contact Us
             </span>

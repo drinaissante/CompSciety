@@ -1,6 +1,6 @@
 function About() {
   return (
-    <div className="bg-[#e8ffd7] flex flex-col items-center text-center p-5 gap-8 text-black">
+    <div id="about" className="bg-[#e8ffd7] flex flex-col items-center text-center p-5 gap-8 text-black">
       <span className="font-bold text-4xl">About CompSciety</span>
 
       <p className="text-lg sm:text-2xl max-w-4xl mx-auto">

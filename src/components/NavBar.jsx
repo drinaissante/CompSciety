@@ -3,7 +3,6 @@ import "../css/NavBar.css"
 import logo from "../assets/CompSciety.png"
 import { useState, useEffect } from "react";
 
-import GooeyNav from "../extras/GooeyNav.jsx"
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
@@ -37,7 +36,7 @@ function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [openMenu]);
 
-  const navLinks = ['Home', 'About', 'Events', 'Partners', 'Contact'];
+  const navLinks = ['Home', 'Events', 'Blogs', 'About', 'Partners', 'Contact'];
 
   return (
     <header className="fixed w-full z-50 shadow-md bg-[#2c4330] text-black dark:text-white transition-colors">
@@ -104,10 +103,29 @@ function NavBar() {
             href='#'
             onClick={(event) => {
               event.preventDefault();
-              document
-                .getElementById(link.toLowerCase())
-                ?.scrollIntoView({ behavior: 'smooth' });
-              setOpenMenu(false);
+
+              const target = document.getElementById(link.toLowerCase());
+
+              if (!target) return;
+
+              // Scroll to the target element
+              target.scrollIntoView({ behavior: 'smooth' });
+
+              // Use IntersectionObserver to detect when it reaches viewport
+              const observer = new IntersectionObserver(
+                (entries) => {
+                  const entry = entries[0];
+                  if (entry.isIntersecting) {
+                    setOpenMenu(false);
+                    observer.disconnect();
+                  }
+                },
+                {
+                  threshold: 0.7, // At least 70% visible
+                }
+              );
+
+              observer.observe(target);
             }}
             className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
           >
