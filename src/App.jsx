@@ -15,6 +15,7 @@ import Partners from './components/Partners.jsx';
 import Events from './components/Events.jsx';
 import Blogs from './components/Blogs.jsx';
 import About from './components/About.jsx';
+import { FaArrowUp } from 'react-icons/fa';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -23,13 +24,6 @@ function App() {
     const timer = setTimeout(() => setShowAnimation(false), 3000);
     return () => clearTimeout(timer);
   }, []);
-
-  const items = [
-    { icon: <VscHome size={18} />, label: 'Home', onClick: () => alert('Home!') },  
-    { icon: <VscArchive size={18} />, label: 'Archive', onClick: () => alert('Archive!') },
-    { icon: <VscAccount size={18} />, label: 'Profile', onClick: () => alert('Profile!') },
-    { icon: <VscSettingsGear size={18} />, label: 'Settings', onClick: () => alert('Settings!') },
-  ];
 
   return (
     <div className='min-h-screen flex flex-col scroll-smooth'>
@@ -43,9 +37,6 @@ function App() {
         >
 
           {/* PUT GLASS BREAKING MATRIX THING ANIMATION HERE */}
-
-
-          
 
           <span className="text-3xl font-bold text-green-700">Welcome to CompSciety!</span>
           <span className='text-black'>GABBY DITO YUNG BROKEN GLASS</span>
@@ -77,19 +68,12 @@ function App() {
           {/* organization partners */}
           <Partners />
 
-          {/* <Dock 
-            items={items}
-            panelHeight={68}
-            baseItemSize={50}
-            magnification={70}
-          /> */}
-
-          {/* <button
+          <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
             className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow"
           >
-            <FaArrowUp />
-          </button> */}
+            <FaArrowUp size={28}/>
+          </button>
 
           {/* footer */}
           <Footer />

@@ -17,7 +17,6 @@ function Hero() {
         />
 
         <img src={logo} className="w-1/4 m-10" />
-        {/* TODO LOGO */}
 
         <h1 className="text-5xl font-bold mb-4 bg-gradient-to-t from-white via-green-600 to-green-900 bg-clip-text text-transparent">
             Welcome to CompSciety!
