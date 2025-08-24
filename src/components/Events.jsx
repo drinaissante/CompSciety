@@ -1,6 +1,7 @@
 import Announcement from "../models/Announcement.jsx";
 import Event from "../models/Event.jsx";
 
+// DITO TAYO MAGLALAGAY NG EVENTS (HARDCODED MUNA)
 const events = [
     {
         name: "Event 1",
@@ -24,6 +25,7 @@ const events = [
     }
 ]
 
+// DITO TAYO MAGLALAGAY NG EVENTS (HARDCODED MUNA)
 const announcements = [
     {
         title: "Announcement 1",
@@ -44,16 +46,16 @@ const announcements = [
 
 function Events() {
     return (
-        <main className="bg-[#e8ffd7] flex flex-col sm:flex-row justify-center p-5 gap-4">
+        <main className="bg-[#e8ffd7] flex md:flex-row justify-center p-5 gap-4">
 
             {/* Events Column */}
-            <div className="ml-5 text-2xl text-black font-bold">
+            <div className="ml-5 text-2xl text-black font-bold ">
                 Events
 
                 <div className="mt-5 text-xl flex flex-col gap-5">
 
                     {events.map((event, index) => (
-                        <div key={index} className="flex rounded-xl overflow-hidden">
+                        <div key={index} className="flex rounded-xl overflow-hidden  transform transition duration-300 hover:scale-103">
 
                             <div className="bg-[#0e6b11] w-4 rounded-l-xl"></div>
 
@@ -71,7 +73,7 @@ function Events() {
             <div className="mr-5 ml-5 text-2xl text-black font-bold">
                 Announcements
 
-                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-2">
+                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-2 transform transition duration-300 hover:scale-103">
                     
                     {announcements.map((event, index) => (
                         <div key={index}>
