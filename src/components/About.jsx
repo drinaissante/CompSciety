@@ -11,7 +11,7 @@ function About() {
         beyond the university.
       </p>
 
-      <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6 m-10 w-full max-w-6xl ">
+      <div className="flex flex-col lg:flex-row justify-center gap-6 m-10 w-full max-w-6xl ">
         <div className="bg-[#5e936c] rounded-2xl flex flex-col gap-3 p-8 text-white text-center flex-1 transform transition duration-300 hover:scale-103">
           <span className="font-bold text-xl lg:text-2xl">Mission</span>
           <p>

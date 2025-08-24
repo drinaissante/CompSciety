@@ -24,15 +24,6 @@ function Hero() {
         <p className="text-xl mb-8 bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
             Background here.
         </p>
-        
-        <Galaxy 
-            className="absolute h-full w-full"
-            mouseRepulsion={false}
-            mouseInteraction={true}
-            density={1}
-            saturation={0.3}
-            hueShift={100}
-        />
 
   </section>
     )
