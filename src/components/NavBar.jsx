@@ -1,7 +1,7 @@
 import "../css/NavBar.css"
 
 import logo from "../assets/CompSciety.png"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
@@ -10,6 +10,8 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 function NavBar() {
   const [isDark, setIsDark] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+
+  const menuRef = useRef(null);
 
   // toggle theme
   useEffect(() => {
@@ -32,9 +34,23 @@ function NavBar() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    
+    const handleClickOutsideMenu = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenMenu(false)
+      }
+    };
+    
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [openMenu]);
+    if (openMenu) {
+      document.addEventListener('mousedown', handleClickOutsideMenu);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutsideMenu);
+    }
+  }, [openMenu]); // openMenu is necessary since in react, every time na may changes dito ( sa openMenu reference object ), magru-run yung nasa loob ng code.
 
   const navLinks = ['Home', 'Events', 'Blogs', 'About', 'Partners', 'Contact'];
 
@@ -44,6 +60,7 @@ function NavBar() {
 
         <div className="flex items-center gap-4">
           <button
+            ref={menuRef}
             className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer hover:text-[#5e936c] transition"
             onClick={() => setOpenMenu(!openMenu)}
             aria-label="Toggle Menu"
