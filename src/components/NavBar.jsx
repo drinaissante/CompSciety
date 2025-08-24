@@ -93,8 +93,8 @@ function NavBar() {
 
       {/* Mobile menu */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${
-          openMenu ? 'max-h-96 py-4' : 'max-h-0'
+        className={`lg:hidden will-change-transform transition-all duration-300 ease-in-out origin-top transform ${
+          openMenu ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
         } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4`}
       >
         {navLinks.map((link, index) => (
@@ -111,21 +111,22 @@ function NavBar() {
               // Scroll to the target element
               target.scrollIntoView({ behavior: 'smooth' });
 
-              // Use IntersectionObserver to detect when it reaches viewport
-              const observer = new IntersectionObserver(
-                (entries) => {
-                  const entry = entries[0];
-                  if (entry.isIntersecting) {
-                    setOpenMenu(false);
-                    observer.disconnect();
-                  }
-                },
-                {
-                  threshold: 0.7, // At least 70% visible
-                }
-              );
+              // Smoothly wait until scroll ends
+              let lastY = window.scrollY;
 
-              observer.observe(target);
+              const checkScroll = () => {
+                const currentY = window.scrollY;
+
+                if (Math.abs(currentY - lastY) < 2) {
+                  setOpenMenu(false); // Close menu when scrolling stops
+                } else {
+                  lastY = currentY;
+                  requestAnimationFrame(checkScroll);
+                }
+
+              };
+
+              requestAnimationFrame(checkScroll);
             }}
             className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
           >

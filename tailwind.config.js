@@ -9,6 +9,13 @@ module.exports = {
       screens: {
         xs: "480px", // Add xs breakpoint
       },
+      transformOrigin: {
+        top: "top",
+      },
+      scale: {
+        0: "0",
+        100: "1",
+      },
     },
   },
   plugins: [],
