@@ -3,10 +3,7 @@ import './App.css'
 
 import NavBar from './components/NavBar.jsx'
 
-
 import { motion } from 'framer-motion';
-
-import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc"
 
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
