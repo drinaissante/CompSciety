@@ -1,7 +1,6 @@
 import Announcement from "../models/Announcement.jsx";
 import Event from "../models/Event.jsx";
 
-// DITO TAYO MAGLALAGAY NG EVENTS (HARDCODED MUNA)
 const events = [
     {
         name: "Event 1",
@@ -9,82 +8,68 @@ const events = [
         location: "LOC",
         date: "September 11, 2001",
     },
-    
     {
         name: "Event 2",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
         location: "LOC",
         date: "September 11, 2001",
     },
-    
     {
         name: "Event 3",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
         location: "LOC",
         date: "September 11, 2001",
     }
-]
+];
 
-// DITO TAYO MAGLALAGAY NG EVENTS (HARDCODED MUNA)
 const announcements = [
     {
         title: "Announcement 1",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
     },
-    
     {
         title: "Announcement 2",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
     },
-
-    
     {
         title: "Announcement 3",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
     }
-]
+];
 
 function Events() {
     return (
-        <main className="bg-[#e8ffd7] flex md:flex-row justify-center p-5 gap-4">
-
+        <main className="bg-[#e8ffd7] flex flex-col lg:flex-row justify-center p-5 gap-4">
             {/* Events Column */}
-            <div className="ml-5 text-2xl text-black font-bold ">
+            <div className="lg:w-1/3 text-2xl text-black font-bold">
                 Events
 
                 <div className="mt-5 text-xl flex flex-col gap-5">
-
                     {events.map((event, index) => (
-                        <div key={index} className="flex rounded-xl overflow-hidden  transform transition duration-300 hover:scale-103">
-
+                        <div key={index} className="flex rounded-xl overflow-hidden transform transition duration-300 hover:scale-101">
                             <div className="bg-[#0e6b11] w-4 rounded-l-xl"></div>
-
                             <div className="bg-[#5e936c] p-4 flex-1">
-                                <Event {...event}/>
+                                <Event {...event} />
                             </div>
-
                         </div>
                     ))}
-
                 </div>
             </div>
 
-            {/* Announcement column */}
-            <div className="mr-5 ml-5 text-2xl text-black font-bold">
+            {/* Announcement Column */}
+            <div className="lg:w-1/6 text-2xl text-black font-bold mt-10 lg:mt-0">
                 Announcements
 
-                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-2 transform transition duration-300 hover:scale-103">
-                    
+                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-4 transform transition duration-300 hover:scale-101">
                     {announcements.map((event, index) => (
                         <div key={index}>
                             <Announcement {...event} />
-                            
-                            {index !== events.length - 1 && (
-                                <hr className="border-t border-white my-2.5 align-center w-50 mx-auto"/>
+                            {index !== announcements.length - 1 && (
+                                <hr className="border-t border-white my-2.5 mx-auto" />
                             )}
                         </div>
                     ))}
-                </div> 
+                </div>
             </div>
         </main>
     );
