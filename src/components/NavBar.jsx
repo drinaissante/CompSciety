@@ -86,32 +86,36 @@ function NavBar() {
             Join 
           </div>
 
-          <button onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
+          <button className="cursor-pointer" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
             {isDark ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {openMenu && (
-        <div className="lg:hidden flex flex-col items-center gap-4 py-4 bg-[#5e936c] text-white text-lg">
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href='#'
-              onClick={(event) => {
-                event.preventDefault();
-                document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${
+          openMenu ? 'max-h-96 py-4' : 'max-h-0'
+        } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4`}
+      >
+        {navLinks.map((link, index) => (
+          <a
+            key={index}
+            href='#'
+            onClick={(event) => {
+              event.preventDefault();
+              document
+                .getElementById(link.toLowerCase())
+                ?.scrollIntoView({ behavior: 'smooth' });
+              setOpenMenu(false);
+            }}
+            className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
+          >
+            {link}
+          </a>
+        ))}
+      </div>
 
-                setOpenMenu(false);
-              }}
-              className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
-            >
-              {link}
-            </a>
-          ))}
-        </div>
-      )}
       
     </header>
   );
