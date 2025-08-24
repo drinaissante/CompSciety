@@ -88,9 +88,9 @@ function App() {
           {showScrollBtn && (
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
-              className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow transform transition duration-300 hover:-translate-y-3"
+              className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow transform transition duration-300 hover:-translate-y-3 text-xl"
             >
-              <FaArrowUp size={28}/>
+              <FaArrowUp/>
             </button>
           )}
 
