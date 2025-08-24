@@ -19,10 +19,27 @@ import { FaArrowUp } from 'react-icons/fa';
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
+  const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowAnimation(false), 3000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScrollBtn = () => {
+      const currentY = window.scrollY;
+
+      if (currentY > 300) {
+        setShowScrollBtn(true);
+      } else {
+        setShowScrollBtn(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScrollBtn);
+
+    return () => window.removeEventListener('scroll', handleScrollBtn);
   }, []);
 
   return (
@@ -68,12 +85,14 @@ function App() {
           {/* organization partners */}
           <Partners />
 
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
-            className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow"
-          >
-            <FaArrowUp size={28}/>
-          </button>
+          {showScrollBtn && (
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
+              className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded shadow transform transition duration-300 hover:-translate-y-3"
+            >
+              <FaArrowUp size={28}/>
+            </button>
+          )}
 
           {/* footer */}
           <Footer />
