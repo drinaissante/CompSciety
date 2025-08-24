@@ -41,28 +41,27 @@ function NavBar() {
 
   return (
     <header className="fixed w-full z-50 shadow-md bg-[#2c4330] text-black dark:text-white transition-colors">
-      <div className="mx-auto flex items-center justify-between px-6 py-3">
+      <div className="mx-auto flex items-center justify-between px-4 py-3">
 
-        {/* Hamburger menu */}
-        <button
-          className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer"
-          onClick={() => setOpenMenu(!openMenu)}
-          aria-label="Toggle Menu"
-        >
-          <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
-          <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
-          <span className="w-6 h-[2px] bg-current rounded"></span>
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer hover:text-[#5e936c] transition"
+            onClick={() => setOpenMenu(!openMenu)}
+            aria-label="Toggle Menu"
+          >
+            <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
+            <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
+            <span className="w-6 h-[2px] bg-current rounded"></span>
+          </button>
 
-        {/* Logo */}
-        <img
-          src={logo}
-          alt="Logo"
-          className="lg:ml-80 h-18 cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        />
+          <img
+            src={logo}
+            alt="Logo"
+            className="lg:h-16 h-12 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          />
+        </div>
 
-        {/* Centered Navigation */}
         <nav className="hidden lg:flex gap-10 text-lg font-medium">
           {navLinks.map((link, index) => (
             <a key={index} href='#' className="hover:text-[#5e936c] transition"
@@ -75,11 +74,9 @@ function NavBar() {
           ))}
         </nav>
 
-        {/* Right controls */}
         <div className="flex items-center gap-5">
 
-          {/* Social icons */}
-          <div className="hidden md:flex gap-3">
+          <div className="hidden sm:flex gap-3">
             <a href="https://facebook.com/compscietybulsu2025/" target="_blank"><FaFacebook size={30} /></a>
             <a href="https://instagram.com/compscietybulsu2025/" target="_blank"><FaInstagram size={30} /></a>
             <a href="https://linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank"><FaLinkedin size={30} /></a>
@@ -89,7 +86,6 @@ function NavBar() {
             Join 
           </div>
 
-          {/* Dark mode toggle */}
           <button onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
             {isDark ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
           </button>
