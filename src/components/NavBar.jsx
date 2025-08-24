@@ -92,11 +92,7 @@ function NavBar() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`lg:hidden will-change-transform transition-all duration-300 ease-in-out origin-top transform ${
-          openMenu ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
-        } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4`}
-      >
+        <div className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${ openMenu ? 'max-h-96 py-4' : 'max-h-0' } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4`} >
         {navLinks.map((link, index) => (
           <a
             key={index}
