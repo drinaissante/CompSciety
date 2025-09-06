@@ -4,7 +4,7 @@ function Announcement({ title, description }) {
             <span className="font-bold flex flex-col">
                 {title}
 
-                <span className="font-medium text-sm break-words w-[30ch]">
+                <span className="font-medium text-sm break-words w-[30ch] text-justify break-normal">
                     {description}
                 </span>
             </span>

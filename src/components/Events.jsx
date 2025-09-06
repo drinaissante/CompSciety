@@ -41,12 +41,12 @@ function Events() {
     return (
         <main id="events" className="bg-[#e8ffd7] flex flex-col lg:flex-row justify-center p-5 gap-4">
             {/* Events Column */}
-            <div className="lg:w-1/3 text-2xl text-black font-bold">
+            <div className="lg:w-1/2 text-2xl text-black font-bold">
                 Events
 
-                <div className="mt-5 text-xl flex flex-col gap-5">
+                <div className="mt-5 text-xl flex flex-col justify-between gap-5 h-90">
                     {events.map((event, index) => (
-                        <div key={index} className="flex rounded-xl overflow-hidden transform transition duration-300 hover:scale-101">
+                        <div key={index} className="flex rounded-xl overflow-hidden transform transition duration-300 hover:scale-101 shadow-xl/15">
                             <div className="bg-[#0e6b11] w-4 rounded-l-xl"></div>
                             <div className="bg-[#5e936c] p-4 flex-1">
                                 <Event {...event} />
@@ -57,10 +57,10 @@ function Events() {
             </div>
 
             {/* Announcement Column */}
-            <div className="lg:w-1/6 text-2xl text-black font-bold mt-10 lg:mt-0">
+            <div className="lg:w-1/4 text-2xl text-black font-bold mt-10 lg:mt-0 lg:min-w-1/4">
                 Announcements
 
-                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-4 transform transition duration-300 hover:scale-101">
+                <div className="bg-[#5e936c] text-xl mt-5 rounded-2xl flex flex-col gap-3 p-4 transform transition duration-300 hover:scale-101 shadow-xl/15">
                     {announcements.map((event, index) => (
                         <div key={index}>
                             <Announcement {...event} />
