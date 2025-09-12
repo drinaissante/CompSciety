@@ -16,6 +16,15 @@ module.exports = {
         0: "0",
         100: "1",
       },
+      keyframes: {
+        "gradient-x": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+      },
+      animation: {
+        "gradient-x": "gradient-x 3s ease infinite",
+      },
     },
   },
   plugins: [],
