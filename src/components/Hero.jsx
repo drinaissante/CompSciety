@@ -1,37 +1,45 @@
 import TextType from "../extras/TextTyping.jsx"
-
 import logo from "../assets/CompSciety.png"
-
-import mascot from "../assets/mascot.jpg"
-
-import gsap from "gsap"
-import { useEffect } from "react";
+import { Squares } from "./squares-background.js"
 
 function Hero() {
-    
-    return (
-    <section 
-        id="home" 
-        className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black via-green-950 to-green-700">
-        <TextType 
-            text={["Text typing effect", "SUP", "Happy coding!"]}
-            typingSpeed={80}
-            pauseDuration={1500}
-            showCursor={true}
-            cursorCharacter="|"
-        />
+  return (
+    <section
+      id="home"
+      className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#27391C] rounded-xl"
+    >
+      {/* Animated squares background */}
+      <Squares
+        direction="diagonal"
+        speed={0.2}
+        squareSize={67}
+        borderColor="darkgray"
+        hoverFillColor="#1F7D53"
+        className="absolute"
+      />
 
-        <img src={logo} className="w-1/4 m-10" />
-
-        <h1 className="text-center text-5xl font-bold mb-4 bg-gradient-to-t from-white via-green-600 to-green-900 bg-clip-text text-transparent">
+      <div className="flex flex-col lg:ml-70 text-wrap text-center mx-auto lg:text-left lg:mx-0 z-10 pointer-events-none">
+        <h1 className="xl:text-8xl lg:text-6xl lg:w-[10ch] text-5xl font-bold mb-4 bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
             Welcome to CompSciety!
         </h1>
-        <p className="text-xl mb-8 bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
-            Background here.
-        </p>
+
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4">
+            <p className="lg:text-xl lg:mx-0 mb-8 mx-auto w-[40ch] bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
+                This is the official Computer Science Society Website. PLACEHOLDER X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X
+            </p>
+
+            <button className="pointer-events-auto text-2xl lg:my-0 lg:ml-120 cursor-pointer bg-gradient-to-r from-green-400 via-green-950 to-blue-500 rounded-full py-3 px-[2px]">
+                <span className="text-white bg-gradient-to-r from-green-700 to-blue-300 px-8 py-3 rounded-full">
+                    Join Now 
+                </span>
+            </button>
+
+        </div>
+    </div>  
+
 
     </section>
-    )
+  )
 }
 
-export default Hero;
+export default Hero
