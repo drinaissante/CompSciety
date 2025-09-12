@@ -5,6 +5,9 @@ import { useState, useEffect, useRef } from "react";
 
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
+
+
+
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 function NavBar() {
@@ -52,13 +55,13 @@ function NavBar() {
     }
   }, [openMenu]); // openMenu is necessary since in react, every time na may changes dito ( sa openMenu reference object ), magru-run yung nasa loob ng code.
 
-  const navLinks = ['Home', 'Events', 'Blogs', 'About', 'Partners', 'Contact'];
+  const navLinks = ['Home', 'About', 'Events', 'Blog', 'Contact'];
 
   return (
-    <header className="fixed w-full z-50 shadow-md bg-[#2c4330] text-black dark:text-white transition-colors">
+    <header className="fixed w-full z-50 shadow-md text-white transition-colors">
       <div className="mx-auto flex items-center justify-between px-4 py-3">
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 lg:ml-50">
           <button
             ref={menuRef}
             className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer hover:text-[#5e936c] transition"
@@ -73,12 +76,12 @@ function NavBar() {
           <img
             src={logo}
             alt="Logo"
-            className="lg:h-16 h-12 cursor-pointer"
+            className="lg:h-21 h-12 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           />
         </div>
 
-        <nav className="hidden lg:flex gap-10 text-lg font-medium">
+        <nav className="hidden lg:flex gap-25 text-lg font-medium bg-[#18230F] border border-[#255F38] rounded-full p-7 lg:px-20 px-1">
           {navLinks.map((link, index) => (
             <a key={index} href='#' className="hover:text-[#5e936c] transition"
               onClick={(event) => {
@@ -89,23 +92,10 @@ function NavBar() {
             </a>
           ))}
         </nav>
-
-        <div className="flex items-center gap-5">
-
-          <div className="hidden sm:flex gap-3">
-            <a href="https://facebook.com/compscietybulsu2025/" target="_blank"><FaFacebook size={30} /></a>
-            <a href="https://instagram.com/compscietybulsu2025/" target="_blank"><FaInstagram size={30} /></a>
-            <a href="https://linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank"><FaLinkedin size={30} /></a>
-          </div>
-
-          <div className="bg-[#5e936c] text-xl flex text-center px-10 py-1 rounded-full">
-            Join 
-          </div>
-
-          <button className="cursor-pointer" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
-            {isDark ? <MdLightMode size={30} /> : <MdDarkMode size={30} />}
-          </button>
-        </div>
+        
+        <button className="cursor-pointer lg:mr-40" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
+          {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
+        </button>
       </div>
 
       {/* Mobile menu */}
