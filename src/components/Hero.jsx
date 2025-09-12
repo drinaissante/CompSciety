@@ -1,9 +1,14 @@
 import TextType from "../extras/TextTyping.jsx"
-import Galaxy from "../extras/Galaxy.jsx"
 
 import logo from "../assets/CompSciety.png"
 
+import mascot from "../assets/mascot.jpg"
+
+import gsap from "gsap"
+import { useEffect } from "react";
+
 function Hero() {
+    
     return (
     <section 
         id="home" 
@@ -25,7 +30,7 @@ function Hero() {
             Background here.
         </p>
 
-  </section>
+    </section>
     )
 }
 
