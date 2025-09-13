@@ -59,7 +59,7 @@ function NavBar() {
 
   return (
     <header className="fixed w-full z-50 shadow-md text-white transition-colors">
-      <div className="mx-auto flex items-center justify-between px-4 py-3">
+      <div className="mx-auto flex items-center justify-between px-3 py-3">
 
         <div className="flex items-center gap-4 lg:ml-50">
           <button
@@ -81,7 +81,7 @@ function NavBar() {
           />
         </div>
 
-        <nav className="hidden lg:flex gap-25 text-lg font-medium bg-[#18230F] border border-[#255F38] rounded-full p-7 lg:px-20 px-1">
+        <nav className="hidden lg:flex gap-25 text-sm font-bold bg-[#18230F] border border-[#255F38] rounded-full px-8 py-5 lg:px-25">
           {navLinks.map((link, index) => (
             <a key={index} href='#' className="hover:text-[#5e936c] transition"
               onClick={(event) => {
@@ -93,7 +93,7 @@ function NavBar() {
           ))}
         </nav>
         
-        <button className="cursor-pointer lg:mr-40" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
+        <button className="cursor-pointer lg:mr-40 hover:text-[#1f7d53] transition" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
           {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
         </button>
       </div>
