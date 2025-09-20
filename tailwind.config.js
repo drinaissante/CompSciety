@@ -25,6 +25,9 @@ module.exports = {
       animation: {
         "gradient-x": "gradient-x 3s ease infinite",
       },
+      fontFamily: {
+        outfit: ["Outfit", "sans-serif"],
+      },
     },
   },
   plugins: [],
