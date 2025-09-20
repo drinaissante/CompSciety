@@ -1,7 +1,7 @@
 function About() {
   return (
-    <div id="about" className="bg-[#e8ffd7] flex flex-col items-center text-center p-5 gap-8 text-black">
-      <span className="font-bold text-4xl">About CompSciety</span>
+    <div id="about" className="flex flex-col items-center text-center p-5 gap-8">
+      <span className="font-bold text-4xl text-white">About CompSciety</span>
 
       <p className="text-lg sm:text-2xl max-w-4xl mx-auto">
         CompSciety exists to build a strong, united, and future-ready generation of Computer Science

@@ -53,7 +53,6 @@ function App() {
           {/* PUT GLASS BREAKING MATRIX THING ANIMATION HERE */}
 
           <span className="text-3xl text-center font-bold text-green-700">Welcome to CompSciety!</span>
-          <span className='text-black'>GABBY DITO YUNG BROKEN GLASS</span>
         </motion.div>
       )}
 
@@ -67,20 +66,22 @@ function App() {
           {/* hero */}
           <Hero />
 
-          {/* separator */}
-          <div className="bg-[#2c4330] p-8"></div>
+          {/* announcement carousel here */}
 
-          {/* events */}
-          <Events />
+          {/* gradient container */}
+          <div className="bg-gradient-to-br from-[#18230F] to-[#27391C]">
+            {/* About CompSciety */}
+            <About />
 
-          {/* Blogs */}
-          <Blogs />
+            {/* events */}
+            <Events />
 
-          {/* About CompSciety */}
-          <About />
+            {/* Blogs */}
+            {/* <Blogs /> */}
 
-          {/* organization partners */}
-          <Partners />
+            {/* organization partners */}
+            {/* <Partners /> */}
+          </div>
 
           {showScrollBtn && (
             <button

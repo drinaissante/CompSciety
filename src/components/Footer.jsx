@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 function Footer() {
     return (
-    <div className="flex flex-col lg:flex-row bg-[#2c4330] text-white justify-evenly">
+    <div className="flex flex-col lg:flex-row bg-[#18230F] text-white justify-evenly">
 
         {/* logo */}
         <div className="flex items-center">

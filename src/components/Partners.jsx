@@ -1,9 +1,10 @@
 import cs_wizards from "../assets/CS_WIZARDS.jpg"
 
+// TODO: check if pwede ilipat in exchange sa announcement carousel
 function Partners() {
     return (
-        <div id="partners" className="bg-[#3e5f44] flex flex-col items-center py-8">
-            <h2 className="text-4xl font-extrabold mb-8">Our Partners</h2>
+        <div id="partners" className="absolute -bottom-13 left-1/2 -translate-x-1/2 lg:w-[50%] w-[80%] h-30 bg-green-700 rounded-full">
+            <h2 className="text-xl font-extrabold m-2 text-center">Our Partners</h2>
 
             <div className="flex flex-wrap gap-8 justify-center">
                 <img 
