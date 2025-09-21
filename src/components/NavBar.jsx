@@ -99,7 +99,7 @@ function NavBar() {
       </div>
 
       {/* Mobile menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${ openMenu ? 'max-h-96 py-4' : 'max-h-0' } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4`} >
+        <div className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${ openMenu ? 'max-h-96 py-4' : 'max-h-0' } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4 rounded`} >
         {navLinks.map((link, index) => (
           <a
             key={index}
