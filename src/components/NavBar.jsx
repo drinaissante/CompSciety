@@ -76,14 +76,14 @@ function NavBar() {
           <img
             src={logo}
             alt="Logo"
-            className="lg:h-21 h-12 cursor-pointer"
+            className="transition-all lg:h-21 h-12 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           />
         </div>
 
         <nav className="hidden lg:flex gap-25 text-sm font-bold bg-[#18230F] border border-[#255F38] rounded-full px-8 py-5 lg:px-25">
           {navLinks.map((link, index) => (
-            <a key={index} href='#' className="hover:text-[#5e936c] transition"
+            <a key={index} className="hover:text-[#5e936c] transition cursor-pointer" target="_blank" rel="noopener noreferrer"
               onClick={(event) => {
                 event.preventDefault();
                 document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
