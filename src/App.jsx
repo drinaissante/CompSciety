@@ -73,14 +73,14 @@ function App() {
             {/* About CompSciety */}
             <About />
 
+            {/* organization partners */}
+            <Partners />
+
             {/* events */}
-            <Events />
+            {/* <Events /> */}
 
             {/* Blogs */}
             {/* <Blogs /> */}
-
-            {/* organization partners */}
-            {/* <Partners /> */}
           </div>
 
           {showScrollBtn && (
