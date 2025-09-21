@@ -8,7 +8,7 @@ function About() {
       id="about"
       className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-15 sm:p-10 sm:mt-30 sm:mr-50 sm:ml-50"
     >
-      <MotionDiv className="absolute -top-6 left-1/7 font-outfit font-bold text-4xl sm:text-7xl text-white sm:-top-10 sm:left-10">
+      <MotionDiv className="absolute -top-6 font-outfit font-bold text-4xl sm:text-7xl text-white sm:-top-10 sm:left-10">
         About CompSciety
       </MotionDiv>
 
@@ -32,25 +32,30 @@ function About() {
       </MotionDiv>
 
       <div className="flex flex-col lg:flex-row justify-center gap-6 w-full max-w-6xl">
-        <MotionDiv className="bg-[#1F7D53] rounded-2xl flex flex-col gap-3 p-8 text-white text-center flex-1 transform transition duration-300 hover:scale-105">
-          <span className="font-outfit font-bold text-xl lg:text-2xl">Mission</span>
 
-          <p>
+        
+        {/* Mission */}
+        <MotionDiv className="bg-[#255F38] rounded-2xl flex flex-col gap-7 p-8 text-white text-center flex-1 transform transition-all duration-300 hover:scale-105 max-w-lg">
+          <span className="font-outfit font-bold text-xl lg:text-3xl">Mission</span>
+
+          <p className="text-lg">
             To cultivate a united community of socially responsible future-ready scholars and innovators committed to excellence, ethical reasoning, and technological advancement in the service of the people and society.
           </p>
         </MotionDiv>
 
-        <MotionDiv transition={{ duration: 1.2, ease: "easeOut" }} className="bg-[#1F7D53] rounded-2xl flex flex-col gap-3 p-8 text-white text-center flex-1 transform transition duration-300 hover:scale-105">
-          <span className="font-outfit font-bold text-xl lg:text-2xl">Vision</span>
+        {/* Vision */}
+        <MotionDiv transition={{ duration: 1.2, ease: "easeOut" }} className="bg-[#255F38] rounded-2xl flex flex-col gap-7 p-8 text-white text-center flex-1 transform transition-all duration-300 hover:scale-105 max-w-lg">
+          <span className="font-outfit font-bold text-xl lg:text-3xl">Vision</span>
           
-          <p>
+          <p className="text-lg">
             To empower students through inclusive education, collaborative innovation, and ethical leadership, fostering a culture of service that responds to the evolving needs of the Filipino nation and the global community.
           </p>
         </MotionDiv>
 
       </div>
 
-      <div className="absolute -bottom-7 px-8 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
+      {/* Learn More Btn */}
+      <div className="absolute -bottom-7 px-12 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_7px_3px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
         Learn More
       </div>
 
