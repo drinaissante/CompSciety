@@ -6,7 +6,7 @@ function About() {
   return (
     <div
       id="about"
-      className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-15 sm:p-10 sm:mt-30 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)]"
+      className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-35 sm:p-10 sm:mt-50 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)]"
     >
       <MotionDiv className="absolute -top-6 font-outfit font-bold text-4xl sm:text-7xl text-white sm:-top-10 sm:left-10">
         About CompSciety
