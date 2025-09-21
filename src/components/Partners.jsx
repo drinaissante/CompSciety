@@ -17,19 +17,19 @@ import MotionDiv from "../components/MotionDiv.jsx"
 import "swiper/css";
 
 const partners = [
-  { name: "The Crunch", logoSrc: thecrunch, mission: "", vision: "", url: "" },
-  { name: "CS Wizards", logoSrc: cs_wizards, mission: "", vision: "", url: "", college: "CS"},
+  { name: "The Crunch", logoSrc: thecrunch, mission: "", vision: "", url: "https://www.facebook.com/TheCrunch.Malolos" },
+  { name: "CS Wizards", logoSrc: cs_wizards, mission: "", vision: "", url: "https://www.facebook.com/thenewCSWIZARDS", college: "CS"},
   {
     name: "Junior Philippine Computer Society (JPCS)",
     logoSrc: jpcs,
     mission:
       "To unite and commit the youth to: technical and leadership excellence; fostering among themselves, lasting friendship, and constructive cooperation in genuine love of God and country.",
     vision: "",
-    url: "",
-    college: "CEU Malolos - CS"
+    url: "https://www.facebook.com/JPCSCEUMLLS",
+    college: "CEU Malolos - CIT"
   },
-  { name: "Society for the Welfare of Information Technology Students (SWITS) ", logoSrc: swits, mission: "The Society for the Welfare of Information Technology Students (SWITS) of the College of Information and Communications Technology (CICT) is a college-based organization founded in 2001. SWITS focuses its goals on addressing the needs of our IT students and anchors its activities on the organization's passion, mission, and vision. SWITS became recognized for their projects and yearly events; including Enablement Seminars, IT Mentorship and IT Congress.", vision: "", url: "", college: "CICT" },
-  { name: "BLISS", logoSrc: mascot, mission: "", vision: "", url: "", college: "CICT" },
+  { name: "Society for the Welfare of Information Technology Students (SWITS) ", logoSrc: swits, mission: "The Society for the Welfare of Information Technology Students (SWITS) of the College of Information and Communications Technology (CICT) is a college-based organization founded in 2001. SWITS focuses its goals on addressing the needs of our IT students and anchors its activities on the organization's passion, mission, and vision. SWITS became recognized for their projects and yearly events; including Enablement Seminars, IT Mentorship and IT Congress.", vision: "", url: "https://www.facebook.com/SWITS.org", college: "CICT" },
+  { name: "BLISS", logoSrc: mascot, mission: "", vision: "", url: "https://www.facebook.com/BLISSorgCICT", college: "CICT" },
 ];
 
 function HoverPreview({ bb, partner }) {
