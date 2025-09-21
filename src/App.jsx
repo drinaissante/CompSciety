@@ -9,10 +9,11 @@ import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
 import Partners from './components/Partners.jsx';
 
-import Events from './components/Events.jsx';
-import Blogs from './components/Blogs.jsx';
+import Announcements from './components/Announcements.jsx';
+
 import About from './components/About.jsx';
 import { FaArrowUp } from 'react-icons/fa';
+
 
 function App() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -67,6 +68,7 @@ function App() {
           <Hero />
 
           {/* announcement carousel here */}
+          <Announcements />
 
           {/* gradient container */}
           <div className="bg-gradient-to-br from-[#18230F] to-[#27391C]">
@@ -75,12 +77,6 @@ function App() {
 
             {/* organization partners */}
             <Partners />
-
-            {/* events */}
-            {/* <Events /> */}
-
-            {/* Blogs */}
-            {/* <Blogs /> */}
           </div>
 
           {showScrollBtn && (
