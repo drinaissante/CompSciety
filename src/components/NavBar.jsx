@@ -1,11 +1,8 @@
 import "../css/NavBar.css"
 
-import logo from "../assets/CompSciety.png"
 import { useState, useEffect, useRef } from "react";
 
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-
-
+import logo from "../assets/CompSciety.png"
 
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
@@ -88,7 +85,7 @@ function NavBar() {
                 event.preventDefault();
                 document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
               }}>
-              {link}
+                {link}
             </a>
           ))}
         </nav>
