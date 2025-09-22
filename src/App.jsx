@@ -12,6 +12,7 @@ import Partners from './components/Partners.jsx';
 import Announcements from './components/Announcements.jsx';
 
 import About from './components/About.jsx';
+
 import { FaArrowUp } from 'react-icons/fa';
 
 
