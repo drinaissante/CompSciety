@@ -1,6 +1,6 @@
-import TextType from "../extras/TextTyping.jsx"
-import logo from "../assets/CompSciety.png"
 import { Squares } from "./squares-background.js"
+
+import { Link } from "react-router-dom";
 
 import MotionDiv from "./MotionDiv.jsx"
 
@@ -33,7 +33,11 @@ function Hero() {
             <MotionDiv transition={{duration: 2, ease: "easeOut"}} >
               <button className="pointer-events-auto text-2xl lg:my-0 lg:ml-120 cursor-pointer bg-gradient-to-r">
                   <span className="px-8 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
-                      <a href="https://youtu.be/dQw4w9WgXcQ?feature=shared">Join Now</a> 
+                      <Link to="/login">
+                        Join Now
+                      </Link>
+                      
+                      {/* <a href="https://youtu.be/dQw4w9WgXcQ?feature=shared">Join Now</a>  */}
                       {/* Note to self, change link as Dialog Box for the Sign Up Form */}
                   </span>
               </button>
