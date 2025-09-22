@@ -20,7 +20,7 @@ function Hero() {
         className="absolute"
       />
 
-      <div className="flex flex-col lg:ml-70 text-wrap text-center mx-auto lg:text-left lg:mx-0 z-10 pointer-events-none ">
+      <div className="flex flex-col lg:ml-70 text-wrap text-center mx-auto lg:text-left lg:mx-0 z-10 pointer-events-none">
         <MotionDiv transition={{duration: 1.7, ease: "easeOut"}} className="xl:text-7xl lg:text-6xl lg:w-[12ch] text-5xl font-bold mb-4 bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
             Welcome to CompSciety!
         </MotionDiv>
@@ -33,7 +33,7 @@ function Hero() {
             <MotionDiv transition={{duration: 2, ease: "easeOut"}} >
               <button className="pointer-events-auto text-2xl lg:my-0 lg:ml-120 cursor-pointer bg-gradient-to-r">
                   <span className="px-8 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
-                      <Link to="/login">
+                      <Link to="/signup">
                         Join Now
                       </Link>
                       
@@ -43,9 +43,8 @@ function Hero() {
               </button>
             </MotionDiv>
 
-        </div>
-    </div>  
-
+          </div>
+      </div>  
 
     </section>
   )
