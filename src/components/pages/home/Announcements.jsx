@@ -2,7 +2,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import MotionDiv from "./MotionDiv.jsx";
+import MotionDiv from "../../MotionDiv.jsx";
 
 import "swiper/css";
 import "swiper/css/navigation";

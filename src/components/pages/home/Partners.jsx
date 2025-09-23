@@ -6,13 +6,13 @@ import { createPortal } from "react-dom";
 
 import {motion, AnimatePresence} from "framer-motion";
 
-import cs_wizards from "../assets/CS_WIZARDS.jpg"
-import jpcs from "../assets/jpcs.png"
-import thecrunch from "../assets/thecrunch.png"
-import swits from "../assets/SWITS.png"
-import bliss from "../assets/BLISS.png"
+import cs_wizards from "@assets/CS_WIZARDS.jpg"
+import jpcs from "@assets/jpcs.png"
+import thecrunch from "@assets/thecrunch.png"
+import swits from "@assets/SWITS.png"
+import bliss from "@assets/BLISS.png"
 
-import MotionDiv from "../components/MotionDiv.jsx"
+import MotionDiv from "../../MotionDiv.jsx"
 
 import "swiper/css";
 

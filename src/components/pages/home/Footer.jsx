@@ -1,4 +1,4 @@
-import logo from "../assets/CompSciety.png"
+import logo from "@assets/CompSciety.png"
 
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 

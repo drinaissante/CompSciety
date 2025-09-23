@@ -1,9 +1,8 @@
-import "../css/NavBar.css"
+import "../../../css/NavBar.css"
 
 import { useState, useEffect, useRef } from "react";
 
-import logo from "../assets/CompSciety.png"
-
+import logo from "@assets/CompSciety.png"
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 

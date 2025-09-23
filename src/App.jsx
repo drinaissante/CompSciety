@@ -6,10 +6,10 @@ import NavBar from './components/pages/home/NavBar.jsx'
 import { motion } from 'framer-motion';
 
 import Footer from './components/pages/home/Footer.jsx';
-import Hero from './components/Hero.jsx';
-import Partners from './components/Partners.jsx';
+import Hero from './components/pages/home/Hero.jsx';
+import Partners from './components/pages/home/Partners.jsx';
 
-import Announcements from './components/Announcements.jsx';
+import Announcements from './components/pages/home/Announcements.jsx';
 
 import About from './components/pages/home/About.jsx';
 

@@ -1,7 +1,21 @@
 
+import { Squares } from "../../squares-background.tsx";
+import MotionDiv from "../../MotionDiv.jsx";
+import { useState } from "react";
 
+import { Link } from "react-router-dom";
 
 function Signup() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function handleSubmit() {
+        print("submit");
+    }
+
+    function handleChange() {
+        print("change");
+    }
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#18230F] rounded-xl">
@@ -33,7 +47,7 @@ function Signup() {
                             className="p-1 bg-white text-black rounded-md"
                         />
                         {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
-                        {errors.email && <p className="text-red-500">{errors.email}</p>}
+                        {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
 
                         
                         Password
@@ -48,7 +62,7 @@ function Signup() {
                             className="p-1 bg-white text-black rounded-md"
                         />
                         {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
-                        {errors.password && <p className="text-red-500">{errors.password}</p>}
+                        {/* {errors.password && <p className="text-red-500">{errors.password}</p>} */}
 
                         
                     </div>

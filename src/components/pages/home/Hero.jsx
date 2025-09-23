@@ -1,8 +1,8 @@
-import { Squares } from "./squares-background.js"
+import { Squares } from "../../squares-background.js"
 
 import { Link } from "react-router-dom";
 
-import MotionDiv from "./MotionDiv.jsx"
+import MotionDiv from "../../MotionDiv.jsx"
 
 function Hero() {
   return (
