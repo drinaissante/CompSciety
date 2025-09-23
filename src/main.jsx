@@ -11,7 +11,7 @@ import Login from './components/pages/login/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename='/CompSciety'>
+    <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel */}
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
