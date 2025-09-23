@@ -19,7 +19,7 @@ function Login() {
         document.title = "Login | BulSU Computer Science Society"
     }, []);
 
-    const [ userLoggedIn ] = useAuth();
+    const { currentUser, userLoggedIn, loading } = useAuth(); // TODO
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -145,7 +145,13 @@ function Login() {
                         Forgot password? 
                         <h1 className="text-blue ml-4">Forgot password.</h1>
                         {/* TODO: make forgot password thing sa firebase */}  
-
+                    </div>
+                    
+                    <div className="flex justify-center">
+                        No account yet?
+                        <Link to="/signup" className="text-blue ml-4">
+                            Create account.
+                        </Link>
                     </div>
                 
                     <h4 className="flex justify-center">Terms of Service</h4>

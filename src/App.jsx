@@ -21,6 +21,10 @@ function App() {
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
+    document.title = "Home | BulSU Computer Science Society"
+  }, [])
+
+  useEffect(() => {
     const timer = setTimeout(() => setShowAnimation(false), 3000);
     return () => clearTimeout(timer);
   }, []);

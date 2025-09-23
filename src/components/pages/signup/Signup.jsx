@@ -1,20 +1,86 @@
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Squares } from "../../squares-background.tsx";
 import MotionDiv from "../../MotionDiv.jsx";
-import { useState } from "react";
-
-import { Link } from "react-router-dom";
+import { doCreateUserWithEmailAndPassword } from "../../auth/auth-main.jsx";
 
 function Signup() {
+    useEffect(() => {
+        document.title = "Signup | BulSU Computer Science Society"
+    }, []);
+        
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({});
 
-    function handleSubmit() {
-        print("submit");
+    const [isRegistering, setIsRegistering] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const emailErrors = validateField("email", email);
+        const pwErrors = validateField("password", password);
+
+        const navigate = useNavigate();
+
+        setErrors({ email: emailErrors, password: pwErrors })
+
+        // TODO: submit to firebase (NO ERRORS)
+        if (!emailErrors && !pwErrors) {
+            if (!isRegistering) {
+                setIsRegistering(true);
+                try {
+                    await doCreateUserWithEmailAndPassword(email, password);
+                    navigate("/");
+                } catch (err) {
+                    console.err(err);
+                } finally {
+                    setIsRegistering(false);
+                }
+            }
+        }
     }
 
-    function handleChange() {
-        print("change");
+    const validateField = (name, value) => {
+        if (value.empty)
+            return "";
+        
+        let error = "";
+
+        if (name === "email") {
+            if (!value?.trim()) {
+                error = "Please enter your email address.";
+            } else if (!/\S+@\S+\.\S+/.test(value)) {
+                error = "Please enter a valid email address.";
+            }
+        }
+
+        if (name === "password") {
+            if (!value?.trim()) {
+                error = "Please enter your password.";
+            } else if (value.length < 6) {
+                error = "Password must at least be 6 characters.";
+            }
+        }
+
+        return error;
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (value.empty)
+            return;
+
+        if (name === "email") setEmail(value);
+        if (name === "password") setPassword(value);
+
+        // validate
+        setErrors((prev) => ({
+            ...prev,
+            [name]: validateField(name, value),
+        }));
     }
 
     return (
@@ -31,7 +97,7 @@ function Signup() {
 
             <MotionDiv className="flex flex-col mx-auto p-10 lg:py-15 lg:px-30 z-10 bg-white/40 rounded-3xl gap-10">
                 
-                <div className="font-bold text-2xl text-center">Login</div>
+                <div className="font-bold text-2xl text-center">Signup</div>
 
                 <form onSubmit={handleSubmit} noValidate>
                     <div className="flex flex-col font-bold text-center gap-3">
@@ -47,7 +113,7 @@ function Signup() {
                             className="p-1 bg-white text-black rounded-md"
                         />
                         {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
-                        {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
+                        {errors.email && <p className="text-red-500">{errors.email}</p>}
 
                         
                         Password
@@ -62,7 +128,7 @@ function Signup() {
                             className="p-1 bg-white text-black rounded-md"
                         />
                         {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
-                        {/* {errors.password && <p className="text-red-500">{errors.password}</p>} */}
+                        {errors.password && <p className="text-red-500">{errors.password}</p>}
 
                         
                     </div>
@@ -71,7 +137,13 @@ function Signup() {
                         Forgot password? 
                         <h1 className="text-blue ml-4">Forgot password.</h1>
                         {/* TODO: make forgot password thing sa firebase */}  
-
+                    </div>
+                    
+                    <div className="flex justify-center">
+                        Already have an account?
+                        <Link to="/login" className="text-blue ml-4">
+                            Sign in
+                        </Link>
                     </div>
                 
                     <h4 className="flex justify-center">Terms of Service</h4>
@@ -90,7 +162,7 @@ function Signup() {
                             type="submit"
                             className="py-3 px-5 rounded-2xl bg-green-600 cursor-pointer"
                         >
-                            Login
+                            Register
                         </button>
                     </div>
                     
