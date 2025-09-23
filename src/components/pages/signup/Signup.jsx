@@ -1,82 +1,7 @@
-import { useState, useEffect } from "react";
-import MotionDiv from "../components/MotionDiv.jsx";
-import { Squares } from "../components/squares-background.tsx";
 
-import { Link } from "react-router-dom";
 
-import { CiCircleCheck } from "react-icons/ci";
-import { FaExclamationCircle } from "react-icons/fa";
 
-// add "forget password"
-// add "register now if no account"
-
-// add make sure to save the url before pressing "Join Now" add "redirect?<URL HERE>"
-
-function Login() {
-    useEffect(() => {
-        document.title = "Login | BulSU Computer Science Society"
-    }, []);
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState({});
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const emailErrors = validateField("email", email);
-        const pwErrors = validateField("password", password);
-
-        setErrors({ email: emailErrors, password: pwErrors })
-
-        if (!emailErrors && !pwErrors) {
-            // TODO: submit to firebase (NO ERRORS)
-
-            // uncomment once done
-            e.preventDefault();
-        }
-    }
-
-    const validateField = (name, value) => {
-        if (value.empty)
-            return "";
-        
-        let error = "";
-
-        if (name === "email") {
-            if (!value?.trim()) {
-                error = "Please enter your email address.";
-            } else if (!/\S+@\S+\.\S+/.test(value)) {
-                error = "Please enter a valid email address.";
-            }
-        }
-
-        if (name === "password") {
-            if (!value?.trim()) {
-                error = "Please enter your password.";
-            } else if (value.length < 6) {
-                error = "Password must at least be 6 characters.";
-            }
-        }
-
-        return error;
-    }
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        if (value.empty)
-            return;
-
-        if (name === "email") setEmail(value);
-        if (name === "password") setPassword(value);
-
-        // validate
-        setErrors((prev) => ({
-            ...prev,
-            [name]: validateField(name, value),
-        }));
-    }
+function Signup() {
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#18230F] rounded-xl">
@@ -163,4 +88,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Signup;

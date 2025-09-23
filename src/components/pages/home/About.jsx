@@ -1,6 +1,6 @@
 import mascot from "../assets/mascot.png";
 
-import MotionDiv from "./MotionDiv.jsx"
+import MotionDiv from "../../MotionDiv.jsx"
 
 function About() {
   return (
