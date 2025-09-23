@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 // NEEDED
 /*
@@ -36,60 +37,67 @@ USAGE:
   } = useStore();
 */
 
-const useStore = create((set) => ({
-    profile: {
-        email: "",
-        first_name: "",
-        last_name: "",
-        middle_ini: "",
-    },
-    student: {
-        college: "",
-        year_level: "",
-        section: "",
-    },
-    questions: {
-        question_1: "",
-        question_2: "",
-        question_3: "", // MAKE SURE TO ADD MORE OR REMOVE ENTIRELY IF NOT NEEDED
-    },
+const useStore = create(
+    persist((set) => ({
+        profile: {
+            email: "",
+            first_name: "",
+            last_name: "",
+            middle_ini: "",
+        },
+        student: {
+            college: "",
+            year_level: "",
+            section: "",
+        },
+        questions: {
+            question_1: "",
+            question_2: "",
+            question_3: "", // MAKE SURE TO ADD MORE OR REMOVE ENTIRELY IF NOT NEEDED
+        },
 
-    updateProfile: (field, value) =>
-        set((state) => ({
-            profile: { ...state.profile, [field]: value },
-        })),
+        updateProfile: (field, value) =>
+            set((state) => ({
+                profile: { ...state.profile, [field]: value },
+            })),
 
-    updateStudent: (field, value) =>
-        set((state) => ({
-            student: { ...state.student, [field]: value },
-        })),
+        updateStudent: (field, value) =>
+            set((state) => ({
+                student: { ...state.student, [field]: value },
+            })),
 
-    updateQuestion: (field, value) =>
-        set((state) => ({
-            questions: { ...state.questions, [field]: value },
-        })),
+        updateQuestion: (field, value) =>
+            set((state) => ({
+                questions: { ...state.questions, [field]: value },
+            })),
 
-    clearResponses: () => 
-        set({
-            profile: {
-                email: "",
-                first_name: "",
-                last_name: "",
-                middle_ini: "",
-            },
-            student: {
-                college: "",
-                year_level: "",
-                section: "",
+        clearResponses: () => 
+            set({
+                profile: {
+                    email: "",
+                    first_name: "",
+                    last_name: "",
+                    middle_ini: "",
+                },
+                student: {
+                    college: "",
+                    year_level: "",
+                    section: "",
 
-            },
-            questions: {
-                question_1: "",
-                question_2: "",
-                question_3: "",
-            }
-        }),
-}));
+                },
+                questions: {
+                    question_1: "",
+                    question_2: "",
+                    question_3: "",
+                }
+            }),
+        })
+    ),
+    {
+        name: "comp-storage"
+    }
+    
+);
 
 
 export default useStore;
