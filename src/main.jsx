@@ -5,9 +5,9 @@ import App from './App.jsx'
 
 import { BrowserRouter } from 'react-router-dom'
 import {Routes, Route} from 'react-router-dom'
-import NotFound from './pages/NotFound.jsx'
-import Signup from './pages/Signup.jsx'
-import Login from './pages/Login.jsx'
+import NotFound from './components/pages/notfound/NotFound.jsx'
+import Signup from './components/pages/signup/Signup.jsx'
+import Login from './components/pages/login/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
