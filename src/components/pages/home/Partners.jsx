@@ -16,6 +16,8 @@ import MotionDiv from "../../MotionDiv.jsx"
 
 import "swiper/css";
 
+// PUT THESE IN A SEPARATE MODEL FILE FOR READABILITY AND IMPORT NALANG
+
 const partners = [
   { name: "The Crunch", logoSrc: thecrunch, mission: "", vision: "", url: "https://www.facebook.com/TheCrunch.Malolos" },
   { name: "CS Wizards", logoSrc: cs_wizards, mission: "", vision: "", url: "https://www.facebook.com/thenewCSWIZARDS", college: "CS"},
@@ -45,7 +47,7 @@ function HoverPreview({ bb, partner }) {
     const cardWidth = 700;
     const left = bb.left + bb.width / 2 - cardWidth / 2 + window.scrollX;
     
-    const cardHeight = 220; // estimate or measure
+    const cardHeight = 220; // estimate or measure - change if too short / tall
 
     let top = bb.top - cardHeight - 40 + window.scrollY;
 
@@ -54,7 +56,6 @@ function HoverPreview({ bb, partner }) {
     } else {
         top += 90;
     }
-
 
     return createPortal(
         <AnimatePresence>
@@ -83,7 +84,7 @@ function HoverPreview({ bb, partner }) {
                 />
 
                 <div className="p-4 text-white text-center overflow-y-auto max-h-full">
-                    <h3 className="font-bold text-lg"> {partner.name} - {partner.college} </h3>
+                    <h3 className="font-bold text-lg"> {partner.name} {partner.college ? "- " + partner.college : ""} </h3>
 
                     <p className="text-sm mt-1"> {partner.mission || ""} </p>
                     <p className="text-sm mt-1"> {partner.vision || ""} </p>
