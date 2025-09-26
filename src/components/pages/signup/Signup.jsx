@@ -26,6 +26,8 @@ function Signup() {
         const timer = setTimeout(() => {
             navigate("/");
         }, 5000); // 5 seconds
+
+        return () => clearTimeout(timer); // cleanup on unmount
     }, [navigate]); // navigate -> run on navigate
         
     const [email, setEmail] = useState("");
@@ -184,9 +186,7 @@ function Signup() {
 
                     <div className="m-2 flex justify-around">
                         <Link to="/">
-                            <button
-                                className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer"
-                            >
+                            <button className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer">
                                 Cancel
                             </button>
                         </Link>
@@ -211,7 +211,7 @@ function Signup() {
                         Redirecting in 5 seconds... 
                         <button 
                             onClick={() => navigate("/")}
-                            className="ml-2 text-green-400 underline"
+                            className="ml-1 text-green-400 underline"
                         >
                             Click here to be redirected immediately
                         </button>
