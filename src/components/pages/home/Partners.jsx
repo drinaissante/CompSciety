@@ -120,7 +120,7 @@ function Partners() {
 
     return (
         <div className="relative">
-            <h2 className="absolute left-1/4 lg:left-0 lg:ml-200 -top-13 text-4xl font-extrabold mt-2 p-5 sm:text-left">Our Partners</h2>
+            <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-4xl font-extrabold p-5">Our Partners</h2>
 
             <MotionDiv
                 id="partners"

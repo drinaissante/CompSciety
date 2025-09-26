@@ -64,9 +64,6 @@ function Hero() {
                             Logout
                           </div>
                     }
-                      
-                      {/* <a href="https://youtu.be/dQw4w9WgXcQ?feature=shared">Join Now</a>  */}
-                      {/* Note to self, change link as Dialog Box for the Sign Up Form */}
                   </span>
               </button>
             </MotionDiv>

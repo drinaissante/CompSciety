@@ -17,7 +17,7 @@ import ResetPassword from './components/pages/resetpw/ResetPassword.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel */}
+    <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel*/}
         <AuthProvider>
           <Routes>
               <Route path="/" element={<App />} />
