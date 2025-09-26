@@ -41,9 +41,6 @@ function Login() {
         setErrors({ email: emailErrors, password: pwErrors })
 
         if (!emailErrors && !pwErrors) {
-            // TODO: submit to firebase (NO ERRORS)
-
-            // uncomment once done
             e.preventDefault();
 
             if (!isSigningIn) {
@@ -182,13 +179,13 @@ function Login() {
                 
                     <div className="flex justify-center mt-10">
                         Forgot password? 
-                        <h1 className="text-blue ml-4">Forgot password.</h1>
+                        <h1 className="text-green-400 ml-4">Forgot password.</h1>
                         {/* TODO: make forgot password thing sa firebase */}  
                     </div>
                     
                     <div className="flex justify-center">
                         No account yet?
-                        <Link to="/signup" className="text-blue ml-4">
+                        <Link to="/signup" className="text-green-400 ml-4">
                             Create account.
                         </Link>
                     </div>

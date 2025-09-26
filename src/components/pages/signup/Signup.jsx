@@ -19,6 +19,14 @@ function Signup() {
     useEffect(() => {
         document.title = "Signup | BulSU Computer Science Society"
     }, []);
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate("/");
+        }, 5000); // 5 seconds
+    }, [navigate]); // navigate -> run on navigate
         
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,7 +35,6 @@ function Signup() {
 
     const [isRegistering, setIsRegistering] = useState(false);
 
-    const navigate = useNavigate();
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const handleSubmit = async (e) => {
@@ -38,7 +45,6 @@ function Signup() {
 
         setErrors({ email: emailErrors, password: pwErrors })
 
-        // TODO: submit to firebase (NO ERRORS)
         if (!emailErrors && !pwErrors) {
             if (!isRegistering) {
                 setIsRegistering(true);
@@ -57,7 +63,8 @@ function Signup() {
                     
                     // make this to another page (?) // white cast overlay
                     setSuccessMessage("A verification link has been sent to your meail. Please verify before logging in.")
-                    
+
+                    // redirect to home page after 5 seconds
                 } catch (error) {
                     const errMessage = getFirebaseAuthErrorMessage(error);
                     setErrors((prev) => ({ ...prev, auth: errMessage }));
@@ -161,13 +168,13 @@ function Signup() {
                 
                     <div className="flex justify-center mt-10">
                         Forgot password? 
-                        <h1 className="text-blue ml-4">Forgot password.</h1>
+                        <h1 className="text-green-400 ml-4">Forgot password.</h1>
                         {/* TODO: make forgot password thing sa firebase */}  
                     </div>
                     
                     <div className="flex justify-center">
                         Already have an account?
-                        <Link to="/login" className="text-blue ml-4">
+                        <Link to="/login" className="text-green-400 ml-4">
                             Sign in
                         </Link>
                     </div>
@@ -197,7 +204,20 @@ function Signup() {
 
                 {errors.auth && <p className="text-center text-red-500">{errors.auth}</p>}
 
-                {success && (<p className="text-green-300 w-[40ch]">{success}</p>)}
+                {success && (
+                    <p className="text-green-300 w-[40ch]">{success}</p>
+                    && 
+                    <p>
+                        Redirecting in 5 seconds... 
+                        <button 
+                            onClick={() => navigate("/")}
+                            className="ml-2 text-green-400 underline"
+                        >
+                            Click here to be redirected immediately
+                        </button>
+                    </p>
+
+                )}
             </MotionDiv>
 
         </div>
