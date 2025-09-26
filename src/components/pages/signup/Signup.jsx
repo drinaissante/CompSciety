@@ -47,7 +47,13 @@ function Signup() {
                     // email verification
                     const userCredential = await doCreateUserWithEmailAndPassword(email, password);
 
-                    await sendEmailVerification(userCredential.user);
+                    // custom email link
+                    const actionCodeSettings = {
+                        url: "https://drinaissante.github.io/verify",
+                        handleCodeInApp: true,
+                    };
+
+                    await sendEmailVerification(userCredential.user, actionCodeSettings);
                     
                     // make this to another page (?) // white cast overlay
                     setSuccessMessage("A verification link has been sent to your meail. Please verify before logging in.")
