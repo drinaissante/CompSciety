@@ -15,19 +15,26 @@ import About from './components/pages/home/About.jsx';
 
 import { FaArrowUp } from 'react-icons/fa';
 
+let animationHasPlayed = false; // <-- stays in memory until page reload
 
 function App() {
-  const [showAnimation, setShowAnimation] = useState(true);
+  const [showAnimation, setShowAnimation] = useState(!animationHasPlayed);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
     document.title = "Home | BulSU Computer Science Society"
-  }, [])
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowAnimation(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!animationHasPlayed) {
+      const timer = setTimeout(() => {
+        setShowAnimation(false);
+        animationHasPlayed = true;
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowAnimation(false);
+    }
+  }, [])
 
   useEffect(() => {
     const handleScrollBtn = () => {
