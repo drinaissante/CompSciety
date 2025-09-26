@@ -15,8 +15,14 @@ function AuthProvider({ children }) {
 
     async function initializeUser(user) {
         if (user) {
-            setCurrentUser({ ...user });
-            setUserLoggedIn(true);
+            if (user.emailVerified) {
+                setCurrentUser({ ...user });
+                setUserLoggedIn(true);
+            } else {
+                await signOut(auth);
+                setCurrentUser(null);
+                setUserLoggedIn(false);
+            }
         } else {
             setCurrentUser(null);
             setUserLoggedIn(false);
@@ -29,7 +35,7 @@ function AuthProvider({ children }) {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     )
 }

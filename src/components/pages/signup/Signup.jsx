@@ -3,7 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Squares } from "../../squares-background.tsx";
 import MotionDiv from "../../MotionDiv.jsx";
-import { doCreateUserWithEmailAndPassword } from "../../auth/auth-main.jsx";
+import { doCreateUserWithEmailAndPassword } from "../../auth/authService.jsx";
+
+import { getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
+import { sendEmailVerification } from "firebase/auth";
+
+
+
+// TODO
+// make sure to prompt all the needed information before this signup page (with email and password on last)
+
+
 
 function Signup() {
     useEffect(() => {
@@ -13,10 +23,12 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const [success, setSuccessMessage] = useState("");
 
     const [isRegistering, setIsRegistering] = useState(false);
-    
+
     const navigate = useNavigate();
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,18 +36,25 @@ function Signup() {
         const emailErrors = validateField("email", email);
         const pwErrors = validateField("password", password);
 
-
         setErrors({ email: emailErrors, password: pwErrors })
 
         // TODO: submit to firebase (NO ERRORS)
         if (!emailErrors && !pwErrors) {
             if (!isRegistering) {
                 setIsRegistering(true);
+
                 try {
-                    await doCreateUserWithEmailAndPassword(email, password);
-                    navigate("/");
-                } catch (err) {
-                    console.err(err);
+                    // email verification
+                    const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+
+                    await sendEmailVerification(userCredential.user);
+                    
+                    // make this to another page (?) // white cast overlay
+                    setSuccessMessage("A verification link has been sent to your meail. Please verify before logging in.")
+                    
+                } catch (error) {
+                    const errMessage = getFirebaseAuthErrorMessage(error);
+                    setErrors((prev) => ({ ...prev, auth: errMessage }));
                 } finally {
                     setIsRegistering(false);
                 }
@@ -52,7 +71,7 @@ function Signup() {
         if (name === "email") {
             if (!value?.trim()) {
                 error = "Please enter your email address.";
-            } else if (!/\S+@\S+\.\S+/.test(value)) {
+            } else if (!emailRegex.test(value)) {
                 error = "Please enter a valid email address.";
             }
         }
@@ -100,7 +119,7 @@ function Signup() {
                 
                 <div className="font-bold text-2xl text-center">Signup</div>
 
-                <form onSubmit={handleSubmit} noValidate>
+                <form onSubmit={handleSubmit}>
                     <div className="flex flex-col font-bold text-center gap-3">
 
                         Email
@@ -169,6 +188,10 @@ function Signup() {
                     </div>
                     
                 </form>
+
+                {errors.auth && <p className="text-center text-red-500">{errors.auth}</p>}
+
+                {success && (<p className="text-green-300 w-[40ch]">{success}</p>)}
             </MotionDiv>
 
         </div>

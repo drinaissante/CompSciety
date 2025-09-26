@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import MotionDiv from "../../MotionDiv.jsx";
 import { Squares } from "../../squares-background.tsx";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { CiCircleCheck } from "react-icons/ci";
 import { FaExclamationCircle } from "react-icons/fa";
 import { useAuth } from "../../auth/authContext/auth.jsx";
-import { doSignInWithEmailAndPassword } from "../../auth/auth-main.jsx";
+import { doSignInWithEmailAndPassword, doSignInWithGoogle, doSignOut } from "../../auth/authService.jsx";
+
+import { auth, getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
 
 // add "forget password"
 // add "register now if no account"
@@ -25,14 +27,16 @@ function Login() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     const [isSigningIn, setIsSigningIn] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const emailErrors = validateField("email", email);
         const pwErrors = validateField("password", password);
-
 
         setErrors({ email: emailErrors, password: pwErrors })
 
@@ -45,8 +49,43 @@ function Login() {
             if (!isSigningIn) {
                 setIsSigningIn(true);
 
-                await doSignInWithEmailAndPassword(email, password);
+                try {
+                    const userCredential = await doSignInWithEmailAndPassword(email, password);
+
+                    if (!userCredential.user.emailVerified) {
+                        // sign out since not verified yet
+                        await doSignOut();
+
+                        setErrors((prev) => (
+                            {
+                                ...prev,
+                                auth: "Please verify your email before logging in."
+                            }
+                        ));
+
+                        return;
+                    }
+
+                    navigate("/");
+                } catch (error) {
+                    const errMessage = getFirebaseAuthErrorMessage(error);
+                    setErrors((prev) => ({ ...prev, auth: errMessage }));
+                } finally {
+                    setIsSigningIn(false);
+                }
+
             }
+        }
+    }
+
+    const handleGoogleSignIn = (e) => {
+        e.preventDefault();
+        
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+            doSignInWithGoogle().catch(error => {
+                setIsSigningIn(false);
+            })
         }
     }
 
@@ -59,7 +98,7 @@ function Login() {
         if (name === "email") {
             if (!value?.trim()) {
                 error = "Please enter your email address.";
-            } else if (!/\S+@\S+\.\S+/.test(value)) {
+            } else if (!emailRegex.test(value)) {
                 error = "Please enter a valid email address.";
             }
         }
@@ -112,7 +151,7 @@ function Login() {
 
                         Email
                         <input
-                            type="text"
+                            type="email"
                             name="email"
                             placeholder="Email"
                             value={email}
@@ -170,11 +209,14 @@ function Login() {
                             type="submit"
                             className="py-3 px-5 rounded-2xl bg-green-600 cursor-pointer"
                         >
-                            Login
+                            {isSigningIn ? "Signing in..." : "Login"}
                         </button>
+                        
                     </div>
                     
                 </form>
+
+                {errors.auth && <p className="text-center text-red-500">{errors.auth}</p>}
 
             </MotionDiv>
 

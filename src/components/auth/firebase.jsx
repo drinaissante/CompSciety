@@ -30,3 +30,36 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export { app, auth };
+
+export const getFirebaseAuthErrorMessage = (error) => {
+  console.error(error);
+  
+  switch (error.code) {
+    case "auth/email-already-in-use":
+      return "This email is already registered.";
+
+    case "auth/invalid-email":
+      return "Invalid email format.";
+
+    case "auth/user-not-found":
+      return "No account found with this email.";
+
+    case "auth/wrong-password":
+      return "Incorrect password.";
+
+    case "auth/weak-password":
+      return "Password is too weak (must be at least 6 characters).";
+
+    case "auth/invalid-credential":
+      return "Invalid email or password.";
+
+    case "auth/network-request-failed":
+      return "Network error. Please check your internet connection.";
+
+    case "auth/too-many-requests":
+      return "Too many failed login attempts. Please try again later.";
+
+    default:
+      return error.message || "An unknown error occurred. Please try again.";
+  }
+};
