@@ -35,7 +35,7 @@ function VerifyEmail() {
             onClick={() => navigate("/login")}
             className="bg-[#1F7D53] px-4 py-2 rounded-lg hover:bg-[#166b45] transition"
             >
-            Go to Login
+                Go to Login
             </button>
         </div>
     </div>
