@@ -210,7 +210,7 @@ function Signup() {
                         Redirecting in 5 seconds... 
                         <button 
                             onClick={() => navigate("/")}
-                            className="ml-1 text-green-400 underline"
+                            className="ml-1 text-green-400 underline cursor-pointer"
                         >
                             Click here to be redirected immediately
                         </button>

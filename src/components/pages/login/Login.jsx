@@ -144,6 +144,8 @@ function Login() {
             return;
         }
 
+        setErrors("");
+
         try {
             await doPasswordReset(email)
 
