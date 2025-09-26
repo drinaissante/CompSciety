@@ -49,7 +49,7 @@ function Signup() {
 
                     // custom email link
                     const actionCodeSettings = {
-                        url: "https://drinaissante.github.io/verify",
+                        url: "https://drinaissante.github.io/CompSciety/verify", // should be changed when pushing to vercel
                         handleCodeInApp: true,
                     };
 
