@@ -15,6 +15,8 @@ function Signup() {
     const [errors, setErrors] = useState({});
 
     const [isRegistering, setIsRegistering] = useState(false);
+    
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +24,6 @@ function Signup() {
         const emailErrors = validateField("email", email);
         const pwErrors = validateField("password", password);
 
-        const navigate = useNavigate();
 
         setErrors({ email: emailErrors, password: pwErrors })
 
@@ -161,13 +162,13 @@ function Signup() {
                         <button
                             type="submit"
                             className="py-3 px-5 rounded-2xl bg-green-600 cursor-pointer"
+                            disabled={isRegistering}
                         >
-                            Register
+                            {isRegistering ? "Registering..." : "Register"}
                         </button>
                     </div>
                     
                 </form>
-
             </MotionDiv>
 
         </div>
