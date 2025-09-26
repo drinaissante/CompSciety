@@ -56,7 +56,7 @@ function Hero() {
                   <span className="px-8 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
                     { !userLoggedIn
                         ?
-                          <Link to="/signup">
+                          <Link to="/login">
                             Join Now
                           </Link>
                         : 
