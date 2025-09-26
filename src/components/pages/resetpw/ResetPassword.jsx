@@ -44,11 +44,11 @@ function ResetPassword() {
             setError("");
 
             const timer = setTimeout(() => navigate("/login"), 3000);
-
             return () => clearTimeout(timer); // cleanup on unmount
         } catch (err) {
             setError("Failed to reset password. Please request a new link.");
             const timer = setTimeout(() => navigate("/login"), 3000);
+            return () => clearTimeout(timer); // cleanup on unmount
         }
     };
 
@@ -56,31 +56,31 @@ function ResetPassword() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-black">
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-80">
-            <h2 className="text-xl font-bold mb-4">Reset Password</h2>
-            
-            <input
-            type="password"
-            placeholder="New Password"
-            className="w-full border p-2 rounded mb-3"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-            type="password"
-            placeholder="Confirm New Password"
-            className="w-full border p-2 rounded mb-3"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow w-80">
+                <h2 className="text-xl font-bold mb-4">Reset Password</h2>
+                
+                <input
+                    type="password"
+                    placeholder="New Password"
+                    className="w-full border p-2 rounded mb-3"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Confirm New Password"
+                    className="w-full border p-2 rounded mb-3"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
 
-            <button type="submit" className="bg-green-500 text-white p-2 rounded-md w-full">
-            Reset Password
-            </button>
+                <button type="submit" className="bg-green-500 text-white p-2 rounded-md w-full">
+                    Reset Password
+                </button>
 
-            {message && <p className="text-green-600 mt-3">{message}</p>}
-            {error && <p className="text-red-600 mt-3">{error}</p>}
-        </form>
+                {message && <p className="text-green-600 mt-3">{message}</p>}
+                {error && <p className="text-red-600 mt-3">{error}</p>}
+            </form>
         </div>
     );
 }
