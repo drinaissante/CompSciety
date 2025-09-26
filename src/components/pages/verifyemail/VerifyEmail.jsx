@@ -8,6 +8,8 @@ function VerifyEmail() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const [seconds, setSeconds] = useState(5); // 5 seconds
+
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const mode = params.get("mode");
@@ -28,12 +30,17 @@ function VerifyEmail() {
     }, [location.search]);
   
     useEffect(() => {
-        const timer = setTimeout(() => {
+        if (seconds <= 0) {
             navigate("/");
-        }, 5000); // 5 seconds
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            setSeconds((prev) => prev - 1);
+        }, 1000); // every second
 
         return () => clearTimeout(timer); // cleanup on unmount
-    }, [navigate]); // navigate -> run on navigate
+    }, [seconds, navigate]); // navigate -> run on navigate
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-[#18230F]">
@@ -43,7 +50,7 @@ function VerifyEmail() {
                 <p>{message}</p>
 
                 <p>
-                    Redirecting in 5 seconds... 
+                    Redirecting in <span className="font-bold">{seconds}</span> seconds... 
                     <button 
                         onClick={() => navigate("/")}
                         className="ml-1 text-green-400 underline"

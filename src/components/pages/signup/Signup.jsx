@@ -12,6 +12,8 @@ import { sendEmailVerification } from "firebase/auth";
 
 // TODO
 // make sure to prompt all the needed information before this signup page (with email and password on last)
+// ORRR
+// after signing in, fill up the forms
 
 
 
@@ -21,14 +23,6 @@ function Signup() {
     }, []);
 
     const navigate = useNavigate();
-    
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            navigate("/");
-        }, 5000); // 5 seconds
-
-        return () => clearTimeout(timer); // cleanup on unmount
-    }, [navigate]); // navigate -> run on navigate
         
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -64,9 +58,14 @@ function Signup() {
                     await sendEmailVerification(userCredential.user, actionCodeSettings);
                     
                     // make this to another page (?) // white cast overlay
-                    setSuccessMessage("A verification link has been sent to your meail. Please verify before logging in.")
+                    setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.")
 
                     // redirect to home page after 5 seconds
+                    const timer = setTimeout(() => {
+                        navigate("/");
+                    }, 5000); // 5 seconds
+
+                    return () => clearTimeout(timer); // cleanup on unmount
                 } catch (error) {
                     const errMessage = getFirebaseAuthErrorMessage(error);
                     setErrors((prev) => ({ ...prev, auth: errMessage }));
