@@ -12,6 +12,7 @@ import Login from './components/pages/login/Login.jsx'
 
 import AuthProvider from './components/auth/authContext/AuthProvider.jsx'
 import VerifyEmail from './components/pages/verifyemail/VerifyEmail.jsx'
+import ResetPassword from './components/pages/resetpw/ResetPassword.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/verify" element={<VerifyEmail />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

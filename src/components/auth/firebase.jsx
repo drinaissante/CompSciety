@@ -32,8 +32,6 @@ const auth = getAuth(app);
 export { app, auth };
 
 export const getFirebaseAuthErrorMessage = (error) => {
-  console.error(error);
-  
   switch (error.code) {
     case "auth/email-already-in-use":
       return "This email is already registered.";
@@ -58,6 +56,9 @@ export const getFirebaseAuthErrorMessage = (error) => {
 
     case "auth/too-many-requests":
       return "Too many failed login attempts. Please try again later.";
+    
+    case "auth/account-exists-with-different-credential":
+      return `An account already exists with ${error.customData?.email}. Please log in with your email and password instead.`;
 
     default:
       return error.message || "An unknown error occurred. Please try again.";

@@ -60,7 +60,6 @@ function Hero() {
                             Join Now
                           </Link>
                         : 
-                        //  TODO logout
                           <div onClick={logout}>
                             Logout
                           </div>

@@ -1,6 +1,6 @@
 import { auth } from "./firebase.jsx";
 
-import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updatePassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, updatePassword } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -10,8 +10,9 @@ export const doSignInWithEmailAndPassword = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
 };
 
+const provider = new GoogleAuthProvider();
+
 export const doSignInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
 
     return result;
@@ -23,8 +24,13 @@ export const doSignOut = () => {
 
 // EXTRAS ??
 
-export const doPasswordReset = (email) => {
-    return sendPasswordResetEmail(auth, email);
+export const doPasswordReset = async (email) => {
+    const result = await sendPasswordResetEmail(auth, email, {
+        url: "https://drinaissante.github.io/CompSciety/resetpassword", 
+        handleCodeInApp: true,
+    });
+
+    return result;
 }
 
 export const doPasswordChange = (password) => {
