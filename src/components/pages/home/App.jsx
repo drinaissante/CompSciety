@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 
-import NavBar from './sections/NavBar.jsx'
+import NavBar from '../../NavBar.jsx'
 
 import { motion } from 'framer-motion';
 
