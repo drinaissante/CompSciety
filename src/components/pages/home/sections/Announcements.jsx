@@ -17,18 +17,14 @@ const announcements = [
 function Announcements() {
     return (
         <MotionDiv className="absolute bg-[#255F38] p-8 text-black flex flex-row w-[80%] left-1/9 lg:left-1/4 lg:w-[50%] text-center justify-self-center rounded-2xl -bottom-14 lg:-bottom-20 lg:p-10 shadow-[0_0_7px_3px_rgba(0,200,0,0.4)]">
-            <button
-                className="prev-btn absolute left-0 top-0 bottom-0 z-10 w-16 flex items-center justify-center bg-black/40 text-white text-4xl opacity-20 hover:opacity-100 transition-opacity duration-300 rounded-full"
-            >
+            <button className="prev-btn absolute left-0 top-0 bottom-0 z-10 w-16 flex items-center justify-center bg-black/40 text-white text-4xl opacity-20 hover:opacity-100 transition-opacity duration-300 rounded-full">
                 ◀
             </button>
 
-            <button
-                className="next-btn absolute right-0 top-0 bottom-0 z-10 w-16 flex items-center justify-center text-white text-4xl opacity-20 
-                bg-black/40 hover:opacity-100 transition-opacity duration-300 rounded-full"
-            >
+            <button className="next-btn absolute right-0 top-0 bottom-0 z-10 w-16 flex items-center justify-center text-white text-4xl opacity-20 bg-black/40 hover:opacity-100 transition-opacity duration-300 rounded-full">
                 ▶
             </button>
+
             <div className="relative w-full group">
                 <Swiper
                     modules={[Navigation, Autoplay]}
