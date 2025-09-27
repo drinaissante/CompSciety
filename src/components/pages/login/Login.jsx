@@ -215,12 +215,9 @@ function Login() {
                     <div className="flex justify-center">
                         No account yet?
                         <Link to="/signup" className="text-green-400 ml-4 cursor-pointer">
-                            Create account.
+                            Create an account.
                         </Link>
                     </div>
-                
-                    <h4 className="flex justify-center">Terms of Service</h4>
-                    {/* TODO: add terms of service */}
 
                     <div className="m-2 flex justify-around">
                         <Link to="/">
@@ -244,7 +241,6 @@ function Login() {
                 {errors.auth && <p className="text-center text-red-500 w-[40ch]">{errors.auth}</p>}
                 
 
-                {/* add horizontal line  */}
                 <div className="flex items-center">
                     <hr className="flex-grow border-t border-gray-300" />
                         <span className="mx-2 text-white-500">OR</span>
@@ -265,6 +261,9 @@ function Login() {
                             Continue with Google
                     </button>
                 </div>
+                
+                <h4 className="flex justify-center underline">Terms of Service</h4>
+                {/* TODO: add terms of service */}
 
             </MotionDiv>
 

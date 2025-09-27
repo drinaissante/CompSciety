@@ -146,7 +146,6 @@ function Signup() {
                             required
                             className="p-1 bg-white text-black rounded-md"
                         />
-                        {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
                         {errors.email && <p className="text-red-500">{errors.email}</p>}
 
                         
@@ -161,27 +160,17 @@ function Signup() {
                             onChange={handleChange}
                             className="p-1 bg-white text-black rounded-md"
                         />
-                        {/* MY IDEA HERE IS, nasa loob dapat nung input box yung icons. not sure how pa. TODOOOOOOO */}
                         {errors.password && <p className="text-red-500">{errors.password}</p>}
 
                         
                     </div>
-                
-                    <div className="flex justify-center mt-10">
-                        Forgot password? 
-                        <h1 className="text-green-400 ml-4">Forgot password.</h1>
-                        {/* TODO: make forgot password thing sa firebase */}  
-                    </div>
                     
-                    <div className="flex justify-center">
+                    <div className="m-3 flex justify-center">
                         Already have an account?
                         <Link to="/login" className="text-green-400 ml-4">
                             Sign in
                         </Link>
                     </div>
-                
-                    <h4 className="flex justify-center">Terms of Service</h4>
-                    {/* TODO: add terms of service */}
 
                     <div className="m-2 flex justify-around">
                         <Link to="/">
@@ -200,6 +189,9 @@ function Signup() {
                     </div>
                     
                 </form>
+            
+                <h4 className="flex justify-center underline">Terms of Service</h4>
+                {/* TODO: add terms of service */}
 
                 {errors.auth && <p className="text-center text-red-500">{errors.auth}</p>}
 
