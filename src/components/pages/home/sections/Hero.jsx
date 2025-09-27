@@ -1,10 +1,10 @@
-import { Squares } from "../../squares-background.js"
+import { Squares } from "../../../squares-background.js"
 
 import { Link, useNavigate } from "react-router-dom";
 
-import MotionDiv from "../../MotionDiv.jsx"
-import { useAuth } from "../../auth/authContext/auth.jsx";
-import { doSignOut } from "../../auth/authService.jsx";
+import MotionDiv from "../../../MotionDiv.jsx"
+import { useAuth } from "../../../auth/authContext/auth.jsx";
+import { doSignOut } from "../../../auth/authService.jsx";
 
 function Hero() {
   const navigate = useNavigate();

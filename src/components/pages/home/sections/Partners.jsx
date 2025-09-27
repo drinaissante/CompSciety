@@ -12,7 +12,7 @@ import thecrunch from "@assets/thecrunch.png"
 import swits from "@assets/SWITS.png"
 import bliss from "@assets/BLISS.png"
 
-import MotionDiv from "../../MotionDiv.jsx"
+import MotionDiv from "../../../MotionDiv.jsx"
 
 import "swiper/css";
 

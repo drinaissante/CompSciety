@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 
-import NavBar from './components/pages/home/NavBar.jsx'
+import NavBar from './sections/NavBar.jsx'
 
 import { motion } from 'framer-motion';
 
-import Footer from './components/pages/home/Footer.jsx';
-import Hero from './components/pages/home/Hero.jsx';
-import Partners from './components/pages/home/Partners.jsx';
+import Footer from './sections/Footer.jsx';
+import Hero from './sections/Hero.jsx';
+import Partners from './sections/Partners.jsx';
 
-import Announcements from './components/pages/home/Announcements.jsx';
+import Announcements from './sections/Announcements.jsx';
 
-import About from './components/pages/home/About.jsx';
+import About from './sections/About.jsx';
 
 import { FaArrowUp } from 'react-icons/fa';
 
