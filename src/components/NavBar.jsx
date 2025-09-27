@@ -5,12 +5,23 @@ import { useState, useEffect, useRef } from "react";
 import logo from "@assets/CompSciety.png"
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
+const navLinks = [
+  { name: 'Home', navTo: "/", type: "page", },
+  { name: 'About', navTo: "/about",  type: "page", },
+  { name: 'Events', navTo: "/events",  type: "page", },
+  { name: 'Blog', navTo: "/blogs",  type: "page", },
+  { name: 'Contact', type: "section", }
+];
 
 function NavBar() {
   const [isDark, setIsDark] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
   const menuRef = useRef(null);
+
+  const navigate = useNavigate();
 
   // toggle theme
   useEffect(() => {
@@ -51,8 +62,6 @@ function NavBar() {
     }
   }, [openMenu]); // openMenu is necessary since in react, every time na may changes dito ( sa openMenu reference object ), magru-run yung nasa loob ng code.
 
-  const navLinks = ['Home', 'About', 'Events', 'Blog', 'Contact'];
-
   return (
     <header className="fixed w-full z-50 shadow-md text-white transition-colors">
       <div className="mx-auto flex items-center justify-between px-3 py-3">
@@ -82,9 +91,14 @@ function NavBar() {
             <a key={index} className="hover:text-[#5e936c] transition cursor-pointer" target="_blank" rel="noopener noreferrer"
               onClick={(event) => {
                 event.preventDefault();
-                document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+
+                if (link.type === "page") {
+                  navigate(link.navTo);
+                } else if (link.type === "section") {
+                  document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                }
               }}>
-                {link}
+                {link.name}
             </a>
           ))}
         </nav>
@@ -102,34 +116,39 @@ function NavBar() {
             href='#'
             onClick={(event) => {
               event.preventDefault();
+              
+              if (link.type === "page") {
+                navigate(link.navTo);
+              } else if (link.type === "section") {
+                const target = document.getElementById(link.name.toLowerCase());
 
-              const target = document.getElementById(link.toLowerCase());
+                if (!target) return;
 
-              if (!target) return;
+                // Scroll to the target element
+                target.scrollIntoView({ behavior: 'smooth' });
 
-              // Scroll to the target element
-              target.scrollIntoView({ behavior: 'smooth' });
+                // Smoothly wait until scroll ends
+                let lastY = window.scrollY;
 
-              // Smoothly wait until scroll ends
-              let lastY = window.scrollY;
+                const checkScroll = () => {
+                  const currentY = window.scrollY;
 
-              const checkScroll = () => {
-                const currentY = window.scrollY;
+                  if (Math.abs(currentY - lastY) < 2) {
+                    setOpenMenu(false); // Close menu when scrolling stops
+                  } else {
+                    lastY = currentY;
+                    requestAnimationFrame(checkScroll);
+                  }
 
-                if (Math.abs(currentY - lastY) < 2) {
-                  setOpenMenu(false); // Close menu when scrolling stops
-                } else {
-                  lastY = currentY;
-                  requestAnimationFrame(checkScroll);
-                }
+                };
 
-              };
-
-              requestAnimationFrame(checkScroll);
+                requestAnimationFrame(checkScroll);
+              }
+              
             }}
             className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
           >
-            {link}
+            {link.name}
           </a>
         ))}
       </div>
