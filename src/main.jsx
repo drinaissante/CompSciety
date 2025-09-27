@@ -1,20 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 
 import { BrowserRouter } from 'react-router-dom'
 import {Routes, Route} from 'react-router-dom'
 
-import NotFound from './components/pages/notfound/NotFound.jsx'
-import Signup from './components/pages/signup/Signup.jsx'
-import Login from './components/pages/login/Login.jsx'
+import App from "@pages/home/App.jsx"
+import NotFound from '@pages/notfound/NotFound.jsx'
+import Signup from '@pages/signup/Signup.jsx'
+import Login from '@pages/login/Login.jsx'
 
-import AuthProvider from './components/auth/authContext/AuthProvider.jsx'
-import VerifyEmail from './components/pages/verifyemail/VerifyEmail.jsx'
-import ActionHandler from './components/pages/action/ActionHandler.jsx'
-import ResetPassword from './components/pages/resetpw/ResetPassword.jsx'
-import AboutPage from './components/pages/about/AboutPage.jsx'
+import AuthProvider from '@components/auth/authContext/AuthProvider.jsx'
+
+import VerifyEmail from '@pages/verifyemail/VerifyEmail.jsx'
+import ActionHandler from '@pages/action/ActionHandler.jsx'
+import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
+import AboutPage from '@pages/about/AboutPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
