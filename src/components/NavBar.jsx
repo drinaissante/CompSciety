@@ -63,6 +63,22 @@ function NavBar() {
     }
   }, [openMenu]); // openMenu is necessary since in react, every time na may changes dito ( sa openMenu reference object ), magru-run yung nasa loob ng code.
 
+  const handleLink = (e, type, link) => {
+    e.preventDefault();
+
+    if (type === "page") {
+      if (location.pathname === link.navTo) {
+
+          window.scrollTo({ top: 0, behavior: "smooth"})
+      } else {
+          navigate(link.navTo);
+      }
+
+    } else if (type === "section") {
+      document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   return (
     <header className="fixed w-full z-50 shadow-md text-white transition-colors">
       <div className="mx-auto flex items-center justify-between px-3 py-3">
@@ -90,20 +106,7 @@ function NavBar() {
         <nav className="hidden lg:flex gap-25 text-sm font-bold bg-[#18230F] border border-[#255F38] rounded-full px-8 py-5 lg:px-25">
           {navLinks.map((link, index) => (
             <a key={index} className="hover:text-[#5e936c] transition cursor-pointer" target="_blank" rel="noopener noreferrer"
-              onClick={(event) => {
-                event.preventDefault();
-
-                if (link.type === "page") {
-                  if (link.name === "Home") {
-                    // check if on home page already
-                    if (location.pathname === "/")
-                      document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                  navigate(link.navTo);
-                } else if (link.type === "section") {
-                  document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}>
+              onClick={(event) => handleLink(event, link.type, link)}>
                 {link.name}
             </a>
           ))}
