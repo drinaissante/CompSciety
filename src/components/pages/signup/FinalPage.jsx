@@ -1,6 +1,3 @@
-import MotionDiv from "../../MotionDiv.jsx";
-
-import { Link } from "react-router-dom";
 
 function FinalSignup({ handleSubmit, handleChange, errors, email, password, isRegistering, success, }) {
     return (
@@ -16,7 +13,7 @@ function FinalSignup({ handleSubmit, handleChange, errors, email, password, isRe
                         value={email}
                         onChange={handleChange}
                         required
-                        className="p-1 bg-white text-black rounded-md"
+                        className="mx-auto p-1 bg-white text-black rounded-md"
                     />
                     {errors.email && <p className="text-red-500">{errors.email}</p>}
 
@@ -30,7 +27,7 @@ function FinalSignup({ handleSubmit, handleChange, errors, email, password, isRe
                         required
                         minLength={6}
                         onChange={handleChange}
-                        className="p-1 bg-white text-black rounded-md"
+                        className="mx-auto p-1 bg-white text-black rounded-md"
                     />
                     {errors.password && <p className="text-red-500">{errors.password}</p>}
 
@@ -48,7 +45,7 @@ function FinalSignup({ handleSubmit, handleChange, errors, email, password, isRe
                     Redirecting in 5 seconds... 
                     <button 
                         onClick={() => navigate("/")}
-                        className="ml-1 text-green-400 underline cursor-pointer"
+                        className="ml-1 text-green-400 underline cursor-pointer max-w-xl"
                     >
                         Click here to be redirected immediately
                     </button>
