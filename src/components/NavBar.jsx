@@ -79,8 +79,45 @@ function NavBar() {
     }
   }
 
+  const handleLinkMobile = (e, type, link) => {
+    e.preventDefault();
+    
+    if (type === "page") {
+      if (location.pathname === link.navTo) {
+
+          window.scrollTo({ top: 0, behavior: "smooth"})
+      } else {
+          navigate(link.navTo);
+      }
+    } else if (type === "section") {
+      const target = document.getElementById(link.name.toLowerCase());
+      if (!target) return;
+
+      // Scroll to the target element
+      target.scrollIntoView({ behavior: 'smooth' });
+
+      // Smoothly wait until scroll ends
+      let lastY = window.scrollY;
+
+      const checkScroll = () => {
+        const currentY = window.scrollY;
+
+        if (Math.abs(currentY - lastY) < 2) {
+          setOpenMenu(false); // Close menu when scrolling stops
+        } else {
+          lastY = currentY;
+          requestAnimationFrame(checkScroll);
+        }
+
+      };
+
+      requestAnimationFrame(checkScroll);
+    }
+      
+  }
+
   return (
-    <header className="fixed w-full z-50 shadow-md text-white transition-colors">
+    <nav className="fixed w-full z-50 shadow-md text-white transition-colors">
       <div className="mx-auto flex items-center justify-between px-3 py-3">
 
         <div className="flex items-center gap-4 lg:ml-50">
@@ -123,38 +160,7 @@ function NavBar() {
           <a
             key={index}
             href='#'
-            onClick={(event) => {
-              event.preventDefault();
-              
-              if (link.type === "page") {
-                navigate(link.navTo);
-              } else if (link.type === "section") {
-                const target = document.getElementById(link.name.toLowerCase());
-
-                if (!target) return;
-
-                // Scroll to the target element
-                target.scrollIntoView({ behavior: 'smooth' });
-
-                // Smoothly wait until scroll ends
-                let lastY = window.scrollY;
-
-                const checkScroll = () => {
-                  const currentY = window.scrollY;
-
-                  if (Math.abs(currentY - lastY) < 2) {
-                    setOpenMenu(false); // Close menu when scrolling stops
-                  } else {
-                    lastY = currentY;
-                    requestAnimationFrame(checkScroll);
-                  }
-
-                };
-
-                requestAnimationFrame(checkScroll);
-              }
-              
-            }}
+            onClick={(event) => handleLinkMobile(event, link.type, link)}
             className="hover:underline hover:bg-green-800 w-full flex items-center justify-center h-10"
           >
             {link.name}
@@ -163,7 +169,7 @@ function NavBar() {
       </div>
 
       
-    </header>
+    </nav>
   );
 }
 
