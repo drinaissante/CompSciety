@@ -82,7 +82,7 @@ function App() {
           <Announcements />
 
           {/* gradient container */}
-          <div className="bg-gradient-to-br from-[#18230F] to-[#27391C]">
+          <div className="bg-gradient-to-br from-[#18230F] via-[#2b5016] to-[#324d22]">
             {/* About CompSciety */}
             <About />
 

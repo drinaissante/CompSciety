@@ -10,7 +10,7 @@ function AboutPage() {
     return (
         <div className='min-h-screen flex flex-col scroll-smooth'>    
             <NavBar />
-            <div className="bg-gradient-to-br from-[#18230F] to-[#27391C]">
+            <div className="bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22]">
                 <div
                     id="about"
                     className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-35 sm:p-10 sm:mt-50 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)]"

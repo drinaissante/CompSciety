@@ -5,7 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import {Routes, Route} from 'react-router-dom'
 
-import App from "@pages/home/App.jsx"
+import Home from "@pages/home/Home.jsx"
 import NotFound from '@pages/notfound/NotFound.jsx'
 import Signup from '@pages/signup/Signup.jsx'
 import Login from '@pages/login/Login.jsx'
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel*/}
         <AuthProvider>
           <Routes>
-              <Route path="/" element={<App />} />
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/verify" element={<VerifyEmail />} />

@@ -33,7 +33,6 @@ function About() {
 
       <div className="flex flex-col lg:flex-row justify-center gap-6 w-full max-w-6xl">
 
-        
         {/* Mission */}
         <MotionDiv className="bg-[#255F38] rounded-2xl flex flex-col gap-7 p-8 text-white text-center flex-1 transform transition-all duration-300 hover:scale-105 max-w-lg">
           <span className="font-outfit font-bold text-xl lg:text-3xl">Mission</span>
