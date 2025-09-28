@@ -16,6 +16,7 @@ import VerifyEmail from '@pages/verifyemail/VerifyEmail.jsx'
 import ActionHandler from '@pages/action/ActionHandler.jsx'
 import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
 import AboutPage from '@pages/about/AboutPage.jsx'
+import NavBar from './components/NavBar.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,6 +33,8 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel*/}
         <AuthProvider>
           <ScrollToTop />
+
+          <NavBar />
           
           <Routes>
               <Route path="/" element={<Home />} />
