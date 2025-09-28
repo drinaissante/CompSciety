@@ -130,8 +130,8 @@ function Partners() {
                     modules={[Autoplay]}
                     spaceBetween={30}
                     slidesPerView={2}
-                    autoplay={{ delay: 4000, disableOnInteraction: false }}
-                    speed={3000}
+                    autoplay={{ delay: 1000, disableOnInteraction: false }}
+                    speed={2000}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     loop={true}
                     loopPreventsSliding={true}
