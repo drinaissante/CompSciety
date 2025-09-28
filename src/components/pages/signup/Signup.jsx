@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Squares } from "../../squares-background.tsx";
-import MotionDiv from "../../MotionDiv.jsx";
 import { doCreateUserWithEmailAndPassword } from "../../auth/authService.jsx";
 
 import { getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
 import { sendEmailVerification } from "firebase/auth";
 
+import { Link } from "react-router-dom";
 
+import Profile from "./Profile.jsx";
+import Student from "./Student.jsx";
+import Questions from "./Questions.jsx";
+import FinalSignup from "./FinalPage.jsx";
+
+import MotionDiv from "../../MotionDiv.jsx";
 
 // TODO
 // make sure to prompt all the needed information before this signup page (with email and password on last)
@@ -16,11 +22,11 @@ import { sendEmailVerification } from "firebase/auth";
 // after signing in, fill up the forms
 
 
-
 function Signup() {
     useEffect(() => {
         document.title = "Signup | BulSU Computer Science Society"
     }, []);
+
 
     const navigate = useNavigate();
         
@@ -30,6 +36,7 @@ function Signup() {
     const [success, setSuccessMessage] = useState("");
 
     const [isRegistering, setIsRegistering] = useState(false);
+
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -117,6 +124,20 @@ function Signup() {
         }));
     }
 
+    const [page, setPage] = useState(0);
+    const [viewedPages, setViewedPages] = useState(new Set());
+    
+    useEffect(() => {
+        setViewedPages((prev) => new Set(prev).add(page));
+    }, [page]); // run after setPage()
+
+    const pages = [
+        <Profile hasViewed={viewedPages.has(1)}/>,
+        <Student hasViewed={viewedPages.has(2)}/>,
+        <Questions hasViewed={viewedPages.has(3)}/>,
+        <FinalSignup handleSubmit={handleSubmit} handleChange={handleChange} errors={errors}  email={email} password={password} isRegistering={isRegistering} success={success} />        
+    ]
+
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#18230F] rounded-xl">
             {/* Animated squares background */}
@@ -129,88 +150,62 @@ function Signup() {
                 className="absolute"
             />
 
-            <MotionDiv className="flex flex-col mx-auto p-10 lg:py-15 lg:px-30 z-10 bg-white/40 rounded-3xl gap-10">
+            <MotionDiv className="flex flex-col p-5 mt-20 mb-20 mx-auto my-auto z-10  bg-white/40 rounded-3xl gap-3">
                 
-                <div className="font-bold text-2xl text-center">Signup</div>
+                <div className="font-bold text-5xl text-center">Signup</div>
+                
+                {pages[page]}
+                
+                <div className="m-3 mt-10 flex justify-center">
+                    Already have an account?
+                    <Link to="/login" className="text-green-400 ml-4">
+                        Sign in
+                    </Link>
+                </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col font-bold text-center gap-3">
-
-                        Email
-                        <input
-                            type="text"
-                            name="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={handleChange}
-                            required
-                            className="p-1 bg-white text-black rounded-md"
-                        />
-                        {errors.email && <p className="text-red-500">{errors.email}</p>}
-
-                        
-                        Password
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={password}
-                            required
-                            minLength={6}
-                            onChange={handleChange}
-                            className="p-1 bg-white text-black rounded-md"
-                        />
-                        {errors.password && <p className="text-red-500">{errors.password}</p>}
-
-                        
-                    </div>
-                    
-                    <div className="m-3 flex justify-center">
-                        Already have an account?
-                        <Link to="/login" className="text-green-400 ml-4">
-                            Sign in
-                        </Link>
-                    </div>
-
-                    <div className="m-2 flex justify-around">
-                        <Link to="/">
-                            <button className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer">
-                                Cancel
-                            </button>
-                        </Link>
-
-                        <button
-                            type="submit"
-                            className="py-3 px-5 rounded-2xl bg-green-600 cursor-pointer"
-                            disabled={isRegistering}
-                        >
-                            {isRegistering ? "Registering..." : "Register"}
-                        </button>
-                    </div>
-                    
-                </form>
-            
                 <h4 className="flex justify-center underline">Terms of Service</h4>
                 {/* TODO: add terms of service */}
 
-                {errors.auth && <p className="text-center text-red-500">{errors.auth}</p>}
 
-                {success && (
-                    <p className="text-green-300 w-[40ch]">{success}</p>
-                    && 
-                    <p>
-                        Redirecting in 5 seconds... 
-                        <button 
-                            onClick={() => navigate("/")}
-                            className="ml-1 text-green-400 underline cursor-pointer"
-                        >
-                            Click here to be redirected immediately
+                {/* buttons bottom right */}
+                <div className="flex gap-2">
+                    {page >= 1 && (
+                    <button
+                        type="button"
+                        className="py-3 px-5 rounded-2xl bg-green-500 cursor-pointer"
+                        disabled={isRegistering}
+                        onClick={() => setPage((p) => p - 1)}
+                    >
+                        Previous
+                    </button>
+                    )}
+
+                    <Link to="/">
+                        <button className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer" onClick={(e) => {
+                            setPage(0);
+                        }}>
+                            Cancel
                         </button>
-                    </p>
+                    </Link>
 
-                )}
+                    <button
+                        type="button"
+                        className="py-3 px-5 rounded-2xl bg-green-900 cursor-pointer"
+                        disabled={isRegistering}
+                        onClick={() => {
+                            if (page === pages.length - 1) {
+                                // handle registration
+                            } else {
+                                setPage((p) => p + 1);
+                            }
+                        }}
+                    >
+                        {page === pages.length - 1 ? "Register" : "Next"}
+                    </button>
+                    
+                </div>
+
             </MotionDiv>
-
         </div>
     );
 }

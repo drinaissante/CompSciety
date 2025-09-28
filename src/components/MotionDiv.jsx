@@ -1,5 +1,5 @@
 // FOR THE ANIMATION ON LOAD/ SCROLL
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MotionDiv = ({
   children,
@@ -8,17 +8,21 @@ const MotionDiv = ({
   whileInView = { opacity: 1, y: 0 },
   transition = { duration: 0.8, ease: "easeOut" },
   viewport = { once: true },
+  hasViewed = undefined,
 }) => {
   return (
-    <motion.div
-      className={className}
-      initial={initial}
-      whileInView={whileInView}
-      transition={transition}
-      viewport={viewport}
-    >
-      {children}
-    </motion.div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={hasViewed ? undefined : initial}
+        whileInView={whileInView}
+        transition={transition}
+        viewport={viewport}
+        exit={hasViewed ? undefined : { x: -300, opacity: 0 }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

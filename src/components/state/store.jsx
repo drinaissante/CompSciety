@@ -1,29 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { createSelectors } from "./create-selectors.jsx"
 
-// NEEDED
 /*
 - continue btn
 - add loading animation = redirect to home
-
-profile: {
-    email:
-    first_name:
-    last_name:
-    middle_ini:
-}
-
-student: {
-    college:
-    year_level:
-    section:
-}
-
-questions: {
-    question_1: <response>
-    question_2: <response>
-    question_3: <response>
-}
 
 USAGE: 
   const {
@@ -99,5 +80,10 @@ const useStore = create(
     
 );
 
+// MAKE SURE TO USE FIRESTORE TO STORE INFORMATION AFTER USING ZUSTAND
+
+
+// SELECTORS
+export const useStoreSelectors = createSelectors(useStore);
 
 export default useStore;
