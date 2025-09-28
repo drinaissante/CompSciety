@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { createSelectors } from "./create-selectors.jsx"
 
 /*
@@ -19,66 +19,71 @@ USAGE:
 */
 
 const useStore = create(
-    persist((set) => ({
-        profile: {
+  persist(
+    (set) => ({
+      profile: {
+        name: "",
+        middle_ini: "",
+        last_name: "",
+      },
+      student: {
+        college: "",
+        year_level: "",
+        section: "",
+      },
+      questions: {
+        question_1: "",
+        question_2: "",
+        question_3: "",
+      },
+
+      update: (slice, fieldOrUpdates, value) =>
+        set((state) => {
+          if (typeof fieldOrUpdates === "string") {
+            // single field
+            return {
+              [slice]: {
+                ...state[slice],
+                [fieldOrUpdates]: value,
+              },
+            };
+          } else {
+            // batch update
+            return {
+              [slice]: {
+                ...state[slice],
+                ...fieldOrUpdates,
+              },
+            };
+          }
+        }),
+
+      clearResponses: () =>
+        set({
+          profile: {
             email: "",
             first_name: "",
             last_name: "",
             middle_ini: "",
-        },
-        student: {
+          },
+          student: {
             college: "",
             year_level: "",
             section: "",
-        },
-        questions: {
+          },
+          questions: {
             question_1: "",
             question_2: "",
-            question_3: "", // MAKE SURE TO ADD MORE OR REMOVE ENTIRELY IF NOT NEEDED
-        },
-
-        updateProfile: (field, value) =>
-            set((state) => ({
-                profile: { ...state.profile, [field]: value },
-            })),
-
-        updateStudent: (field, value) =>
-            set((state) => ({
-                student: { ...state.student, [field]: value },
-            })),
-
-        updateQuestion: (field, value) =>
-            set((state) => ({
-                questions: { ...state.questions, [field]: value },
-            })),
-
-        clearResponses: () => 
-            set({
-                profile: {
-                    email: "",
-                    first_name: "",
-                    last_name: "",
-                    middle_ini: "",
-                },
-                student: {
-                    college: "",
-                    year_level: "",
-                    section: "",
-
-                },
-                questions: {
-                    question_1: "",
-                    question_2: "",
-                    question_3: "",
-                }
-            }),
-        })
-    ),
+            question_3: "",
+          },
+        }),
+    }),
     {
-        name: "comp-storage"
+      name: "comp-storage",
     }
-    
+  )
 );
+
 
 // MAKE SURE TO USE FIRESTORE TO STORE INFORMATION AFTER USING ZUSTAND
 
