@@ -94,10 +94,10 @@ function Footer() {
 
         {/* contact */}
         <div id="contact" className="flex flex-col p-4">
-            <span className="font-bold">
+            <span className="text-sm font-bold">
                 Contact Us
             </span>
-            <span className="pt-2 text-sm">
+            <span className="pt-2 text-sm text-gray-100/50">
                 compscietybulsu2025@gmail.com
             </span>
         </div>
