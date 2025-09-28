@@ -161,7 +161,7 @@ function Partners() {
                                             draggable="false"
                                         />
 
-                                        <span className="block mt-2 text-center">{partner.name}</span>
+                                        <span className="block mt-2 text-center w-[20ch]">{partner.name}</span>
                                     </div>
                                 </a>
                             </div>

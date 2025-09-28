@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 
 import NavBar from '../../NavBar.jsx'
 
-import { motion } from 'framer-motion';
-
 import Footer from './sections/Footer.jsx';
 import Hero from './sections/Hero.jsx';
 import Partners from './sections/Partners.jsx';
@@ -14,28 +12,12 @@ import About from './sections/About.jsx';
 
 import { FaArrowUp } from 'react-icons/fa';
 
-let animationHasPlayed = false; // <-- stays in memory until page reload
-
 function App() {
-  const [showAnimation, setShowAnimation] = useState(!animationHasPlayed);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
   useEffect(() => {
     document.title = "Home | BulSU Computer Science Society"
 
-    if (!animationHasPlayed) {
-      const timer = setTimeout(() => {
-        setShowAnimation(false);
-        animationHasPlayed = true;
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    } else {
-      setShowAnimation(false);
-    }
-  }, [])
-
-  useEffect(() => {
     const handleScrollBtn = () => {
       const currentY = window.scrollY;
 
@@ -53,57 +35,37 @@ function App() {
 
   return (
     <div className='min-h-screen flex flex-col scroll-smooth'>
-      {showAnimation && (
-        <motion.div
-          initial={{opacity: 0, scale: 0.4}}
-          animate={{opacity: 1, scale: 1.2}}
-          exit={{opacity: 0, scale: 2}}
-          transition={{duration: 4}}
-          className="fixed inset-0 flex items-center justify-center bg-white z-50"
-        >
+        {/* animated cursor  ?? */}
 
-          {/* PUT GLASS BREAKING MATRIX THING ANIMATION HERE */}
+        {/* header with navbar */}
+        <NavBar />
 
-          <span className="text-3xl text-center font-bold text-green-700">Welcome to CompSciety!</span>
-        </motion.div>
-      )}
+        {/* hero */}
+        <Hero />
 
-      {!showAnimation && (
-        <>
-          {/* animated cursor  ?? */}
+        {/* announcement carousel here */}
+        <Announcements />
 
-          {/* header with navbar */}
-          <NavBar />
+        {/* gradient container */}
+        <div className="bg-gradient-to-br from-[#18230F] via-[#2b5016] to-[#324d22]">
+          {/* About CompSciety */}
+          <About />
 
-          {/* hero */}
-          <Hero />
+          {/* organization partners */}
+          <Partners />
+        </div>
 
-          {/* announcement carousel here */}
-          <Announcements />
+        {showScrollBtn && (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
+            className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded-xl shadow-emerald-200 transform transition duration-300 hover:-translate-y-2 text-xl"
+          >
+            <FaArrowUp/>
+          </button>
+        )}
 
-          {/* gradient container */}
-          <div className="bg-gradient-to-br from-[#18230F] via-[#2b5016] to-[#324d22]">
-            {/* About CompSciety */}
-            <About />
-
-            {/* organization partners */}
-            <Partners />
-          </div>
-
-          {showScrollBtn && (
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth"})}
-              className="fixed cursor-pointer bottom-8 right-8 bg-green-700 text-white px-3 py-3 rounded-xl shadow-emerald-200 transform transition duration-300 hover:-translate-y-2 text-xl"
-            >
-              <FaArrowUp/>
-            </button>
-          )}
-
-          {/* footer */}
-          <Footer />
-          
-        </>
-      )}
+        {/* footer */}
+        <Footer />
     </div>
   )
 }
