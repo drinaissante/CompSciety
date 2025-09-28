@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./auth.jsx";
+import { doSignOut } from "../authService.jsx";
 
 function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
@@ -19,7 +20,7 @@ function AuthProvider({ children }) {
                 setCurrentUser({ ...user });
                 setUserLoggedIn(true);
             } else {
-                await signOut(auth);
+                await doSignOut();
                 setCurrentUser(null);
                 setUserLoggedIn(false);
             }
