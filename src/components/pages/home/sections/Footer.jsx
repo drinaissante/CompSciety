@@ -1,6 +1,6 @@
 import logo from "@assets/CompSciety.png"
 
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa";
 
 function Footer() {
     return (
@@ -25,22 +25,26 @@ function Footer() {
             <span className="font-bold">Follow Us</span>
 
             <div className="flex gap-5">
-                {/* <a href="">
-                    <FaYoutube />
-                </a> */}
+                <a href="https://www.youtube.com/@ComputerScienceSociety-BulSU" target="_blank" rel="noopener noreferrer">
+                    <FaYoutube size={23}/>
+                </a>
 
-                <a href="https://www.facebook.com/compscietybulsu2025" target="_blank" rel="noopener noreferrer">
-                    <FaFacebook  size={23}/>
+                <a href="https://www.tiktok.com/@compscietybulsu" target="_blank" rel="noopener noreferrer">
+                    <FaFacebook size={23}/>
+                </a>
+                
+                <a href="https://www.youtube.com/@ComputerScienceSociety-BulSU" target="_blank" rel="noopener noreferrer">
+                    <FaTiktok size={23}/>
                 </a>
 
                 
                 <a href="https://www.instagram.com/compscietybulsu2025/" target="_blank" rel="noopener noreferrer">
-                    <FaInstagram  size={23}/>
+                    <FaInstagram size={23}/>
                 </a>
 
                 
                 <a href="https://www.linkedin.com/in/computer-science-society-bulsu-705740378/" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin  size={23}/>
+                    <FaLinkedin size={23}/>
                 </a>
             </div>
 
