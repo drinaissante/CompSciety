@@ -61,11 +61,6 @@ function AboutPage() {
 
                     </div>
 
-                    {/* Learn More Btn */}
-                    <div className="absolute -bottom-7 px-12 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_7px_3px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
-                        Learn More
-                    </div>
-
                 </div>
             </div>
             
