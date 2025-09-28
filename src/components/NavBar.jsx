@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import logo from "@assets/CompSciety.png"
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { name: 'Home', navTo: "/", type: "page", },
@@ -22,6 +22,7 @@ function NavBar() {
   const menuRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation(); 
 
   // toggle theme
   useEffect(() => {
@@ -93,6 +94,11 @@ function NavBar() {
                 event.preventDefault();
 
                 if (link.type === "page") {
+                  if (link.name === "Home") {
+                    // check if on home page already
+                    if (location.pathname === "/")
+                      document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                  }
                   navigate(link.navTo);
                 } else if (link.type === "section") {
                   document.getElementById(link.name.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
