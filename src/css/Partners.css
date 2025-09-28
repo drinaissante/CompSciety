@@ -1,0 +1,14 @@
+/* Turn bullets into bars */
+.swiper-pagination-bullet {
+    width: 26px !important;
+    height: 6px !important;
+    border-radius: 4px !important;
+    background: #9ca3af !important;
+    opacity: 1 !important;
+}
+
+/* Active bullet styling */
+.swiper-pagination-bullet-active {
+    background: #22c55e !important;
+    width: 34px !important;
+}

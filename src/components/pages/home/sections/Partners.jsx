@@ -1,10 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import {motion, AnimatePresence} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import cs_wizards from "@assets/CS_WIZARDS.jpg"
 import jpcs from "@assets/jpcs.png"
@@ -15,6 +15,9 @@ import bliss from "@assets/BLISS.png"
 import MotionDiv from "../../../MotionDiv.jsx"
 
 import "swiper/css";
+import "swiper/css/pagination"
+
+import "@css/Partners.css"
 
 // PUT THESE IN A SEPARATE MODEL FILE FOR READABILITY AND IMPORT NALANG
 
@@ -117,17 +120,17 @@ function Partners() {
         swiperRef.current?.autoplay.start();
     }
 
-
     return (
         <div className="relative">
             <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-4xl font-extrabold p-5">Our Partners</h2>
 
             <MotionDiv
                 id="partners"
-                className="mt-20 mb-10 justify-self-center sm:w-[30%] w-[80%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)] overflow-visible"
+                className="mt-20 mb-10 justify-self-center sm:w-[30%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)]   bg-[#18230F] overflow-visible"
             >
                 <Swiper
-                    modules={[Autoplay]}
+                    modules={[Autoplay, Pagination]}
+                    pagination={{ clickable: true }}
                     spaceBetween={30}
                     slidesPerView={2}
                     autoplay={{ delay: 1000, disableOnInteraction: false }}
