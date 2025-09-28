@@ -15,6 +15,7 @@ import Questions from "./Questions.jsx";
 import FinalSignup from "./FinalPage.jsx";
 
 import MotionDiv from "../../MotionDiv.jsx";
+import useStore from "../../state/store.jsx";
 
 // TODO
 // make sure to prompt all the needed information before this signup page (with email and password on last)
@@ -48,11 +49,25 @@ function Signup() {
 
         setErrors({ email: emailErrors, password: pwErrors })
 
+        const profile = useStore((state) => state.profile);
+        const student = useStore((state) => state.student);
+        const questions = useStore((state) => state.questions);
+
+        const clear = useStore((state) => state.clearResponses);
+
         if (!emailErrors && !pwErrors) {
             if (!isRegistering) {
                 setIsRegistering(true);
 
                 try {
+                    // ZUSTAND TEST
+                    console.log(profile.name);
+                    console.log(student.year_level);
+                    console.log(questions.question_3);
+
+                    clear();
+
+
                     // email verification
                     const userCredential = await doCreateUserWithEmailAndPassword(email, password);
 
@@ -150,7 +165,7 @@ function Signup() {
                 className="absolute"
             />
 
-            <MotionDiv className="flex flex-col p-5 mt-20 mb-20 mx-auto my-auto z-10  bg-white/40 rounded-3xl gap-3">
+            <MotionDiv className="flex flex-col p-5 mt-20 mb-20 mx-auto my-auto z-10 min-w-max bg-white/40 rounded-3xl gap-3">
                 
                 <div className="font-bold text-5xl text-center">Signup</div>
                 
@@ -167,7 +182,7 @@ function Signup() {
                 {/* TODO: add terms of service */}
 
 
-                {/* buttons bottom right */}
+                {/* TODO: buttons should be bottom right */}
                 <div className="flex gap-2">
                     {page >= 1 && (
                     <button
@@ -189,12 +204,13 @@ function Signup() {
                     </Link>
 
                     <button
-                        type="button"
+                        type="submit"
                         className="py-3 px-5 rounded-2xl bg-green-900 cursor-pointer"
                         disabled={isRegistering}
-                        onClick={() => {
+                        onClick={(e) => {
+                            // last page na
                             if (page === pages.length - 1) {
-                                // handle registration
+                                handleSubmit(e);
                             } else {
                                 setPage((p) => p + 1);
                             }
