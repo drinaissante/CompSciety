@@ -2,14 +2,16 @@ import MotionDiv from "../../MotionDiv.jsx";
 
 import mascot from "@assets/mascot.png"
 
-import NavBar from '../../NavBar.jsx'
-
 import Footer from "../home/sections/Footer.jsx";
+import { useEffect } from "react";
 
 function AboutPage() {
+    useEffect(() => {
+        document.title = "About | BulSU Computer Science Society"
+    }, []);
+
     return (
         <div className='min-h-screen flex flex-col scroll-smooth'>    
-            <NavBar />
             <div className="bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22]">
                 <div
                     id="about"
