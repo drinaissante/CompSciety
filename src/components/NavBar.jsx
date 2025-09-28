@@ -136,7 +136,15 @@ function NavBar() {
             src={logo}
             alt="Logo"
             className="transition-all lg:h-21 h-12 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (location.pathname !== "/") {
+                navigate("/");
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
           />
         </div>
 
