@@ -1,8 +1,8 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, useLocation } from 'react-router-dom'
 import {Routes, Route} from 'react-router-dom'
 
 import Home from "@pages/home/Home.jsx"
@@ -17,10 +17,22 @@ import ActionHandler from '@pages/action/ActionHandler.jsx'
 import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
 import AboutPage from '@pages/about/AboutPage.jsx'
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+
+  return null;
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel*/}
         <AuthProvider>
+          <ScrollToTop />
+          
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
