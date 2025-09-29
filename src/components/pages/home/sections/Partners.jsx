@@ -126,13 +126,13 @@ function Partners() {
 
             <MotionDiv
                 id="partners"
-                className="mt-20 mb-10 justify-self-center sm:w-[30%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)]   bg-[#18230F] overflow-visible"
+                className="mt-20 mb-10 justify-self-center sm:w-[50%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)]   bg-[#18230F] overflow-visible"
             >
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     pagination={{ clickable: true }}
                     spaceBetween={30}
-                    slidesPerView={2}
+                    slidesPerView={3}
                     autoplay={{ delay: 1000, disableOnInteraction: false }}
                     speed={2000}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}

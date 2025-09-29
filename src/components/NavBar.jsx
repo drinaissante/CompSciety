@@ -157,9 +157,14 @@ function NavBar() {
           ))}
         </nav>
         
-        <button className="cursor-pointer lg:mr-40 hover:text-[#1f7d53] transition" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
-          {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
-        </button>
+        <span className="lg:mr-20 flex items-center justify-start gap-15">
+          <button className="cursor-pointer hover:text-[#1f7d53] transition" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
+            {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
+          </button>
+
+            {/* <How to change btn link from Join Button to Login Button> */}
+          <button className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition">Login</button>
+        </span>
       </div>
 
       {/* Mobile menu */}
