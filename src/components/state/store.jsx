@@ -73,7 +73,4 @@ const useStore = create(
   )
 );
 
-
-// MAKE SURE TO USE FIRESTORE TO STORE INFORMATION AFTER USING ZUSTAND
-
 export default useStore;

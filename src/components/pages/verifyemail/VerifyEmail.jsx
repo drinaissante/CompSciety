@@ -43,7 +43,7 @@ function VerifyEmail() {
     }, [seconds, navigate]); // navigate -> run on navigate
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-[#18230F]">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22] ">
             <div className="flex flex-col text-center font-bold text-white space-y-4">
 
                 <h2 className="text-2xl">Email Verification</h2>
@@ -53,7 +53,7 @@ function VerifyEmail() {
                     Redirecting in <span className="font-bold">{seconds}</span> seconds... 
                     <button 
                         onClick={() => navigate("/")}
-                        className="ml-1 text-green-400 underline"
+                        className="ml-1 text-green-400 underline cursor-pointer"
                     >
                         Click here to be redirected immediately
                     </button>
@@ -61,7 +61,7 @@ function VerifyEmail() {
 
                 <button
                     onClick={() => navigate("/login")}
-                    className="bg-[#1F7D53] px-4 py-2 rounded-lg hover:bg-[#166b45] transition"
+                    className="bg-[#1F7D53] px-4 py-2 rounded-lg hover:bg-[#166b45] transition cursor-pointer"
                 >
                     Go to Login
                 </button>
