@@ -11,6 +11,9 @@ student: {
 */
 
 
+// TODO: make year level and college a drop down
+
+
 function Student({ hasViewed, setIsValid, setErrors }) {
     const student = useStore((state) => state.student);
 
@@ -68,19 +71,19 @@ function Student({ hasViewed, setIsValid, setErrors }) {
         <form onSubmit={handleSubmit} className="mt-2 flex flex-col lg:flex-row gap-8">
             <div className="flex flex-col text-center">
                 <h1>College <span className="text-red-500">*</span> </h1>
-                <input type="text" name="text" placeholder="Ex. College of Science" required value={college} onChange={(e) => handleChange("college", e)} 
+                <input type="text" placeholder="Ex. College of Science" required value={college} onChange={(e) => handleChange("college", e)} 
                 className="p-3 bg-white text-black rounded-md" />
             </div>
 
             <div className="flex flex-col text-center">
                 <h1>Year Level <span className="text-red-500">*</span> </h1>
-                <input type="text" name="text" placeholder="Ex. 2nd Year" required value={yearLevel} onChange={(e) => handleChange("year_level", e)}
+                <input type="text" placeholder="Ex. 2nd Year" required value={yearLevel} onChange={(e) => handleChange("year_level", e)}
                  className="p-3 bg-white text-black rounded-md" />
             </div>
             
             <div className="flex flex-col text-center">
                 <h1>Section <span className="text-red-500">*</span> </h1>
-                <input type="text" name="text" placeholder="Ex. 2B" required value={section} onChange={(e) => handleChange("section", e)}
+                <input type="text" placeholder="Ex. 2B" required value={section} onChange={(e) => handleChange("section", e)}
                 className="p-3 bg-white text-black rounded-md" />
             </div>
         </form>

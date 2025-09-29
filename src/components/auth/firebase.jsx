@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"
+import { getFirestore } from "firebase/firestore";
 
 /*
     NOTE: THIS DOES NOT WORK SA GITHUB PAGES. This should work on vercel. pero okay lang naman daw na publicly available to (frontend) and kahit sa github repo.
@@ -15,7 +16,7 @@ const firebaseConfig = {
 };
 */
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDenaQpC44i30FU4_VCw-lcY2Ib57vbq5U",
   authDomain: "compsciety.firebaseapp.com",
   projectId: "compsciety",
@@ -27,9 +28,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const auth = getAuth(app);
 
-export { app, auth };
+export { app, auth, db };
 
 export const getFirebaseAuthErrorMessage = (error) => {
   switch (error.code) {

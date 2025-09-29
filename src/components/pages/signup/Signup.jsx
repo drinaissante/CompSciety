@@ -17,11 +17,9 @@ import FinalSignup from "./FinalPage.jsx";
 import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
 
-// TODO
-// make sure to prompt all the needed information before this signup page (with email and password on last)
-// ORRR
-// after signing in, fill up the forms
+import { createUserDocument } from "../../db/database.jsx"
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function Signup() {
     useEffect(() => {
@@ -34,60 +32,93 @@ function Signup() {
     const [errors, setErrors] = useState({});
     const [success, setSuccessMessage] = useState("");
 
+    const creds = useStore((state) => state.creds);
+    const profile = useStore((state) => state.profile);
+    const student = useStore((state) => state.student);
+    const questions = useStore((state) => state.questions);
+    
+    const clear = useStore((state) => state.clearResponses);
+
+    const [email, setEmail] = useState(creds.email || "");
+    const [password, setPassword] = useState("");
+
     const [isRegistering, setIsRegistering] = useState(false);
+    
+    const validateField = (name, value) => {
+        if (value.empty)
+            return "";
+        
+        let error = "";
+
+        if (name === "email") {
+            if (!value?.trim()) {
+                error = "Please enter your email address.";
+            } else if (!emailRegex.test(value)) {
+                error = "Please enter a valid email address.";
+            }
+        }
+
+        if (name === "password") {
+            if (!value?.trim()) {
+                error = "Please enter your password.";
+            } else if (value.length < 6) {
+                error = "Password must at least be 6 characters.";
+            }
+        }
+
+        return error;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const emailErrors = validateField("email", email);
-        const pwErrors = validateField("password", password);
+        if (!isRegistering) {
+            setIsRegistering(true);
 
-        setErrors({ email: emailErrors, password: pwErrors })
+            try {
+                // email verification
+                const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
 
-        const profile = useStore((state) => state.profile);
-        const student = useStore((state) => state.student);
-        const questions = useStore((state) => state.questions);
-
-        const clear = useStore((state) => state.clearResponses);
-
-        if (!emailErrors && !pwErrors) {
-            if (!isRegistering) {
-                setIsRegistering(true);
-
-                try {
-                    // ZUSTAND TEST
-                    console.log(profile.name);
-                    console.log(student.year_level);
-                    console.log(questions.question_3);
-
-                    clear();
-
-                    // // email verification
-                    // const userCredential = await doCreateUserWithEmailAndPassword(email, password);
-
-                    // // custom email link
-                    // const actionCodeSettings = {
-                    //     url: "https://drinaissante.github.io/CompSciety/verify", // should be changed when pushing to vercel
-                    //     handleCodeInApp: true,
-                    // };
-
-                    // await sendEmailVerification(userCredential.user, actionCodeSettings);
-                    
-                    // make this to another page (?) // white cast overlay
-                    setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.")
-
-                    // redirect to home page after 5 seconds
-                    const timer = setTimeout(() => {
-                        navigate("/");
-                    }, 5000); // 5 seconds
-
-                    return () => clearTimeout(timer); // cleanup on unmount
-                } catch (error) {
-                    const errMessage = getFirebaseAuthErrorMessage(error);
-                    setErrors((prev) => ({ ...prev, auth: errMessage }));
-                } finally {
-                    setIsRegistering(false);
+                // custom email link
+                const actionCodeSettings = {
+                    url: "https://drinaissante.github.io/CompSciety/verify", // should be changed when pushing to vercel
+                    handleCodeInApp: true,
+                };
+                
+                const profileData = {
+                    email: creds.email,
+                    name: profile.name, 
+                    middle_initial: profile.middle_ini, 
+                    last_name: profile.last_name, 
+                    college: student.college, 
+                    year_level: student.year_level, 
+                    section: student.section,
+                    question_1: questions.question_1, 
+                    question_2: questions.question_2, 
+                    question_3: questions.question_3,
                 }
+
+                await createUserDocument(profileData, setErrors);
+
+                await sendEmailVerification(user, actionCodeSettings);
+                
+                // make this to another page (?) // white cast overlay
+                setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.")
+                
+                clear();
+
+                // redirect to home page after 5 seconds
+                const timer = setTimeout(() => {
+                    navigate("/");
+                }, 5000); // 5 seconds
+
+                return () => clearTimeout(timer); // cleanup on unmount
+            } catch (error) {
+                const errMessage = getFirebaseAuthErrorMessage(error);
+                setErrors({auth: errMessage});
+            } finally {
+                setIsRegistering(false);
             }
         }
     }
@@ -104,7 +135,8 @@ function Signup() {
         <Profile hasViewed={viewedPages.has(1)} setIsValid={setIsValid} setErrors={setErrors}/>,
         <Student hasViewed={viewedPages.has(2)} setIsValid={setIsValid} setErrors={setErrors}/>,
         <Questions hasViewed={viewedPages.has(3)} setIsValid={setIsValid} setErrors={setErrors}/>,
-        <FinalSignup handleSubmit={handleSubmit} errors={errors} success={success} setErrors={setErrors}/>        
+        <FinalSignup handleSubmit={handleSubmit} email={email} setEmail={setEmail} 
+            password={password} setPassword={setPassword} errors={errors} success={success} setErrors={setErrors} validateField={validateField}/>        
     ]
 
     return (
@@ -125,9 +157,9 @@ function Signup() {
                 
                 {pages[page]}
                 
-                {errors.auth && (<p className="text-center text-red-500">{errors.auth}</p>)}
+                {errors.auth && (<p className="mt-5 text-center text-red-500 w-[50ch]">{errors.auth}</p>)}
                 
-                <div className="m-3 mt-10 flex justify-center">
+                <div className="m-3 flex justify-center">
                     Already have an account?
                     <Link to="/login" className="text-green-400 ml-4">
                         Sign in

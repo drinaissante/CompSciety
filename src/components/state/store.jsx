@@ -19,6 +19,9 @@ const useStore = create(
         question_2: "",
         question_3: "",
       },
+      creds: {
+        email: "",
+      },
 
       update: (slice, fieldOrUpdates, value) =>
         set((state) => {
@@ -59,6 +62,9 @@ const useStore = create(
             question_2: "",
             question_3: "",
           },
+          creds: {
+            email: "",
+          }
         }),
     }),
     {

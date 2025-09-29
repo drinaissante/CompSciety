@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./auth.jsx";
-import { doSignOut } from "../authService.jsx";
 
 function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
@@ -16,14 +15,12 @@ function AuthProvider({ children }) {
 
     async function initializeUser(user) {
         if (user) {
-            if (user.emailVerified) {
                 setCurrentUser({ ...user });
                 setUserLoggedIn(true);
-            } else {
-                await doSignOut();
-                setCurrentUser(null);
-                setUserLoggedIn(false);
-            }
+
+                if (!user.emailVerified) {
+                    console.log("Email not verified - but allowing profile creation");
+                }
         } else {
             setCurrentUser(null);
             setUserLoggedIn(false);

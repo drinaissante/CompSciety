@@ -3,91 +3,52 @@ import { auth, getFirebaseAuthErrorMessage } from "./firebase.jsx";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, updatePassword } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-    try {
-        return createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+
+    return result;
 };
 
-export const doSignInWithEmailAndPassword = (email, password) => {
-    try {
-        return signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+export const doSignInWithEmailAndPassword = async (email, password) => {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+
+    return result;
 };
 
 const provider = new GoogleAuthProvider();
 
 export const doSignInWithGoogle = async () => {
-    try {
-        const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
 
-        return result;
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+    return result;
 };
 
-export const doSignOut = () => {
-    try {
-        return auth.signOut();
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+export const doSignOut = async () => {
+    const result = await auth.signOut();
+
+    return result;
 };
 
 // EXTRAS ??
 
 export const doPasswordReset = async (email) => {
-    try {
-        const result = await sendPasswordResetEmail(auth, email, {
-            url: "https://drinaissante.github.io/CompSciety/resetpassword", // make sure to have this set to vercel once vercel is in production
-            handleCodeInApp: true,
-        });
+    const result = await sendPasswordResetEmail(auth, email, {
+        url: "https://drinaissante.github.io/CompSciety/resetpassword", // make sure to have this set to vercel once vercel is in production
+        handleCodeInApp: true,
+    });
 
-        return result;
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+    return result;
 }
 
 export const doPasswordChange = (password) => {
-    try {
-        return updatePassword(auth.currentUser, password);
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+    const result = updatePassword(auth.currentUser, password);
+
+    return result;
 }
 
 export const doSendEmailVerification = () => {
-    try {
-        return sendEmailVerification(auth.currentUser, {
-            url: `${window.location.origin}/home`
-        });
-    } catch (err) {
-        const errMessage = getFirebaseAuthErrorMessage(err);
-        console.log(errMessage);
-    } finally {
-        return null;
-    }
+    const result =  sendEmailVerification(auth.currentUser, {
+        url: `${window.location.origin}/home`
+    });
+
+    return result;
 };
