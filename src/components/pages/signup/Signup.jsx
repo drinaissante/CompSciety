@@ -14,7 +14,7 @@ import Student from "./Student.jsx";
 import Questions from "./Questions.jsx";
 import FinalSignup from "./FinalPage.jsx";
 
-import MotionDiv from "../../MotionDiv.jsx";
+import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
 
 // TODO
@@ -31,15 +31,10 @@ function Signup() {
 
     const navigate = useNavigate();
         
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const [success, setSuccessMessage] = useState("");
 
     const [isRegistering, setIsRegistering] = useState(false);
-
-
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,17 +62,16 @@ function Signup() {
 
                     clear();
 
+                    // // email verification
+                    // const userCredential = await doCreateUserWithEmailAndPassword(email, password);
 
-                    // email verification
-                    const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+                    // // custom email link
+                    // const actionCodeSettings = {
+                    //     url: "https://drinaissante.github.io/CompSciety/verify", // should be changed when pushing to vercel
+                    //     handleCodeInApp: true,
+                    // };
 
-                    // custom email link
-                    const actionCodeSettings = {
-                        url: "https://drinaissante.github.io/CompSciety/verify", // should be changed when pushing to vercel
-                        handleCodeInApp: true,
-                    };
-
-                    await sendEmailVerification(userCredential.user, actionCodeSettings);
+                    // await sendEmailVerification(userCredential.user, actionCodeSettings);
                     
                     // make this to another page (?) // white cast overlay
                     setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.")
@@ -98,59 +92,19 @@ function Signup() {
         }
     }
 
-    const validateField = (name, value) => {
-        if (value.empty)
-            return "";
-        
-        let error = "";
-
-        if (name === "email") {
-            if (!value?.trim()) {
-                error = "Please enter your email address.";
-            } else if (!emailRegex.test(value)) {
-                error = "Please enter a valid email address.";
-            }
-        }
-
-        if (name === "password") {
-            if (!value?.trim()) {
-                error = "Please enter your password.";
-            } else if (value.length < 6) {
-                error = "Password must at least be 6 characters.";
-            }
-        }
-
-        return error;
-    }
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        if (value.empty)
-            return;
-
-        if (name === "email") setEmail(value);
-        if (name === "password") setPassword(value);
-
-        // validate
-        setErrors((prev) => ({
-            ...prev,
-            [name]: validateField(name, value),
-        }));
-    }
-
     const [page, setPage] = useState(0);
     const [viewedPages, setViewedPages] = useState(new Set());
+    const [isValid, setIsValid] = useState(false);
     
     useEffect(() => {
         setViewedPages((prev) => new Set(prev).add(page));
     }, [page]); // run after setPage()
 
     const pages = [
-        <Profile hasViewed={viewedPages.has(1)}/>,
-        <Student hasViewed={viewedPages.has(2)}/>,
-        <Questions hasViewed={viewedPages.has(3)}/>,
-        <FinalSignup handleSubmit={handleSubmit} handleChange={handleChange} errors={errors}  email={email} password={password} isRegistering={isRegistering} success={success} />        
+        <Profile hasViewed={viewedPages.has(1)} setIsValid={setIsValid} setErrors={setErrors}/>,
+        <Student hasViewed={viewedPages.has(2)} setIsValid={setIsValid} setErrors={setErrors}/>,
+        <Questions hasViewed={viewedPages.has(3)} setIsValid={setIsValid} setErrors={setErrors}/>,
+        <FinalSignup handleSubmit={handleSubmit} errors={errors} success={success} setErrors={setErrors}/>        
     ]
 
     return (
@@ -165,7 +119,7 @@ function Signup() {
                 className="absolute"
             />
 
-            <MotionDiv className="flex flex-col p-5 mt-20 mb-20 mx-auto my-auto z-10 min-w-max bg-white/40 rounded-3xl gap-3">
+            <MotionDivExit className="flex flex-col p-5 mt-20 mb-20 mx-auto my-auto z-10 min-w-max bg-white/40 rounded-3xl gap-3">
                 
                 <div className="font-bold text-5xl text-center">Signup</div>
                 
@@ -180,14 +134,16 @@ function Signup() {
 
                 <h4 className="flex justify-center underline">Terms of Service</h4>
                 {/* TODO: add terms of service */}
-
+                
+                {errors.auth && (<p className="text-center text-red-500">{errors.auth}</p>)}
 
                 {/* TODO: buttons should be bottom right */}
                 <div className="flex gap-2">
+                    {/* previous */}
                     {page >= 1 && (
                     <button
                         type="button"
-                        className="py-3 px-5 rounded-2xl bg-green-500 cursor-pointer"
+                        className="py-3 px-5 rounded-2xl bg-green-500 cursor-pointer shadow-md shadow-yellow-100 transform duration-100 hover:-translate-y-1 hover:bg-green-600"
                         disabled={isRegistering}
                         onClick={() => setPage((p) => p - 1)}
                     >
@@ -195,19 +151,31 @@ function Signup() {
                     </button>
                     )}
 
+                    {/* cancel */}
                     <Link to="/">
-                        <button className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer" onClick={(e) => {
-                            setPage(0);
-                        }}>
+                        <button 
+                            type="button"
+                            className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer shadow-md transform duration-100 hover:-translate-y-1 hover:bg-gray-500"
+                            onClick={(e) => {
+                                setPage(0);
+                            }}
+                        >
                             Cancel
                         </button>
                     </Link>
 
+                    {/* next */}
                     <button
                         type="submit"
-                        className="py-3 px-5 rounded-2xl bg-green-900 cursor-pointer"
-                        disabled={isRegistering}
+                        className={`py-3 px-5 rounded-2xl bg-green-900 cursor-pointer shadow-md shadow-cyan-100
+                            ${isValid ? "transform duration-100 hover:-translate-y-1 hover:bg-green-800" : ""}`
+                        }
                         onClick={(e) => {
+                            if (!isValid) {
+                                
+                                return;
+                            }
+
                             // last page na
                             if (page === pages.length - 1) {
                                 handleSubmit(e);
@@ -221,7 +189,7 @@ function Signup() {
                     
                 </div>
 
-            </MotionDiv>
+            </MotionDivExit>
         </div>
     );
 }
