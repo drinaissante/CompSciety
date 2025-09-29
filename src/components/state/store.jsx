@@ -1,22 +1,5 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import { createSelectors } from "./create-selectors.jsx"
-
-/*
-- continue btn
-- add loading animation = redirect to home
-
-USAGE: 
-  const {
-    profile,
-    student,
-    questions,
-    updateProfile,
-    updateStudent,
-    updateQuestion,
-    clearAll,
-  } = useStore();
-*/
+import { persist } from "zustand/middleware";
 
 const useStore = create(
   persist(
@@ -86,9 +69,5 @@ const useStore = create(
 
 
 // MAKE SURE TO USE FIRESTORE TO STORE INFORMATION AFTER USING ZUSTAND
-
-
-// SELECTORS
-export const useStoreSelectors = createSelectors(useStore);
 
 export default useStore;

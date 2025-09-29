@@ -5,11 +5,11 @@ profile: {
     last_name:
 }
 */
-import { useState } from "react";
-import MotionDiv from "../../MotionDiv.jsx";
+import { useEffect, useState } from "react";
+import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
 
-function Profile({ hasViewed }) {
+function Profile({ hasViewed, setIsValid, setErrors }) {
     const profile = useStore((state) => state.profile);
 
     const [name, setName] = useState(profile.name || "");
@@ -17,6 +17,18 @@ function Profile({ hasViewed }) {
     const [lastName, setLastName] = useState(profile.last_name || "");
     
     const update = useStore((state) => state.update);
+
+    useEffect(() => {
+        const isValid = name.trim() !== "" && middle_ini.trim() !== "" && lastName.trim() !== "";
+
+        if (!isValid) {
+            setErrors((prev) => ({...prev, auth: "Please fill all required fields."}))
+        } else {
+            setErrors("");
+        }
+        
+        setIsValid(isValid); // report validity to parent
+    }, [name, middle_ini, lastName, setIsValid]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,27 +59,27 @@ function Profile({ hasViewed }) {
     }
 
     return (
-      <MotionDiv hasViewed={hasViewed}>
+      <MotionDivExit hasViewed={hasViewed}>
         <span className="flex justify-center">Profile</span>
 
         <form onSubmit={handleSubmit} className="mt-2 flex flex-col lg:flex-row gap-8">
             <div className="flex flex-col text-center">
-                <h1>Given Name</h1>
-                <input type="text" name="text" value={profile.name} onChange={(e) => handleChange("name", e)} placeholder="Enter your name" required className="p-3 bg-white text-black rounded-md" />
+                <h1>Given Name <span className="text-red-500">*</span> </h1>
+                <input type="text" name="text" value={name} onChange={(e) => handleChange("name", e)} placeholder="Enter your name" required className="p-3 bg-white text-black rounded-md" />
             </div>
             
             <div className="flex flex-col text-center">
-                <h1>Middle Initial</h1>
+                <h1>Middle Initial <span className="text-red-500">*</span> </h1>
                 <input type="text" name="text" value={middle_ini} onChange={(e) => handleChange("middle_ini", e)} placeholder="Enter your middle Initial" required className="p-3 bg-white text-black rounded-md" />
             </div>
 
             <div className="flex flex-col text-center">
-                <h1>Last Name</h1>
+                <h1>Last Name <span className="text-red-500">*</span> </h1>
                 <input type="text" name="text" value={lastName} onChange={(e) => handleChange("last_name", e)} placeholder="Enter your last name" required className="p-3 bg-white text-black rounded-md" />
             </div>
         </form>
 
-      </MotionDiv>  
+      </MotionDivExit>  
     );
 }
 
