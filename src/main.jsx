@@ -30,7 +30,7 @@ function ScrollToTop() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename='/CompSciety'> {/* make sure to remove this para sa vercel*/}
+    <BrowserRouter > {/* make sure to remove this para sa vercel basename='/CompSciety'*/}
         <AuthProvider>
           <ScrollToTop />
 

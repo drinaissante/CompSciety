@@ -1,11 +1,17 @@
 import "@css/NavBar.css"
 
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import logo from "@assets/CompSciety.png"
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
+// import { useAuth } from "auth/authContext/auth.jsx";
+// import { doSignOut } from "auth/authContext/auth.jsx";
+
+import { useAuth } from "./auth/authContext/auth.jsx";
+import { doSignOut } from "./auth/authService.jsx";
 
 const navLinks = [
   { name: 'Home', navTo: "/", type: "page", },
@@ -21,8 +27,16 @@ function NavBar() {
 
   const menuRef = useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation(); 
+
+  const navigate = useNavigate();
+  const { currentUser, userLoggedIn } = useAuth();
+  
+  const logout = (e) => {
+    e.preventDefault();
+  
+    doSignOut().then(() => { navigate('/login') });
+  }
 
   // toggle theme
   useEffect(() => {
@@ -118,6 +132,14 @@ function NavBar() {
 
   return (
     <nav className="fixed w-full z-50 shadow-md text-white transition-colors">
+      {userLoggedIn && (
+          <div className="absolute">
+            <h1> Hello, {currentUser.email}! </h1>
+            <button onClick={logout}>
+              Logout
+            </button>
+          </div>
+      )}
       <div className="mx-auto flex items-center justify-between px-3 py-3">
 
         <div className="flex items-center gap-4 lg:ml-50">
@@ -157,13 +179,16 @@ function NavBar() {
           ))}
         </nav>
         
-        <span className="lg:mr-20 flex items-center justify-start gap-15">
+        <span className="lg:mr-20 flex items-center justify-start gap-8">
           <button className="cursor-pointer hover:text-[#1f7d53] transition" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
             {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
           </button>
 
             {/* <How to change btn link from Join Button to Login Button> */}
-          <button className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition">Login</button>
+          <button className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition">
+            { !userLoggedIn ? <Link to="/login"> Login </Link> : <div onClick={logout}> Logout </div>
+          }
+          </button>
         </span>
       </div>
 
