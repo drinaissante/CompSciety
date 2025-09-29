@@ -125,6 +125,8 @@ function Signup() {
                 
                 {pages[page]}
                 
+                {errors.auth && (<p className="text-center text-red-500">{errors.auth}</p>)}
+                
                 <div className="m-3 mt-10 flex justify-center">
                     Already have an account?
                     <Link to="/login" className="text-green-400 ml-4">
@@ -134,8 +136,6 @@ function Signup() {
 
                 <h4 className="flex justify-center underline">Terms of Service</h4>
                 {/* TODO: add terms of service */}
-                
-                {errors.auth && (<p className="text-center text-red-500">{errors.auth}</p>)}
 
                 {/* TODO: buttons should be bottom right */}
                 <div className="flex gap-2">
@@ -167,12 +167,11 @@ function Signup() {
                     {/* next */}
                     <button
                         type="submit"
-                        className={`py-3 px-5 rounded-2xl bg-green-900 cursor-pointer shadow-md shadow-cyan-100
-                            ${isValid ? "transform duration-100 hover:-translate-y-1 hover:bg-green-800" : ""}`
+                        className={`py-3 px-5 rounded-2xl bg-green-900 shadow-md shadow-cyan-100
+                            ${isValid ? "transform duration-100 hover:-translate-y-1 hover:bg-green-800 cursor-pointer" : "cursor-default"}`
                         }
                         onClick={(e) => {
                             if (!isValid) {
-                                
                                 return;
                             }
 
