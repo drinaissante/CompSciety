@@ -11,12 +11,12 @@ import Signup from '@pages/signup/Signup.jsx'
 import Login from '@pages/login/Login.jsx'
 
 import AuthProvider from '@components/auth/authContext/AuthProvider.jsx'
+import NavBar from '@components/NavBar.jsx'
 
 import VerifyEmail from '@pages/verifyemail/VerifyEmail.jsx'
 import ActionHandler from '@pages/action/ActionHandler.jsx'
 import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
 import AboutPage from '@pages/about/AboutPage.jsx'
-import NavBar from './components/NavBar.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
