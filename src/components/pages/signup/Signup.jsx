@@ -88,6 +88,7 @@ function Signup() {
                 
                 const profileData = {
                     email: creds.email,
+                    discord: creds.discord,
                     name: profile.name, 
                     middle_initial: profile.middle_ini, 
                     last_name: profile.last_name, 

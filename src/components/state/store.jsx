@@ -22,6 +22,7 @@ const useStore = create(
       },
       creds: {
         email: "",
+        discord: "",
       },
 
       update: (slice, fieldOrUpdates, value) =>
@@ -66,6 +67,7 @@ const useStore = create(
           },
           creds: {
             email: "",
+            discord: "",
           }
         }),
     }),
