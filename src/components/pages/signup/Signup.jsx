@@ -155,13 +155,13 @@ function Signup() {
                 
                 <div className="font-bold text-5xl text-center">Signup</div>
                 
-                {pages[page]}
                 
-                {errors.auth && (<p className="mt-5 text-center text-red-500 w-[50ch]">{errors.auth}</p>)}
+                {pages[page]}
+                {errors.auth && (<p className="flex justify-center mt-5 text-red-500">{errors.auth}</p>)}
                 
                 <div className="m-3 flex justify-center">
                     Already have an account?
-                    <Link to="/login" className="text-green-400 ml-4">
+                    <Link to="/login" className="text-green-400 ml-4 underline">
                         Sign in
                     </Link>
                 </div>
@@ -200,7 +200,7 @@ function Signup() {
                     <button
                         type="submit"
                         className={`py-3 px-5 rounded-2xl bg-green-900 shadow-md shadow-cyan-100
-                            ${isValid ? "transform duration-100 hover:-translate-y-1 hover:bg-green-800 cursor-pointer" : "cursor-default"}`
+                            ${isValid ? "transform duration-100 hover:-translate-y-1 hover:bg-green-800 cursor-pointer" : "cursor-not-allowed"}`
                         }
                         onClick={(e) => {
                             if (!isValid) {

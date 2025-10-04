@@ -18,13 +18,14 @@ function Student({ hasViewed, setIsValid, setErrors }) {
     const student = useStore((state) => state.student);
 
     const [college, setCollege] = useState(student.college || "");
+    const [program, setProgram] = useState(student.program || "");
     const [yearLevel, setYearLevel] = useState(student.year_level || "");
     const [section, setSection] = useState(student.section || "");
     
     const update = useStore((state) => state.update);
 
     useEffect(() => {
-        const isValid = college.trim() !== ""  && yearLevel.trim() !== ""  && section.trim() !== "" ;
+        const isValid = college.trim() !== "" && program.trim() !== "" && yearLevel.trim() !== ""  && section.trim() !== "" ;
 
         if (!isValid) {
             setErrors((prev) => ({...prev, auth: "Please fill all required fields."}))
@@ -33,7 +34,7 @@ function Student({ hasViewed, setIsValid, setErrors }) {
         }
 
         setIsValid(isValid); // report validity to parent
-    }, [college, yearLevel, section, setIsValid]);
+    }, [college, program, yearLevel, section, setIsValid]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,6 +42,7 @@ function Student({ hasViewed, setIsValid, setErrors }) {
         // TODO store to zustand
         update("student", {
             college: college,
+            program: program,
             year_level: yearLevel,
             section: section
         })
@@ -53,6 +55,10 @@ function Student({ hasViewed, setIsValid, setErrors }) {
             setCollege(value);
 
             update("student", "college", value);
+        } else if (field === "program") {
+            setProgram(value);
+
+            update("student", "program", value);
         } else if (field === "year_level") {
             setYearLevel(value);
 
@@ -72,6 +78,12 @@ function Student({ hasViewed, setIsValid, setErrors }) {
             <div className="flex flex-col text-center">
                 <h1>College <span className="text-red-500">*</span> </h1>
                 <input type="text" placeholder="Ex. College of Science" required value={college} onChange={(e) => handleChange("college", e)} 
+                className="p-3 bg-white text-black rounded-md" />
+            </div>
+            
+            <div className="flex flex-col text-center">
+                <h1>Program <span className="text-red-500">*</span> </h1>
+                <input type="text" placeholder="Ex. BS Math" required value={program} onChange={(e) => handleChange("program", e)} 
                 className="p-3 bg-white text-black rounded-md" />
             </div>
 

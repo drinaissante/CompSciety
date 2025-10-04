@@ -11,6 +11,7 @@ const useStore = create(
       },
       student: {
         college: "",
+        program: "",
         year_level: "",
         section: "",
       },
@@ -54,6 +55,7 @@ const useStore = create(
           },
           student: {
             college: "",
+            program: "",
             year_level: "",
             section: "",
           },
