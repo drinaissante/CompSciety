@@ -17,6 +17,8 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
         if (name === "discord") {
             setDiscord(value);
             update("creds", "discord", value);
+
+            // add timer, cancel if timer
         }
 
         if (name === "email") {
