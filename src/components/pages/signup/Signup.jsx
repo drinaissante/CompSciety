@@ -92,6 +92,7 @@ function Signup() {
                     middle_initial: profile.middle_ini, 
                     last_name: profile.last_name, 
                     college: student.college, 
+                    program: student.program,
                     year_level: student.year_level, 
                     section: student.section,
                     question_1: questions.question_1, 
@@ -101,10 +102,10 @@ function Signup() {
 
                 await createUserDocument(profileData, setErrors);
 
-                await sendEmailVerification(user, actionCodeSettings);
-                
-                // make this to another page (?) // white cast overlay
-                setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.")
+                sendEmailVerification(user, actionCodeSettings).then(() => {
+                    // make this to another page (?) // white cast overlay
+                    setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.");
+                });
                 
                 clear();
 

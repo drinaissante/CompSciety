@@ -63,7 +63,7 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
             {success && (
                 <p className="text-green-300 w-[40ch]">{success}</p>
                 && 
-                <p>
+                <p className="flex">
                     Redirecting in 5 seconds... 
                     <button 
                         onClick={() => navigate("/")}
