@@ -21,6 +21,7 @@ export async function createUserDocument(profileData, {setErrors}) {
     uid: user.uid,
     ...profileData,
     createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp()
   };
   
   try {
