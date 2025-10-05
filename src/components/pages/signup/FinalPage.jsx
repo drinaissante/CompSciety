@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import useStore from "../../state/store.jsx";
 
 import { motion, AnimatePresence} from "framer-motion"
+import { fetchAvatarURL } from "../../db/database.jsx";
 
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);
@@ -30,18 +31,11 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
             setIsLoadingAvatar(true);
             setError(null);
 
-            const res = await fetch(`http://51.75.118.151:20261/api/users/${username}?type=avatarURL`, {
-                        method: "GET",
-                        headers: {
-                            "x-api-key": "css2025compsciety"
-                        }
-                    });
+            const url = await fetchAvatarURL(username, {setError});
             
-            if (res.ok) {
-                const data = await res.json();
-
-                avatarCache.current[username] = data.avatarURL;
-                setAvatarURL(data.avatarURL);
+            if (url !== "N/A") {
+                avatarCache.current[username] = url;
+                setAvatarURL(url);
             } else {
                 setAvatarURL(null);
                 avatarCache.current[username] = null;
