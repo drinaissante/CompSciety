@@ -26,7 +26,6 @@ function Signup() {
         document.title = "Signup | BulSU Computer Science Society"
     }, []);
 
-
     const navigate = useNavigate();
         
     const [errors, setErrors] = useState({});
@@ -76,6 +75,15 @@ function Signup() {
             setIsRegistering(true);
 
             try {
+                // make sure to verify discord 
+                    
+
+
+
+
+
+
+
                 // email verification
                 const userCredential = await doCreateUserWithEmailAndPassword(email, password);
                 const user = userCredential.user;

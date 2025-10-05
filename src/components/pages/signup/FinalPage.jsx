@@ -1,12 +1,63 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useStore from "../../state/store.jsx";
+
+import { motion, AnimatePresence} from "framer-motion"
 
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);
-
     const update = useStore((state) => state.update);
 
     const [discord, setDiscord] = useState(creds.discord || "");
+    const [avatarURL, setAvatarURL] = useState(null);
+    const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
+    const [error, setError] = useState(null);
+
+    const avatarCache = useRef({});
+    const debounceTimer = useRef(null);
+
+    const fetchAvatar = async (username) => {
+        if (!username) {
+            setAvatarURL(null);
+            return;
+        }
+
+        if (avatarCache.current[username]) {
+            setAvatarURL(avatarCache.current[username]);
+            return;
+        }
+
+        try {
+            setIsLoadingAvatar(true);
+            setError(null);
+
+            const res = await fetch(`http://51.75.118.151:20261/api/users/${username}?type=avatarURL`, {
+                        method: "GET",
+                        headers: {
+                            "x-api-key": "css2025compsciety"
+                        }
+                    });
+            
+            if (res.ok) {
+                const data = await res.json();
+
+                avatarCache.current[username] = data.avatarURL;
+                setAvatarURL(data.avatarURL);
+            } else {
+                setAvatarURL(null);
+                avatarCache.current[username] = null;
+            }
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+            setAvatarURL(null);
+        } finally {
+            setIsLoadingAvatar(false);
+        }
+    }
+
+    useEffect(() => {
+        return () => clearTimeout(debounceTimer);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,7 +69,18 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
             setDiscord(value);
             update("creds", "discord", value);
 
-            // add timer, cancel if timer
+            if (value.trim() === "") {
+                setAvatarURL(null);
+                avatarCache.current[value] = null;
+                return;
+            }
+
+            if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+            debounceTimer.current = setTimeout(() => {
+                if (value) 
+                    fetchAvatar(value);
+            }, 700);
         }
 
         if (name === "email") {
@@ -40,7 +102,48 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
         <>
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col font-bold text-center gap-y-10">
+                    <AnimatePresence mode="wait">
+                        {isLoadingAvatar ? (
+                            // skeleton loader (animated pulsing circle)
+                            <motion.div
+                                key="skeleton"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 1 }}
+                                className="rounded-full h-14 w-14 bg-gray-300 animate-pulse"
+                            >
+                            </motion.div>
+                        ) : avatarURL ? (
+                            // fade-in avatar
+                            <motion.img
+                                key="avatar"
+                                src={avatarURL}
+                                alt={`Discord avatar`}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="rounded-full h-14 w-14 object-cover shadow-md"
+                                draggable="false"
+                            />
+                        ): (
+                            // empty placeholder (when nothing typed)
+                            <div
+                                key="empty"
+                                className="rounded-full h-14 w-14 bg-gray-200 border border-gray-400"
+                            />
+                        )}
+                    </AnimatePresence>
+
+                    {isLoadingAvatar && 
+                                <p className="text-gray-400">Fetching avatar...</p>}
+
+                    {error && <p className="text-red-400 text-sm mt-2 w-[38ch]">{error}</p>}
                     
+                    {!isLoadingAvatar && !avatarURL && discord && (
+                        <p className="text-red-400 text-sm mt-2 w-[38ch]">
+                            No Discord user found. Please make sure you have joined our discord server.
+                        </p>
+                    )}
                     {/* TODO: make sure na kapag nagt-type, papakita yung avatar (use CSS Bot) */}
                     <div className="mt-5">
                         Discord <span className="text-red-500">*</span>
@@ -83,8 +186,7 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
                         />
                         {errors.password && <p className="text-red-500">{errors.password}</p>}
                     </div>
-
-                    
+                     
                 </div>
                 
             </form>
