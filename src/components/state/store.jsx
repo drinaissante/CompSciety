@@ -8,6 +8,7 @@ const useStore = create(
         name: "",
         middle_ini: "",
         last_name: "",
+        profile_link: "",
       },
       student: {
         college: "",
@@ -51,8 +52,9 @@ const useStore = create(
           profile: {
             email: "",
             first_name: "",
-            last_name: "",
             middle_ini: "",
+            last_name: "",
+            profile_link: "",
           },
           student: {
             college: "",

@@ -5,6 +5,7 @@ profile: {
     last_name:
 }
 */
+
 import { useEffect, useState } from "react";
 
 import imageCompression from "browser-image-compression";
@@ -13,7 +14,7 @@ import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
 import { upload } from "../../db/supabase.jsx";
 
-import { IoPerson, IoPersonCircle } from "react-icons/io5"
+import { IoPersonCircle } from "react-icons/io5"
 
 const options = {
     maxSizeMB: 0.1, // 100KB
