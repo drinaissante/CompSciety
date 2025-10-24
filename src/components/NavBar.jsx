@@ -7,11 +7,11 @@ import logo from "@assets/CompSciety.png"
 
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { useAuth } from "auth/authContext/auth.jsx";
-// import { doSignOut } from "auth/authContext/auth.jsx";
 
 import { useAuth } from "./auth/authContext/auth.jsx";
 import { doSignOut } from "./auth/authService.jsx";
+
+import { IoPerson } from "react-icons/io5";
 
 const navLinks = [
   { name: 'Home', navTo: "/", type: "page", },
@@ -82,7 +82,6 @@ function NavBar() {
 
     if (type === "page") {
       if (location.pathname === link.navTo) {
-
           window.scrollTo({ top: 0, behavior: "smooth"})
       } else {
           navigate(link.navTo);
@@ -131,15 +130,7 @@ function NavBar() {
   }
 
   return (
-    <nav className="fixed w-full z-50 shadow-md text-white transition-colors">
-      {userLoggedIn && (
-          <div className="absolute">
-            <h1> Hello, {currentUser.email}! </h1>
-            <button onClick={logout}>
-              Logout
-            </button>
-          </div>
-      )}
+    <nav className="fixed w-full z-50 shadow-md text-white transition-colors select-none">
       <div className="mx-auto flex items-center justify-between px-3 py-3">
 
         <div className="flex items-center gap-4 lg:ml-50">
@@ -154,10 +145,19 @@ function NavBar() {
             <span className="w-6 h-[2px] bg-current rounded"></span>
           </button>
 
+          {/* TODO make this the profile pic */}
+          {/* userLoggedIn &&  */}
+          {(
+              <div className="border-1 p-3 rounded-full hover:bg-green-800  cursor-pointer" onClick={() => navigate("/me")}>
+                <IoPerson />
+              </div>
+          )}
+
           <img
             src={logo}
             alt="Logo"
             className="transition-all lg:h-21 h-12 cursor-pointer"
+            draggable={false}
             onClick={(e) => {
               e.preventDefault();
 
@@ -187,7 +187,7 @@ function NavBar() {
             {/* <How to change btn link from Join Button to Login Button> */}
           <button className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition">
             { !userLoggedIn ? <Link to="/login"> Login </Link> : <div onClick={logout}> Logout </div>
-          }
+            }
           </button>
         </span>
       </div>

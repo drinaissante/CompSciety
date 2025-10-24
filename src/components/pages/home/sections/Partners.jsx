@@ -122,12 +122,11 @@ function Partners() {
 
     return (
         <div className="relative">
-            <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-3xl font-extrabold p-5 sm:text-4xl">Our Partners</h2>
-
             <MotionDiv
                 id="partners"
                 className="mt-20 mb-10 justify-self-center sm:w-[50%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)] bg-[#18230F] overflow-visible"
             >
+                <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-3xl font-extrabold p-5 sm:text-4xl">Our Partners</h2>
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     pagination={{ clickable: true }}
