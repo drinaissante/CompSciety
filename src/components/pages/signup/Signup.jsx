@@ -101,6 +101,7 @@ function Signup() {
                     name: profile.name, 
                     middle_initial: profile.middle_ini, 
                     last_name: profile.last_name, 
+                    profile_link: profile.profile_link,
                     college: student.college, 
                     program: student.program,
                     year_level: student.year_level, 

@@ -8,6 +8,7 @@ import logo from "@assets/CompSciety.png"
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 
+
 import { useAuth } from "./auth/authContext/auth.jsx";
 import { doSignOut } from "./auth/authService.jsx";
 
@@ -185,10 +186,19 @@ function NavBar() {
           </button>
 
             {/* <How to change btn link from Join Button to Login Button> */}
-          <button className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition">
-            { !userLoggedIn ? <Link to="/login"> Login </Link> : <div onClick={logout}> Logout </div>
-            }
+          <button 
+            className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition"
+            onClick={(e) => {
+              if (!userLoggedIn) {
+                navigate("/login");
+              } else {
+                logout(e);
+              }
+            }}
+          >
+            { !userLoggedIn ? "Login"  : "Logout" }
           </button>
+
         </span>
       </div>
 

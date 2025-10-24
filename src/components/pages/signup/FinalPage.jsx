@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import useStore from "../../state/store.jsx";
+
 
 import { motion, AnimatePresence} from "framer-motion"
 import { fetchAvatarURL } from "../../db/database.jsx";
+import { useNavigate } from "react-router-dom";
 
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);
     const update = useStore((state) => state.update);
+
+    const navigate = useNavigate();
 
     const [discord, setDiscord] = useState(creds.discord || "");
     const [avatarURL, setAvatarURL] = useState(null);
@@ -138,7 +141,6 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
                             No Discord user found. Please make sure you have joined our discord server.
                         </p>
                     )}
-                    {/* TODO: make sure na kapag nagt-type, papakita yung avatar (use CSS Bot) */}
                     <div className="mt-5">
                         Discord <span className="text-red-500">*</span>
                         <input

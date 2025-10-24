@@ -6,39 +6,19 @@ const supabase = createClient(
     import.meta.env.SUPABASE_ANON,
 )
 
-const EDGE_FUNCTION_URL = import.meta.env.SUPA_UPLOAD_FUNC; 
 
-
-async function upload(file) {
+async function uploadVia(file) {
     if (!file) return null;
 
-    try {
-        const formData = new FormData();
-        const deconstructed = await shortImageKey(file.name);
+    const filePath = await shortImageKey(file.name);
 
-        formData.append('file', file);
-        formData.append('filename', deconstructed);
+    const { data, error } = await supabase.storage.from("profile_uploads").upload(filePath, file, { upsert: true });
 
-        const res = await fetch(EDGE_FUNCTION_URL, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Authorization': `Bearer ${ANON}`
-            }
-        });
+    if (error) throw error;
 
-        const data = await res.json();
+    const { data: publicUrl } = supabase.storage.from("profile_uploads").getPublicUrl(filePath);
 
-        if (!res.ok) {
-            throw new Error(data?.error || `Upload failed: ${res.status}`);
-        }
-
-        return data.publicUrl;
-    } catch (error) {
-        console.error(error);
-    }
-
-    return null;
+    return publicUrl.publicUrl;
 }
 
-export { supabase, upload };
+export { supabase, uploadVia };

@@ -1,30 +1,16 @@
-/*
-profile: {
-    name:
-    middle_ini:
-    last_name:
-}
-*/
-
 import { useEffect, useState } from "react";
 
 import imageCompression from "browser-image-compression";
 
 import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
-import { upload } from "../../db/supabase.jsx";
+import { uploadVia } from "../../db/supabase.jsx";
 
 import { IoPersonCircle } from "react-icons/io5"
 
 const options = {
     maxSizeMB: 0.1, // 100KB
     maxWidthOrHeight: 256,
-    useWebWorker: true,
-}
-
-const mainOptions = {
-    maxSizeMB: 0.4, // 400KB
-    maxWidthOrHeight: 1024,
     useWebWorker: true,
 }
 
@@ -36,28 +22,17 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
     const [lastName, setLastName] = useState(profile.last_name || "");
 
     const [image, setImage] = useState(null);
-    
-    const [mainUrl, setMainUrl] = useState("");
-    const [uploading, setUploading] = useState(false);
 
-
-    const handleUpload = async () => {
-        if (!image) return;
-
-        setUploading(true);
+    async function handleUpload(image) {
+        if (!image) return "N/A";
 
         try {
-            const compressedMain = await imageCompression(image, maxSizeMB);
-
-            const publicUrl = await upload(compressedMain);
-
-            setMainUrl(publicUrl);
-
-            console.log(`Uploaded images! ${publicUrl}`);
+            const compressedMain = await imageCompression(image, options);
+            const publicUrl = await uploadVia(compressedMain);
+            return publicUrl;
         } catch (error) {
             console.error(error);
-        } finally {
-            setUploading(false);
+            return "N/A";
         }
     }
     
@@ -75,18 +50,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
         setIsValid(isValid); // report validity to parent
     }, [name, middle_ini, lastName, setIsValid]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        update("profile", {
-            name: name,
-            middle_ini: middle_ini,
-            last_name: lastName,
-            profile_link: mainUrl
-        })
-    }
-
-    const handleChange = (field, e) => {
+    const handleChange = async (field, e) => {
         const value = e.target.value;
         
         if (field === "name") {
@@ -101,6 +65,13 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
             setLastName(value);
 
             update("profile", "last_name", value);
+        } else if (field === "image") {
+            const image = e.target.files[0];
+            setImage(image);
+
+            const url = await handleUpload(image);  
+
+            update("profile", "profile_link", url);
         }
     }
 
@@ -108,7 +79,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
       <MotionDivExit hasViewed={hasViewed}>
         <span className="flex justify-center">Profile</span>
 
-        <form onSubmit={handleSubmit} className="mt-2 flex flex-col lg:flex-row gap-8">
+        <form className="mt-2 flex flex-col lg:flex-row gap-8">
             <div className="flex flex-col text-center">
                 <h1>Given Name <span className="text-red-500">*</span> </h1>
                 <input type="text" name="text" value={name} onChange={(e) => handleChange("name", e)} placeholder="Enter your name" required className="p-3 bg-white text-black rounded-md" />
@@ -137,7 +108,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
 
                 <label htmlFor="upload" className="cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded-md text-center transition w-35 py-2 self-center">Upload Image</label>
 
-                <input id="upload" type="file" accept="image/png" onChange={(e) => setImage(e.target.files[0])} required className="hidden" />
+                <input id="upload" type="file" accept="image/png" onChange={(e) => handleChange("image", e)} required className="hidden" />
                 
             </div>
             

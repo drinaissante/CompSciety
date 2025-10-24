@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Footer from "../home/sections/Footer.jsx";
 import MotionDiv from "../../MotionDiv.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { fetchAvatarURL, fetchProfileURL } from "../../db/database.jsx";
 
 /*
 - get profile picture, profile details
@@ -15,8 +16,20 @@ import { useEffect } from "react";
 
 
 function Me() {
+    const [profile, setProfile] = useState("");
+
     useEffect(() => {
-        document.title = "Profile | BulSU Computer Science Society"
+        document.title = "Profile | BulSU Computer Science Society";
+
+        async function fetch() {
+            const image = await fetchProfileURL(); // returns null, no perms apparently
+            console.log(image);
+            setProfile(image);
+
+            // const av = await fetchAvatarURL(username);
+        }
+        
+        fetch();
     }, []);
 
     // load the picture
@@ -31,7 +44,7 @@ function Me() {
                     <div className="font-bold text-5xl text-center">Profile</div>
                     
                     <div className="m-3 flex justify-center">
-                        
+                        <img src={profile} />
                     </div>
 
                 </MotionDiv>

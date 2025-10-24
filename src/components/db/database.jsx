@@ -29,7 +29,6 @@ export async function createUserDocument(profileData, {setErrors}) {
     console.log("Created");
 
     return user.uid;
-    
   } catch (err) {
     const errMsg = getFirebaseAuthErrorMessage(err);
     setErrors((prev) => ({...prev, auth: errMsg}));
@@ -52,5 +51,34 @@ export async function fetchAvatarURL(username, {setError}) {
   } catch (err) {
     const errMsg = getFirebaseAuthErrorMessage(err);
     setError(errMsg);
+  }
+}
+
+// TODO
+export async function fetchProfileURL() {
+  try {
+    const user = auth.currentUser;
+
+    console.log(user);
+
+    // get fresh token to ensure it's valid
+    try {
+      await user.getIdToken(true);
+    } catch (err) {
+      console.log(err);
+    }
+
+    const q = query(collection(db, "users"), where("email", "==", user.uid));
+
+    const snap = await getDocs(q);
+
+    if (!snap.empty) {
+        const userDoc = snap.docs[0];
+        const url = userDoc.data().profile_link;
+        return url;
+    }
+      return "N/A";
+  } catch (err) {
+    console.log(err);
   }
 }
