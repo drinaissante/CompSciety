@@ -60,11 +60,11 @@ function Footer() {
 
             {/* navigation */}
             <div className="flex flex-col p-4 gap-2">
-                <span className="text-sm font-bold ">
+                <span className="text-sm font-bold">
                     Navigation
                 </span>
 
-                <ul className="flex flex-col gap-3 mt-1 [&_li]:text-gray-100/50 [&_li]:hover:text-white text-sm">
+                <ul className="flex lg:flex-col gap-3 mt-1 [&_li]:text-gray-100/50 [&_li]:hover:text-white text-sm [&_li]:w-11">
                     <li>
                         <Link 
                             to="/" 
