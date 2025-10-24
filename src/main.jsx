@@ -17,6 +17,7 @@ import VerifyEmail from '@pages/verifyemail/VerifyEmail.jsx'
 import ActionHandler from '@pages/action/ActionHandler.jsx'
 import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
 import AboutPage from '@pages/about/AboutPage.jsx'
+import Me from '@pages/me/Me.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ createRoot(document.getElementById('root')).render(
           
           <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/me" element={<Me /> }/>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/verify" element={<VerifyEmail />} />
