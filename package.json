@@ -15,7 +15,9 @@
   "dependencies": {
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
+    "@supabase/supabase-js": "^2.76.1",
     "@tailwindcss/vite": "^4.1.11",
+    "browser-image-compression": "^2.0.2",
     "firebase": "^12.3.0",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
