@@ -13,6 +13,10 @@ import { useAuth } from "./auth/authContext/auth.jsx";
 import { doSignOut } from "./auth/authService.jsx";
 
 import { IoPerson } from "react-icons/io5";
+import { fetchProfileDetails, fetchProfileURL } from "./db/database.jsx";
+import ProfileImage from "./state/ProfileImage.jsx";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./auth/firebase.jsx";
 
 const navLinks = [
   { name: 'Home', navTo: "/", type: "page", },
@@ -28,6 +32,8 @@ function NavBar() {
 
   const menuRef = useRef(null);
 
+  const [ profilePic, setProfilePic ] = useState(null);
+
   const location = useLocation(); 
 
   const navigate = useNavigate();
@@ -38,6 +44,30 @@ function NavBar() {
   
     doSignOut().then(() => { navigate('/login') });
   }
+
+  useEffect(() => {
+      async function fetchProfile() {
+          try {
+              const profile_link = await fetchProfileURL();
+
+              setProfilePic(profile_link);
+          } catch (error) {
+              console.error(error);
+          }
+      }
+
+      const unsub = onAuthStateChanged(auth, async (currentUser) => {
+          if (currentUser) {
+              fetchProfile();
+          } else {
+              setProfilePic(null);
+          }
+      });
+
+      fetchProfile();
+
+      return unsub;
+  });
 
   // toggle theme
   useEffect(() => {
@@ -134,7 +164,7 @@ function NavBar() {
     <nav className="fixed w-full z-50 shadow-md text-white transition-colors select-none">
       <div className="mx-auto flex items-center justify-between px-3 py-3">
 
-        <div className="flex items-center gap-4 lg:ml-50">
+        <div className="flex items-center gap-4 lg:ml-30 transition-all ease-in-out">
           <button
             ref={menuRef}
             className="lg:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer hover:text-[#5e936c] transition"
@@ -146,13 +176,15 @@ function NavBar() {
             <span className="w-6 h-[2px] bg-current rounded"></span>
           </button>
 
-          {/* TODO make this the profile pic */}
-          {/* userLoggedIn &&  */}
-          {(
-              <div className="border-1 p-3 rounded-full hover:bg-green-800  cursor-pointer" onClick={() => navigate("/me")}>
-                <IoPerson />
+          <div className="sm:w-[70px] sm:h-[70px] sm:flex items-center justify-center">
+            {userLoggedIn && profilePic ? (
+              <div onClick={() => navigate("/me")}>
+                <ProfileImage imageUrl={profilePic} width={70} height={70} />
               </div>
-          )}
+            ) : (
+              <div className="sm:w-[70px] sm:h-[70px] rounded-full animate-pulse" />
+            )}
+          </div>
 
           <img
             src={logo}
