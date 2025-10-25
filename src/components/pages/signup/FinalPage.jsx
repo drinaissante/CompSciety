@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence} from "framer-motion"
 import { fetchAvatarURL } from "../../db/database.jsx";
 import { useNavigate } from "react-router-dom";
+import useStore from "../../state/store.jsx";
 
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);
@@ -138,7 +139,7 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
                     
                     {!isLoadingAvatar && !avatarURL && discord && (
                         <p className="text-red-400 text-sm mt-2 w-[38ch]">
-                            No Discord user found. Please make sure you have joined our discord server.
+                            Discord User not in the Discord Server.
                         </p>
                     )}
                     <div className="mt-5">

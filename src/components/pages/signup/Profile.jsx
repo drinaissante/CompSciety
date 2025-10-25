@@ -70,7 +70,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
             setImage(image);
 
             const url = await handleUpload(image);  
-
+            
             update("profile", "profile_link", url);
         }
     }
@@ -109,7 +109,6 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
                 <label htmlFor="upload" className="cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded-md text-center transition w-35 py-2 self-center">Upload Image</label>
 
                 <input id="upload" type="file" accept="image/png" onChange={(e) => handleChange("image", e)} required className="hidden" />
-                
             </div>
             
         </form>

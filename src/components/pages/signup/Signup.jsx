@@ -113,10 +113,10 @@ function Signup() {
 
                 await createUserDocument(profileData, setErrors);
 
-                sendEmailVerification(user, actionCodeSettings).then(() => {
-                    // make this to another page (?) // white cast overlay
-                    setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.");
-                });
+                // sendEmailVerification(user, actionCodeSettings).then(() => {
+                //     // make this to another page (?) // white cast overlay
+                //     setSuccessMessage("A verification link has been sent to your email. Please verify before logging in.");
+                // });
                 
                 clear();
 
