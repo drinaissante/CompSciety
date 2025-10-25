@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { db, getFirebaseAuthErrorMessage } from "../auth/firebase.jsx"
 
 import { auth } from "../auth/firebase.jsx";
@@ -35,10 +35,38 @@ export async function createUserDocument(profileData, {setErrors}) {
   }
 }
 
-export async function fetchAvatarURL(username, {setError}) {
+export async function authFetchAvatarURL(username) {
+  if (!auth || !auth.currentUser) return "N/A";
+  
+  const CACHE_KEY = `${auth.currentUser.uid}-avatar`;
+
+  const cached = localStorage.getItem(CACHE_KEY);
+
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    return parsed.avatarUrl;
+  }
+
+  // not cached
+
+  const avatarUrl = await fetchAvatarURL(username);
+
+  if (avatarUrl !== "N/A") {
+    localStorage.setItem(CACHE_KEY, 
+      JSON.stringify({
+        avatarUrl: avatarUrl
+      })
+    );
+
+    return avatarUrl;
+  }
+
+  return "N/A";
+}
+
+export async function fetchAvatarURL(username, {setError} = {}) {
   try {
     const q = query(collection(db, "discord"), where("username", "==", username)); 
-
     const snap = await getDocs(q);
 
     if (!snap.empty) {
@@ -46,39 +74,66 @@ export async function fetchAvatarURL(username, {setError}) {
       const url = userDoc.data().avatarURL;
       return url;
     }
-
-    return "N/A";
   } catch (err) {
-    const errMsg = getFirebaseAuthErrorMessage(err);
-    setError(errMsg);
+    if (setError) {
+      const errMsg = getFirebaseAuthErrorMessage(err);
+      setError(errMsg);
+    } else {
+      console.error(err);
+    }
   }
+
+  return "N/A";
 }
 
-// TODO
 export async function fetchProfileURL() {
+  if (!auth || !auth.currentUser) return null;
+
   try {
     const user = auth.currentUser;
 
-    console.log(user);
+    const snap = await getDoc(doc(db, "users", user.uid));
 
-    // get fresh token to ensure it's valid
-    try {
-      await user.getIdToken(true);
-    } catch (err) {
-      console.log(err);
+    if (snap.exists()) {
+        return snap.data().profile_link;
     }
-
-    const q = query(collection(db, "users"), where("email", "==", user.uid));
-
-    const snap = await getDocs(q);
-
-    if (!snap.empty) {
-        const userDoc = snap.docs[0];
-        const url = userDoc.data().profile_link;
-        return url;
-    }
-      return "N/A";
   } catch (err) {
     console.log(err);
+    return null;
+  }
+}
+
+export async function fetchProfileDetails() {
+  if (!auth || !auth.currentUser) return null;
+
+  const CACHE_KEY = `${auth.currentUser.uid}`;
+
+  const cached = localStorage.getItem(CACHE_KEY);
+
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    return parsed.data;
+  }
+
+  try {
+    const user = auth.currentUser;
+
+    const snap = await getDoc(doc(db, "users", user.uid));
+
+    if (snap.exists()) {
+      const data = snap.data();
+
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          data: data
+        })
+      )
+
+      return data;
+    }
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 }
