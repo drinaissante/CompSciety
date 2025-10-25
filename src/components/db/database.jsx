@@ -89,17 +89,16 @@ export async function fetchAvatarURL(username, {setError} = {}) {
 export async function fetchProfileURL() {
   if (!auth || !auth.currentUser) return null;
 
-  try {
-    const user = auth.currentUser;
+  const CACHE_KEY = `${auth.currentUser.uid}`;
+  const cached = localStorage.getItem(CACHE_KEY);
+  
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    return parsed.data.profile_link;
+  } else {
+    const data = await fetchProfileDetails();
 
-    const snap = await getDoc(doc(db, "users", user.uid));
-
-    if (snap.exists()) {
-        return snap.data().profile_link;
-    }
-  } catch (err) {
-    console.log(err);
-    return null;
+    return data.profile_link;
   }
 }
 
@@ -107,7 +106,6 @@ export async function fetchProfileDetails() {
   if (!auth || !auth.currentUser) return null;
 
   const CACHE_KEY = `${auth.currentUser.uid}`;
-
   const cached = localStorage.getItem(CACHE_KEY);
 
   if (cached) {
