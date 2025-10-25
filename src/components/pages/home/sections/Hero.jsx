@@ -32,15 +32,6 @@ function Hero() {
         className="absolute"
       />
 
-      {userLoggedIn && (
-          <div className="absolute">
-            <h1> Hello, {currentUser.email}! </h1>
-            <button onClick={logout}>
-              Logout
-            </button>
-          </div>
-      )}
-
       <div className="flex flex-col lg:ml-70 text-wrap text-center mx-auto lg:text-left lg:mx-0 z-10 pointer-events-none">
         <MotionDiv transition={{duration: 1.7, ease: "easeOut"}} className="xl:text-7xl lg:text-6xl lg:w-[12ch] text-5xl font-bold mb-4 bg-gradient-to-t from-white to-green-700 bg-clip-text text-transparent">
             Welcome to CompSciety!
