@@ -3,7 +3,7 @@ import { auth } from "../auth/firebase.jsx";
 import { supabase } from "../db/supabase.jsx";
 import { IoPersonCircle } from "react-icons/io5";
 
-export default function ProfileImage({imageUrl, maxAgeMs = 55 * 60 * 1000}) {
+export default function ProfileImage({imageUrl, width = 80, height = 80, maxAgeMs = 55 * 60 * 1000}) {
     const [src, setSrc] = useState(null);
 
     useEffect(() => {
@@ -11,10 +11,22 @@ export default function ProfileImage({imageUrl, maxAgeMs = 55 * 60 * 1000}) {
         const cachedTime = localStorage.getItem("cache-time");
 
         if (cached && cachedTime && Date.now() - cachedTime < maxAgeMs) {
-            setSrc(<img src={cached} alt="Image" className="w-30 h-30 object-contain rounded-full border" draggable={false} />);
+            setSrc(
+                <img 
+                    src={cached} 
+                    alt="Image" 
+                    className={`object-contain rounded-full border cursor-pointer`} 
+                    style={{
+                        width: `${width}px`,
+                        height: `${height}px`
+                    }}
+                    draggable={false} 
+                />
+            );
             return;
         }
 
+        // not cached
         (async () => {
             try {
                 if (!auth || !auth.currentUser)
@@ -29,7 +41,18 @@ export default function ProfileImage({imageUrl, maxAgeMs = 55 * 60 * 1000}) {
                 localStorage.setItem("cache", data.signedUrl);
                 localStorage.setItem("cache-time", Date.now().toString());
 
-                setSrc(<img src={data.signedUrl} alt="Image" className="w-30 h-30 object-contain rounded-full border" draggable={false} />);
+                setSrc(
+                    <img 
+                        src={data.signedUrl} 
+                        alt="Image" 
+                        className={`object-contain rounded-full border cursor-pointer`} 
+                        style={{
+                            width: `${width}px`,
+                            height: `${height}px`
+                        }}
+                        draggable={false} 
+                    />
+                );
             } catch (error) {
                 console.error(error);
 
