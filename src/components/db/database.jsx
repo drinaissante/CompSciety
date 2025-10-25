@@ -109,6 +109,7 @@ export async function fetchProfileDetails() {
   const cached = localStorage.getItem(CACHE_KEY);
 
   if (cached) {
+    // make sure to not accept cache changes
     const parsed = JSON.parse(cached);
     return parsed.data;
   }
