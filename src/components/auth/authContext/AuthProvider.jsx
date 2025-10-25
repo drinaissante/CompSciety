@@ -17,10 +17,6 @@ function AuthProvider({ children }) {
         if (user) {
                 setCurrentUser({ ...user });
                 setUserLoggedIn(true);
-
-                if (!user.emailVerified) {
-                    console.log("Email not verified - but allowing profile creation");
-                }
         } else {
             setCurrentUser(null);
             setUserLoggedIn(false);
