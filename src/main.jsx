@@ -18,6 +18,7 @@ import ActionHandler from '@pages/action/ActionHandler.jsx'
 import ResetPassword from '@pages/resetpw/ResetPassword.jsx'
 import AboutPage from '@pages/about/AboutPage.jsx'
 import Me from '@pages/me/Me.jsx'
+import OfficerPanel from './components/pages/officer/OfficerPanel.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -46,6 +47,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="resetpassword" element={<ResetPassword /> } />
               <Route path="/action" element={<ActionHandler />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/officer" element={<OfficerPanel />} />
               <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
