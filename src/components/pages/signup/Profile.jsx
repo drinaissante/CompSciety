@@ -26,42 +26,12 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
     async function handleUpload(image) {
         if (!image) return "N/A";
         
-        // TODO make sure to only upload upon request
-        console.log("Uploading to canva...");
 
         try {
             const compressedMain = await imageCompression(image, options);
             const publicUrl = await uploadVia(compressedMain);
 
-            // handle canva
-            const formData = new FormData();
-            formData.append('image', compressedMain);
-
-            const response = await fetch(
-                'https://backend-compsciety.vercel.app/api/process-canva',
-                {
-                    method: 'POST',
-                    body: formData,
-                }
-            )
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error);
-            }
-
-            const data = await response.json();
-
-            console.log(data.exportUrls);
-
-            const exported = await uploadCanva(data.exportUrls[0]);
-
-            console.log(exported);
-
-            // exported url
-
-            // first page - with member id card
-            return exported;
+            return publicUrl;
         } catch (error) {
             console.error("Something went wrong:", error);
             return "N/A";
