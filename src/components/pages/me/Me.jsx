@@ -79,11 +79,36 @@ function Me() {
         if (src.type === IoPersonCircle)
             return null; // no profile picture
 
-        // todo
-        const image = src.props.src; // src => <img src={}> />
+        try {
+            // todo
+            const image = src.props.src; // src => <img src={}> />
 
-        // TODO add loading button
+            // TODO add loading button
 
+            console.log("Uploading to canva..", src);
+
+            const formData = new FormData();
+            formData.append('image', image);
+
+            // handle canva
+            const response = await fetch('https://backend-compsciety.vercel.app/api/process-canva', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error);
+            }
+
+            const data = await response.json();
+
+            await uploadCanva(data.exportUrls[0]);
+
+            console.log("Successfully uploaded to canva.");
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     // TODO upload profile picture
@@ -139,9 +164,23 @@ function Me() {
                                         <h1>College: {details.college} | {details.program}</h1>
                                         <h1>Year Level: {details.year_level} </h1>
                                         <h1>Section: {details.section}</h1>
-                                        <button onClick={requestCanvaExportURL} disabled={src}>
-                                            Request Membership ID
-                                        </button>
+
+                                        <div className="relative group inline-block">
+                                            <button onClick={requestCanvaExportURL} disabled={src}>
+                                                Request Membership ID
+                                            </button>
+                                            
+                                            {!src && (
+                                                <span
+                                                    className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                                            bg-gray-800 text-red text-xs rounded py-1 px-2
+                                                            opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100
+                                                            transition-all duration-200 ease-out pointer-events-none shadow-lg">
+                                                    Please upload a valid profile picture.
+                                                </span>
+                                            )}
+
+                                        </div>
                                     </div>
                                 ) : (
                                     <Loading />
