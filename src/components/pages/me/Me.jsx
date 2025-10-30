@@ -12,7 +12,7 @@ import ProfileImage from "../../state/ProfileImage.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../auth/firebase.jsx";
 
-import { IoCheckmarkCircle } from "react-icons/io5";
+import { IoCheckmarkCircle, IoPersonCircle } from "react-icons/io5";
 import { FaClipboardList } from "react-icons/fa";
 
 /*
@@ -72,11 +72,25 @@ function Me() {
         return unsub;
     }, []);
 
-    // TODO upload picture
+    async function requestCanvaExportURL(e) {
+        e.preventDefault();
+
+        // check first if there is a profile picture
+        if (src.type === IoPersonCircle)
+            return null; // no profile picture
+
+        // todo
+        const image = src.props.src; // src => <img src={}> />
+
+        // TODO add loading button
+
+    }
+
+    // TODO upload profile picture
 
     return (
         <div className='flex flex-col scroll-smooth'>    
-            <div className="min-h-screen bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22]">
+            <div className="min-h-screen bg-linear-to-b from-[#18230F] via-[#2b5016] to-[#324d22]">
 
                 {loading ? (
                     <div className="flex justify-center items-center h-screen">
@@ -93,8 +107,11 @@ function Me() {
                                     <div className="m-3 flex flex-col text-center items-center">
                                         {src}
 
-                                        <h1>UID: {details.uid} <FaClipboardList /></h1>  
-                                        <h1>Name: {details.name} {details.middle_initial} {details.last_name}</h1>
+                                        {/* TODO: add a checkmark for verified email */}
+                                        {/* Make sure to only be able to upload to canva if verified */}
+
+                                        <h1>UID: {details.uid} <FaClipboardList /></h1>   
+                                        <h1>Name: {details.name} {details.middle_initial} {details.last_name} </h1>
 
                                         <h1 className="flex items-center justify-center gap-2">
                                             Discord: 
@@ -122,6 +139,9 @@ function Me() {
                                         <h1>College: {details.college} | {details.program}</h1>
                                         <h1>Year Level: {details.year_level} </h1>
                                         <h1>Section: {details.section}</h1>
+                                        <button onClick={requestCanvaExportURL} disabled={src}>
+                                            Request Membership ID
+                                        </button>
                                     </div>
                                 ) : (
                                     <Loading />

@@ -4,7 +4,7 @@ import imageCompression from "browser-image-compression";
 
 import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "../../state/store.jsx";
-import { uploadCanva, uploadVia } from "../../db/supabase.jsx";
+import { uploadVia } from "../../db/supabase.jsx";
 
 import { IoPersonCircle } from "react-icons/io5"
 
