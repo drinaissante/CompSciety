@@ -6,7 +6,6 @@ const supabase = createClient(
     import.meta.env.SUPABASE_ANON,
 )
 
-
 async function uploadVia(file) {
     if (!file) return null;
 
@@ -21,4 +20,30 @@ async function uploadVia(file) {
     return publicUrl.publicUrl;
 }
 
-export { supabase, uploadVia };
+async function uploadCanva(exportUrl) {
+    if (!exportUrl) return null;
+
+    const response = await fetch(exportUrl);
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+    }
+
+    const blob = await response.blob();
+
+    const fileName = `${Date.now()}.png`;
+
+    const { data, error } = await supabase.storage.from("canva_exports").upload(fileName, blob, {
+        contentType: blob.type || 'image/png',
+        upsert: true,
+    });
+
+    if (error) throw error;
+
+    const { data: publicUrl} = supabase.storage.from("canva_exports").getPublicUrl(fileName);
+
+    return publicUrl.publicUrl;
+}
+
+export { supabase, uploadVia, uploadCanva };

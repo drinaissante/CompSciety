@@ -152,7 +152,7 @@ function OfficerPanel() {
 
 
     return (
-        <div className='flex flex-col scroll-smooth min-h-screen bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22]'>
+        <div className='flex flex-col scroll-smooth min-h-screen bg-linear-to-b from-[#18230F] via-[#2b5016] to-[#324d22]'>
             <div className="flex justify-center items-center h-screen">
                 <div className="py-[7%] px-[10%]">
 
