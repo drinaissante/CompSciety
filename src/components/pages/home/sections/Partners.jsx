@@ -34,7 +34,7 @@ const partners = [
     college: "(CEU Malolos) - CIT"
   },
   { name: "Society for the Welfare of Information Technology Students (SWITS) ", logoSrc: swits, mission: "The Society for the Welfare of Information Technology Students (SWITS) of the College of Information and Communications Technology (CICT) is a college-based organization founded in 2001. SWITS focuses its goals on addressing the needs of our IT students and anchors its activities on the organization's passion, mission, and vision. SWITS became recognized for their projects and yearly events; including Enablement Seminars, IT Mentorship and IT Congress.", vision: "", url: "https://www.facebook.com/SWITS.org", college: "CICT" },
-  { name: "BLISS", logoSrc: bliss, mission: "The Brigade of Library and Information Science Students Organization (BLISS) empower future information specialists. BLISS is a college-based organization at Bulacan State University under the College of Information and Communications Technology, an organization for Bachelor of Library and Information Science (BLIS) students, committed to empower future information professionals to bridge gaps, foster unity, and strengthen the access to information resources. Through students’ collective efforts, we aim to connect people with knowledge, ensuring that libraries, archives, and information centers remain vibrant and relevant.", vision: "", url: "https://www.facebook.com/BLISSorgCICT", college: "CICT" },
+  { name: "Brigade of Library and Information Science Students (BLISS)", logoSrc: bliss, mission: "The Brigade of Library and Information Science Students Organization (BLISS) empower future information specialists. BLISS is a college-based organization at Bulacan State University under the College of Information and Communications Technology, an organization for Bachelor of Library and Information Science (BLIS) students, committed to empower future information professionals to bridge gaps, foster unity, and strengthen the access to information resources. Through students’ collective efforts, we aim to connect people with knowledge, ensuring that libraries, archives, and information centers remain vibrant and relevant.", vision: "", url: "https://www.facebook.com/BLISSorgCICT", college: "CICT" },
 ];
 
 function HoverPreview({ bb, partner }) {
@@ -43,7 +43,6 @@ function HoverPreview({ bb, partner }) {
     useEffect(() => {
         setMounted(true);
     }, []);
-
 
     if (!mounted || !bb || !partner || !document?.body) return null;
 
@@ -124,13 +123,13 @@ function Partners() {
         <div className="relative">
             <MotionDiv
                 id="partners"
-                className="mt-20 mb-10 justify-self-center sm:w-[50%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)] bg-[#18230F] overflow-visible"
+                className="mt-20 mb-10 justify-self-center sm:w-[50%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)] bg-[#18230F] overflow-visible text-white"
             >
-                <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-3xl font-extrabold p-5 sm:text-4xl">Our Partners</h2>
+                <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-3xl font-extrabold p-10 w-65 sm:p-8 sm:w-90 sm:text-5xl">Our Partners</h2>
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     pagination={{ clickable: true }}
-                    spaceBetween={30}
+                    spaceBetween={50}
                     slidesPerView={3}
                     autoplay={{ delay: 1000, disableOnInteraction: false }}
                     speed={2000}
@@ -141,7 +140,7 @@ function Partners() {
                     {partners.map((partner, i) => (
                         <SwiperSlide key={i}>
                             <div 
-                                className="relative group flex flex-col items-center text-center pb-5"
+                                className="relative group flex flex-col items-center text-center pb-15"
                                 onMouseEnter={(e) => handleMouseEnter(e, partner)}
                                 onMouseLeave={handleMouseLeave}
                             >
@@ -160,7 +159,7 @@ function Partners() {
                                             draggable="false"
                                         />
 
-                                        <span className="block mt-2 text-center w-[20ch]">{partner.name}</span>
+                                        <span className="block mt-2 max-w-[15ch] text-center w-[20ch]">{partner.name}</span>
                                     </div>
                                 </a>
                             </div>

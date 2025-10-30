@@ -12,7 +12,7 @@ function AboutPage() {
 
     return (
         <div className='min-h-screen flex flex-col scroll-smooth'>    
-            <div className="bg-gradient-to-b from-[#18230F] via-[#2b5016] to-[#324d22]">
+            <div className="bg-linear-to-b from-[#18230F] via-[#2b5016] to-[#324d22] select-none">
                 <div
                     id="about"
                     className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-35 sm:p-10 sm:mt-50 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)]"
@@ -24,19 +24,20 @@ function AboutPage() {
                     <MotionDiv className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-8 max-w-6xl w-full">
 
                         <div className="flex flex-col max-w-3xl">
-                        <p className="text-base m-5 sm:text-xl sm:m-0 text-white">
-                            CompSciety exists to build a strong, united, and future-ready generation of Computer Science
-                            students, not merely to keep up with the times, but to define them. Guided by the values of excellence,
-                            innovation, integrity, collaboration, and inclusivity, we strive to turn knowledge into action, elevate
-                            the role of Computer Science in society, and contribute to the advancement of the field within and
-                            beyond the university.
-                        </p>
+                            <p className="text-base m-5 sm:text-xl sm:m-0 text-white">
+                                CompSciety exists to build a strong, united, and future-ready generation of Computer Science
+                                students, not merely to keep up with the times, but to define them. Guided by the values of excellence,
+                                innovation, integrity, collaboration, and inclusivity, we strive to turn knowledge into action, elevate
+                                the role of Computer Science in society, and contribute to the advancement of the field within and
+                                beyond the university.
+                            </p>
                         </div>
 
                         <img
-                        src={mascot}
-                        alt="CompSciety Mascot"
-                        className="sm:ml-20 w-32 sm:w-44 h-auto"
+                            src={mascot}
+                            alt="CompSciety Mascot"
+                            className="sm:ml-20 w-32 sm:w-44 h-auto"
+                            draggable={false}
                         />
                     </MotionDiv>
 

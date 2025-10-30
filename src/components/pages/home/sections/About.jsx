@@ -9,7 +9,7 @@ function About() {
   return (
     <div
       id="about"
-      className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-35 sm:p-10 sm:mt-50 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)]"
+      className="relative rounded-[50px] bg-[#18230F] flex flex-col items-center gap-10 p-10 m-6 mt-35 sm:p-10 sm:mt-50 sm:mr-50 sm:ml-50 shadow-[0_0_1px_0.8px_rgba(0,255,0,0.3)] select-none"
     >
       <MotionDiv className="absolute -top-6 font-outfit font-bold text-4xl sm:text-5xl lg:text-6xl text-white sm:-top-9 sm:left-10">
         About CompSciety
@@ -31,6 +31,7 @@ function About() {
           src={mascot}
           alt="CompSciety Mascot"
           className="sm:ml-20 w-32 sm:w-44 h-auto"
+          draggable={false}
         />
       </MotionDiv>
 
@@ -57,7 +58,7 @@ function About() {
       </div>
 
       {/* Learn More Btn */}
-      <div className="absolute -bottom-7 px-12 py-3 rounded-full text-lg font-bold text-white bg-gradient-to-r from-green-400 to-blue-400 shadow-[0_0_7px_3px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition cursor-pointer" onClick={(e) => {
+      <div className="absolute -bottom-7 px-12 py-3 rounded-full text-lg font-bold text-white bg-linear-to-r from-green-400 to-blue-400 shadow-[0_0_7px_3px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition cursor-pointer" onClick={(e) => {
         e.preventDefault();
 
         navigate("/about");

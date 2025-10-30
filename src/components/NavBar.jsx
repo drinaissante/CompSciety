@@ -12,8 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./auth/authContext/auth.jsx";
 import { doSignOut } from "./auth/authService.jsx";
 
-import { IoPerson } from "react-icons/io5";
-import { fetchProfileDetails, fetchProfileURL } from "./db/database.jsx";
+import { fetchProfileURL } from "./db/database.jsx";
 import ProfileImage from "./state/ProfileImage.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./auth/firebase.jsx";

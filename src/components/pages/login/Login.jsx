@@ -229,6 +229,7 @@ function Login() {
                         <button
                             type="submit"
                             className="py-3 px-5 rounded-2xl bg-green-600 cursor-pointer"
+                            disabled={isSigningIn}
                         >
                             {isSigningIn ? "Signing in..." : "Login"}
                         </button>
@@ -242,9 +243,9 @@ function Login() {
                 
 
                 <div className="flex items-center">
-                    <hr className="flex-grow border-t border-gray-300" />
+                    <hr className="grow border-t border-gray-300" />
                         <span className="mx-2 text-white-500">OR</span>
-                    <hr className="flex-grow border-t border-gray-300" />
+                    <hr className="row border-t border-gray-300" />
                 </div>
                 
                 {/* SIGNUP WITH GOOGLE */}
