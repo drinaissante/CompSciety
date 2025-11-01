@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export const MAX_WIDTH = 70;
+export const MAX_WIDTH = 40;
 
 export default function TruncatedText({ 
     expanded: controlledExpanded, 
@@ -8,7 +8,7 @@ export default function TruncatedText({
     text, 
     max_width = MAX_WIDTH,
     collapsedHeight = "6rem", // default collapsed height
-    scrollThreshold = 400,    // when content is taller than this, enable scrolling
+    scrollThreshold = 80,    // when content is taller than this, enable scrolling
 }) {
     const [ defaultExpanded, defaultSetExpanded ] = useState(false);
 
@@ -34,20 +34,28 @@ export default function TruncatedText({
     }, [expanded, text, collapsedHeight, scrollThreshold, isScrollable]);
 
     return (
-        <p>
-            <div 
-                ref={ref}
-                className={`max-h-15 lg:max-h-[${maxHeight}px] transition-all duration-300 overflow-hidden ${expanded && isScrollable ? "overflow-y-auto pr-2" : ""}`}
-            >
-                {expanded ? text : text.slice(0, max_width) + "... "}
-            </div>
+        <div className="pt-5 mt-2 overflow-x-scroll rounded-2xl p-4 shadow-sm">
+            {text.length >= MAX_WIDTH ? (
+                <>
+                    <div 
+                        ref={ref}
+                        className={`max-h-15 lg:max-h-[${maxHeight}px] transition-all duration-300 overflow-hidden ${expanded && isScrollable ? "overflow-y-auto" : ""}`}
+                    >
+                        {expanded ? text : text.slice(0, max_width) + "... "}
+                    </div>
 
-            <button
-                onClick={() => setExpanded(!expanded)}
-                className="text-blue-500 hover:underline"    
-            >
-                {expanded ? "Show less" : "Click more"}
-            </button>
-        </p>
+                    <button
+                        onClick={() => setExpanded(!expanded)}
+                        className="text-green-500 hover:underline"    
+                    >
+                        {expanded ? "Show less" : "Click more"}
+                    </button>
+                </>
+            ) : (
+                <p className="mt-2 text-sm sm:text-xl">
+                    {announcements[0].description}
+                </p>
+            )}
+        </div>
     );
 }

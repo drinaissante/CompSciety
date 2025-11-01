@@ -43,21 +43,23 @@ function Hero() {
             </MotionDiv>
 
             <MotionDiv transition={{duration: 2, ease: "easeOut"}} >
-              <button className="pointer-events-auto text-2xl lg:my-0 lg:ml-120 cursor-pointer bg-linear-to-r">
-                  <span className="px-8 py-3 rounded-full text-lg font-bold text-white bg-linear-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
-                    <a target="_blank" rel="noopener noreferrer" href="https://forms.gle/yjfKLEwMauXz48qb7">Join Now</a>
-                    {/* { !userLoggedIn
-                        ?
-                          <Link to="/login">
-                            Join Now
-                          </Link>
-                        : 
-                          <div onClick={logout}>
-                            Logout
-                          </div>
-                    } */}
-                  </span>
-              </button>
+              <a target="_blank" rel="noopener noreferrer" href="https://forms.gle/yjfKLEwMauXz48qb7">
+                <button className="pointer-events-auto text-2xl lg:my-0 lg:ml-120 cursor-pointer bg-linear-to-r">
+                    <span className="px-8 py-3 rounded-full text-lg font-bold text-white bg-linear-to-r from-green-400 to-blue-400 shadow-[0_0_10px_5px_rgba(0,255,0,0.6)] flex align-center hover:opacity-90 transition">
+                      Join Now
+                      {/* { !userLoggedIn
+                          ?
+                            <Link to="/login">
+                              Join Now
+                            </Link>
+                          : 
+                            <div onClick={logout}>
+                              Logout
+                            </div>
+                      } */}
+                    </span>
+                </button>
+              </a>
             </MotionDiv>
 
           </div>
