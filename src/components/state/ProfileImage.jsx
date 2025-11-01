@@ -3,7 +3,12 @@ import { auth } from "../auth/firebase.jsx";
 import { supabase } from "../db/supabase.jsx";
 import { IoPersonCircle } from "react-icons/io5";
 
-export default function ProfileImage({imageUrl, width = 80, height = 80, maxAgeMs = 55 * 60 * 1000}) {
+export default function ProfileImage({
+    imageUrl, 
+    width = 80, 
+    height = 80, 
+    maxAgeMs = 55 * 60 * 1000
+}) {
     const [src, setSrc] = useState(null);
 
     useEffect(() => {
@@ -15,7 +20,7 @@ export default function ProfileImage({imageUrl, width = 80, height = 80, maxAgeM
                 <img 
                     src={cached} 
                     alt="Image" 
-                    className={`object-contain rounded-full border cursor-pointer`} 
+                    className="object-contain rounded-full" 
                     style={{
                         width: `${width}px`,
                         height: `${height}px`
@@ -45,7 +50,7 @@ export default function ProfileImage({imageUrl, width = 80, height = 80, maxAgeM
                     <img 
                         src={data.signedUrl} 
                         alt="Image" 
-                        className={`object-contain rounded-full border cursor-pointer`} 
+                        className="object-contain rounded-full"
                         style={{
                             width: `${width}px`,
                             height: `${height}px`

@@ -7,9 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/authContext/auth.jsx";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle, doSignOut, doPasswordReset } from "../../auth/authService.jsx";
 
-import { getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
+import { auth, getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
 
 import useStore from "@/components/state/store.jsx";
+import { onAuthStateChanged } from "firebase/auth";
 
 // add "forget password"
 // add "register now if no account"
@@ -17,11 +18,20 @@ import useStore from "@/components/state/store.jsx";
 // add make sure to save the url before pressing "Join Now" add "redirect?<URL HERE>"
 
 function Login() {
+    const { currentUser, userLoggedIn, loading } = useAuth(); // TODO
+    const navigate = useNavigate();
+
     useEffect(() => {
         document.title = "Login | BulSU Computer Science Society"
-    }, []);
 
-    const { currentUser, userLoggedIn, loading } = useAuth(); // TODO
+        // go back to home if already logged in
+        const unsub = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) 
+                navigate("/");
+        });
+
+        return unsub;
+    }, []);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,7 +40,6 @@ function Login() {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const [isSigningIn, setIsSigningIn] = useState(false);
-    const navigate = useNavigate();
 
     // clear zustand
     const clear = useStore((state) => state.clearResponses)
@@ -44,6 +53,7 @@ function Login() {
         setErrors({ email: emailErrors, password: pwErrors })
 
         if (!emailErrors && !pwErrors) {
+            console.log("login")
             if (!isSigningIn) {
                 setIsSigningIn(true);
 
@@ -248,14 +258,15 @@ function Login() {
                     
                 </form>
 
-                {message && <p className="text-center text-green-600 mt-3 w-[40ch]">{message}</p>}
-                {errors.auth && <p className="text-center text-red-500 w-[40ch]">{errors.auth}</p>}
-                
+                {errors.auth 
+                    ? <p className="text-center text-red-500 w-[40ch]">{errors.auth}</p> 
+                    : (message && <p className="text-center text-green-600 mt-3 w-[40ch]">{message}</p>)
+                }
 
                 <div className="flex items-center">
                     <hr className="grow border-t border-gray-300" />
                         <span className="mx-2 text-white-500">OR</span>
-                    <hr className="row border-t border-gray-300" />
+                    <hr className="grow border-t border-gray-300" />
                 </div>
                 
                 {/* SIGNUP WITH GOOGLE */}

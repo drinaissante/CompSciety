@@ -26,7 +26,6 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
 
     async function handleUpload(image) {
         if (!image) return "N/A";
-        
 
         try {
             const compressedMain = await imageCompression(image, options);

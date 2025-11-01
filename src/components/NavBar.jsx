@@ -177,7 +177,7 @@ function NavBar() {
 
           <div className="sm:w-[70px] sm:h-[70px] sm:flex items-center justify-center">
             {userLoggedIn && profilePic ? (
-              <div onClick={() => navigate("/me")}>
+              <div className="rounded-3xl border-2 shadow-lg cursor-pointer" onClick={() => navigate("/me")}>
                 <ProfileImage imageUrl={profilePic} width={70} height={70} />
               </div>
             ) : (
