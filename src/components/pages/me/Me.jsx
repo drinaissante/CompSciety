@@ -14,6 +14,7 @@ import { auth } from "../../auth/firebase.jsx";
 
 import { IoCheckmarkCircle, IoPersonCircle } from "react-icons/io5";
 import { FaClipboardList } from "react-icons/fa";
+import ProfileDetails from "./ProfileDetails.jsx";
 
 /*
 - get profile picture, profile details
@@ -41,7 +42,7 @@ function Me() {
 
         const unsub = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
-                fetchProfile();
+                await fetchProfile();
             } else {
                 setDetails(null);
                 setLoading(false);
@@ -67,49 +68,9 @@ function Me() {
             }
         }
 
-        fetchProfile();
-
         return unsub;
     }, []);
 
-    async function requestCanvaExportURL(e) {
-        e.preventDefault();
-
-        // check first if there is a profile picture
-        if (src.type === IoPersonCircle)
-            return null; // no profile picture
-
-        try {
-            // todo
-            const image = src.props.src; // src => <img src={}> />
-
-            // TODO add loading bar
-
-            console.log("Uploading to canva..", src);
-
-            const formData = new FormData();
-            formData.append('image', image);
-
-            // handle canva
-            const response = await fetch('https://backend-compsciety.vercel.app/api/process-canva', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error);
-            }
-
-            const data = await response.json();
-
-            await uploadCanva(data.exportUrls[0]);
-
-            console.log("Successfully uploaded to canva.");
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     // TODO upload profile picture
 
@@ -124,64 +85,10 @@ function Me() {
                 ) : (
                     <MotionDiv className="mt-25 lg:mt-35 mx-auto my-auto bg-white/40 rounded-xl gap-3">
                         
-                        <div className="font-bold text-5xl text-center">Profile</div>
-                        
                         {src && (
                             <>
                                 {details ? (
-                                    <div className="m-3 flex flex-col text-center items-center">
-                                        {src}
-
-                                        {/* TODO: add a checkmark for verified email */}
-                                        {/* Make sure to only be able to upload to canva if verified */}
-
-                                        <h1>UID: {details.uid} | {auth.currentUser && auth.currentUser.emailVerified ? "a" : "NOT VERIFIED"} <FaClipboardList /></h1>   
-                                        <h1>Name: {details.name} {details.middle_initial} {details.last_name} </h1>
-
-                                        <h1 className="flex items-center justify-center gap-2">
-                                            Discord: 
-                                            <span className="flex items-center gap-2 bg-[#5865F2]/20 text-[#5865F2] px-3 py-1 rounded-full font-semibold">
-                                                <img src={avatarUrl} className="h-10 rounded-full" draggable={false}/>
-
-                                                {details.discord || "Unknown"}
-                                                {details.discord_verified && (
-                                                    <div className="relative group inline-block">
-                                                        <IoCheckmarkCircle className="text-green-500 w-5 h-5 cursor-pointer" />
-                                                        
-                                                        <span
-                                                            className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap
-                                                                    bg-gray-800 text-white text-xs rounded py-1 px-2
-                                                                    opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100
-                                                                    transition-all duration-200 ease-out pointer-events-none shadow-lg">
-                                                            Verified Discord account
-                                                        </span>
-                                                </div>
-                                                )}
-                                                
-                                            </span>
-                                        </h1>
-
-                                        <h1>College: {details.college} | {details.program}</h1>
-                                        <h1>Year Level: {details.year_level} </h1>
-                                        <h1>Section: {details.section}</h1>
-
-                                        <div className="relative group inline-block">
-                                            <button onClick={requestCanvaExportURL} disabled={src}>
-                                                Request Membership ID
-                                            </button>
-                                            
-                                            {!src && (
-                                                <span
-                                                    className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap
-                                                            bg-gray-800 text-red text-xs rounded py-1 px-2
-                                                            opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100
-                                                            transition-all duration-200 ease-out pointer-events-none shadow-lg">
-                                                    Please upload a valid profile picture.
-                                                </span>
-                                            )}
-
-                                        </div>
-                                    </div>
+                                    <ProfileDetails profile={src} details={details} avatarUrl={avatarUrl} />
                                 ) : (
                                     <Loading />
                                 )}
