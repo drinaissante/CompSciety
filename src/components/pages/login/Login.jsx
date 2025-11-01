@@ -9,6 +9,8 @@ import { doSignInWithEmailAndPassword, doSignInWithGoogle, doSignOut, doPassword
 
 import { getFirebaseAuthErrorMessage } from "../../auth/firebase.jsx";
 
+import useStore from "@/components/state/store.jsx";
+
 // add "forget password"
 // add "register now if no account"
 
@@ -30,6 +32,9 @@ function Login() {
     const [isSigningIn, setIsSigningIn] = useState(false);
     const navigate = useNavigate();
 
+    // clear zustand
+    const clear = useStore((state) => state.clearResponses)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -39,27 +44,27 @@ function Login() {
         setErrors({ email: emailErrors, password: pwErrors })
 
         if (!emailErrors && !pwErrors) {
-            e.preventDefault();
-
             if (!isSigningIn) {
                 setIsSigningIn(true);
 
                 try {
-                    const userCredential = await doSignInWithEmailAndPassword(email, password);
+                    // const userCredential = await doSignInWithEmailAndPassword(email, password);
 
-                    if (!userCredential.user.emailVerified) {
-                        // sign out since not verified yet
-                        await doSignOut();
+                    // if (!userCredential.user.emailVerified) {
+                    //     // sign out since not verified yet
+                    //     await doSignOut();
 
-                        setErrors((prev) => (
-                            {
-                                ...prev,
-                                auth: "Please verify your email before logging in."
-                            }
-                        ));
+                    //     setErrors((prev) => (
+                    //         {
+                    //             ...prev,
+                    //             auth: "Please verify your email before logging in."
+                    //         }
+                    //     ));
 
-                        return;
-                    }
+                    //     return;
+                    // }
+
+                    await doSignInWithEmailAndPassword(email, password);
 
                     navigate("/");
                 } catch (error) {
@@ -68,9 +73,16 @@ function Login() {
                 } finally {
                     setIsSigningIn(false);
                 }
-
             }
         }
+    }
+
+    const handleClear = (e) => {
+        e.preventDefault();
+
+        clear();
+
+        navigate("/");
     }
 
     const handleGoogleSignIn = async (e) => {
@@ -186,7 +198,6 @@ function Login() {
                             className="p-1 bg-white text-black rounded-md"
                         />
                         {errors.email && <p className="text-red-500">{errors.email}</p>}
-
                         
                         Password
                         <input
@@ -201,7 +212,6 @@ function Login() {
                         />
                         {errors.password && <p className="text-red-500">{errors.password}</p>}
 
-                        
                     </div>
                 
                     <div className="flex justify-center mt-10">
@@ -220,11 +230,11 @@ function Login() {
                     </div>
 
                     <div className="m-2 flex justify-around">
-                        <Link to="/">
-                            <button className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer">
-                                Cancel
-                            </button>
-                        </Link>
+                        <button 
+                            className="py-3 px-5 rounded-2xl bg-gray-600 cursor-pointer"
+                            onClick={(e) => handleClear(e)}>
+                            Cancel
+                        </button>
 
                         <button
                             type="submit"
