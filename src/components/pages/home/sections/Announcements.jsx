@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { useRef } from "react";
-import TruncatedText, { MAX_WIDTH } from "../../../../extras/TruncatedText.jsx"
+import TruncatedText from "../../../../extras/TruncatedText.jsx"
 
 const announcements = [
   { title: "First Title", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet", date: "January 17, 2025" },

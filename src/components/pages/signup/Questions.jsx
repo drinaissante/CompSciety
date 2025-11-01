@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MotionDivExit } from "../../MotionDiv.jsx";
-import useStore from "../../state/store.jsx";
+import useStore from "@/components/state/store.jsx";
+
 
 /*
 questions: {
@@ -34,7 +35,6 @@ function Questions({ hasViewed, setIsValid, setErrors }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // TODO store to zustand
         update("questions", {
             question_1: firstQuestion,
             question_2: secondQuestion,

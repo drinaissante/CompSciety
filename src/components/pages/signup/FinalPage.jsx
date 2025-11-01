@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-
 import { motion, AnimatePresence} from "framer-motion"
 import { fetchAvatarURL } from "../../db/database.jsx";
 import { useNavigate } from "react-router-dom";
-import useStore from "../../state/store.jsx";
+import useStore from "@/components/state/store.jsx";
 
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);

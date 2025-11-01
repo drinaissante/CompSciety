@@ -15,7 +15,7 @@ import Questions from "./Questions.jsx";
 import FinalSignup from "./FinalPage.jsx";
 
 import { MotionDivExit } from "../../MotionDiv.jsx";
-import useStore from "../../state/store.jsx";
+import useStore from "@/components/state/store.jsx";
 
 import { createUserDocument } from "../../db/database.jsx"
 

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../home/sections/Footer.jsx";
 import MotionDiv from "../../MotionDiv.jsx";
 
@@ -83,7 +83,7 @@ function Me() {
             // todo
             const image = src.props.src; // src => <img src={}> />
 
-            // TODO add loading button
+            // TODO add loading bar
 
             console.log("Uploading to canva..", src);
 
@@ -135,7 +135,7 @@ function Me() {
                                         {/* TODO: add a checkmark for verified email */}
                                         {/* Make sure to only be able to upload to canva if verified */}
 
-                                        <h1>UID: {details.uid} <FaClipboardList /></h1>   
+                                        <h1>UID: {details.uid} | {auth.currentUser && auth.currentUser.emailVerified ? "a" : "NOT VERIFIED"} <FaClipboardList /></h1>   
                                         <h1>Name: {details.name} {details.middle_initial} {details.last_name} </h1>
 
                                         <h1 className="flex items-center justify-center gap-2">

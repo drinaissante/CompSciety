@@ -170,9 +170,9 @@ function NavBar() {
             onClick={() => setOpenMenu(!openMenu)}
             aria-label="Toggle Menu"
           >
-            <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
-            <span className="w-6 h-[2px] bg-current mb-1 rounded"></span>
-            <span className="w-6 h-[2px] bg-current rounded"></span>
+            <span className="w-6 h-0.5 bg-current mb-1 rounded"></span>
+            <span className="w-6 h-0.5 bg-current mb-1 rounded"></span>
+            <span className="w-6 h-0.5 bg-current rounded"></span>
           </button>
 
           <div className="sm:w-[70px] sm:h-[70px] sm:flex items-center justify-center">

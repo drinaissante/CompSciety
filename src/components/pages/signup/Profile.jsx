@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import imageCompression from "browser-image-compression";
 
 import { MotionDivExit } from "../../MotionDiv.jsx";
-import useStore from "../../state/store.jsx";
+import useStore from "@/components/state/store.jsx";
+
 import { uploadVia } from "../../db/supabase.jsx";
 
 import { IoPersonCircle } from "react-icons/io5"

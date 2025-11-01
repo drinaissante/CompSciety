@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MotionDivExit } from "../../MotionDiv.jsx";
-import useStore from "../../state/store.jsx";
+
+import useStore from "@/components/state/store.jsx";
 
 /*
 student: {
