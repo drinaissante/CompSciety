@@ -20,30 +20,67 @@ async function uploadVia(file) {
     return publicUrl.publicUrl;
 }
 
-async function uploadCanva(exportUrl) {
+async function uploadCanva(exportUrl, progress) {
     if (!exportUrl) return null;
 
-    const response = await fetch(exportUrl);
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error);
-    }
-
-    const blob = await response.blob();
-
+    const blob = await getBlob(exportUrl, progress)
     const fileName = `${Date.now()}.png`;
 
     const { data, error } = await supabase.storage.from("canva_exports").upload(fileName, blob, {
-        contentType: blob.type || 'image/png',
+        contentType: 'image/png',
         upsert: true,
     });
 
     if (error) throw error;
 
-    const { data: publicUrl} = supabase.storage.from("canva_exports").getPublicUrl(fileName);
+    const { data: dataSigned, error: errorSigned } = await supabase.storage.from("canva_exports").createSignedUrl(data.path, 60);
 
-    return publicUrl.publicUrl;
+    if (errorSigned) throw errorSigned;
+
+    return dataSigned.signedUrl;
 }
 
-export { supabase, uploadVia, uploadCanva };
+async function getProfileImageBlob(profile_link, progress) {
+    const filePath = profile_link.split("/").pop();
+
+    const { data, error } = await supabase.storage.from("profile_uploads").createSignedUrl(filePath, 60);
+
+    if (error) throw error;
+
+    const signedUrl = data.signedUrl;
+
+    const blob = getBlob(signedUrl, progress);
+    return blob;
+}
+
+async function getBlob(url, progress) {
+    const response = await fetch(url);
+
+    const contentLength = response.headers.get("content-length");
+    const total = contentLength ? parseInt(contentLength, 10) : 0;
+    let loaded = 0;
+    
+    const reader = response.body.getReader();
+    const chunks = [];
+
+    while (true) {
+        const { done, value } = await reader.read();
+        
+        if (done) break;
+
+        chunks.push(value);
+        loaded += value.length;
+
+        if (progress && total) {
+            const percent = Math.round((loaded / total) * 100);
+            progress(percent);
+        }
+    }
+
+    const blob = new Blob(chunks, { type: "image/png"});
+
+    return blob;
+}
+
+
+export { supabase, uploadVia, uploadCanva, getProfileImageBlob, getBlob };

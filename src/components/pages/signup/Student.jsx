@@ -8,6 +8,8 @@ student: {
     college:
     year_level:
     section:
+
+    // TODO student_number
 }
 */
 
@@ -22,11 +24,12 @@ function Student({ hasViewed, setIsValid, setErrors }) {
     const [program, setProgram] = useState(student.program || "");
     const [yearLevel, setYearLevel] = useState(student.year_level || "");
     const [section, setSection] = useState(student.section || "");
+    const [studentNumber, setStudentNumber] = useState(student.student_number || ""); // tODO
     
     const update = useStore((state) => state.update);
 
     useEffect(() => {
-        const isValid = college.trim() !== "" && program.trim() !== "" && yearLevel.trim() !== ""  && section.trim() !== "" ;
+        const isValid = college.trim() !== "" && program.trim() !== "" && yearLevel.trim() !== ""  && section.trim() !== "" && (studentNumber.trim() !== "" && studentNumber.length === 10) ;
 
         if (!isValid) {
             setErrors((prev) => ({...prev, auth: "Please fill all required fields."}))
@@ -35,17 +38,17 @@ function Student({ hasViewed, setIsValid, setErrors }) {
         }
 
         setIsValid(isValid); // report validity to parent
-    }, [college, program, yearLevel, section, setIsValid]);
+    }, [college, program, yearLevel, section, studentNumber, setIsValid]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // TODO store to zustand
         update("student", {
             college: college,
             program: program,
             year_level: yearLevel,
-            section: section
+            section: section,
+            student_number: studentNumber
         })
     }
 
@@ -68,6 +71,10 @@ function Student({ hasViewed, setIsValid, setErrors }) {
             setSection(value);
 
             update("student", "section", value);
+        } else if (field === "student_number") {
+            setStudentNumber(value);
+
+            update("student", "student_number", value);
         }
     }
 
@@ -97,6 +104,12 @@ function Student({ hasViewed, setIsValid, setErrors }) {
             <div className="flex flex-col text-center">
                 <h1>Section <span className="text-red-500">*</span> </h1>
                 <input type="text" placeholder="Ex. 2B" required value={section} onChange={(e) => handleChange("section", e)}
+                className="p-3 bg-white text-black rounded-md" />
+            </div>
+            
+            <div className="flex flex-col text-center">
+                <h1>Student Number <span className="text-red-500">*</span> </h1>
+                <input type="text" placeholder="2025XXXXXX (10 digits)" required value={studentNumber} onChange={(e) => handleChange("student_number", e)}
                 className="p-3 bg-white text-black rounded-md" />
             </div>
         </form>

@@ -88,10 +88,17 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
 
             const formData = new FormData();
             formData.append('image', blob);
+            formData.append("name", details.name.toUpperCase());
+            formData.append("middle_initial", details.middle_initial.toUpperCase());
+            formData.append("last_name", details.last_name.toUpperCase());
+            formData.append("position", "MEMBER");
+            formData.append("student_number", details.student_number); // TODO
 
             setProgress(0);
             setLoadingMsg("Export");
 
+
+            // add progress here
             // handle canva
             const response = await fetch('https://backend-compsciety.vercel.app/api/process-canva', {
                 method: 'POST',
@@ -103,10 +110,13 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
                 throw new Error(errorData.error);
             }
 
+            setLoadingMsg("Retrieving url.");
+
             const data = await response.json();
 
             const signedUrl = await uploadCanva(data.exportUrls[0], (progress) => setProgress(progress));
 
+            setLoadingMsg("Setting up canva..");
             const canvaBlob = await getBlob(signedUrl, (progress) => setProgress(progress));
 
             const blobImage = URL.createObjectURL(canvaBlob);
@@ -117,7 +127,6 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(blobImage);
 
             setCardImage(blobImage);
             
@@ -171,6 +180,9 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
                     <div className="font-medium text-gray-800 dark:text-white">UID</div>
                     <div>{details.uid}</div>
 
+                    <div className="font-medium text-gray-800 dark:text-white">Student Number</div>
+                    <div>{details.student_number || "N/A"}</div>
+
                     <div className="font-medium text-gray-800 dark:text-white">College</div>
                     <div>{details.college}</div>
 
@@ -192,16 +204,20 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
                     Request Membership ID
                 </button>
 
-                {loading && (
-                    <div className="flex text-center justify-center ">
-                        <Loading />
-                        <progress value={prog} max="100" />
-                    </div>
-                    )}
+                {/* FIX THE LAYOUT / DESIGN */}
+                <div className="flex justify-center gap-y-5 mt-10">
+                    {loading && (
+                        <div className="flex flex-col text-center justify-center align-middle">
+                            <Loading />
+                            <h1>{loadingMsg}</h1>
+                            <progress value={prog} max="100" className="w-full h-3  rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-value]:bg-green-500 [&::-moz-progress-bar]:bg-green-500"/>
+                        </div>
+                        )}
 
-                {cardImage && (
-                    <img src={cardImage} />
-                )}
+                    {cardImage && (
+                        <img src={cardImage} alt="Preview"  />
+                    )}
+                </div>
             </div>
         </div>
     </div>
