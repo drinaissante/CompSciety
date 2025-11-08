@@ -5,6 +5,8 @@ import { fetchAvatarURL } from "../../db/database.jsx";
 import { useNavigate } from "react-router-dom";
 import useStore from "@/components/state/store.jsx";
 
+// blur everything and add <Loading> in the middle so it waits
+
 function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, errors, success, setErrors, validateField }) {
     const creds = useStore((state) => state.creds);
     const update = useStore((state) => state.update);
@@ -141,6 +143,7 @@ function FinalSignup({ handleSubmit, email, setEmail, password, setPassword, err
                             Discord User not in the Discord Server.
                         </p>
                     )}
+                    
                     <div className="mt-5">
                         Discord <span className="text-red-500">*</span>
                         <input

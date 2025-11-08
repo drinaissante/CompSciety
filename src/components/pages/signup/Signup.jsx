@@ -18,18 +18,22 @@ import { MotionDivExit } from "../../MotionDiv.jsx";
 import useStore from "@/components/state/store.jsx";
 
 import { createUserDocument } from "../../db/database.jsx"
+import Loading from "@/extras/Loading.jsx";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function Signup() {
-    useEffect(() => {
-        document.title = "Signup | BulSU Computer Science Society"
-    }, []);
-
     const navigate = useNavigate();
         
     const [errors, setErrors] = useState({});
     const [success, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+        document.title = "Signup | BulSU Computer Science Society"
+
+        setErrors({});
+        setSuccessMessage("");
+    }, []);
 
     const creds = useStore((state) => state.creds);
     const profile = useStore((state) => state.profile);
@@ -83,6 +87,7 @@ function Signup() {
 
 
 
+                console.log("creating an account using:", email);
 
                 // email verification
                 const userCredential = await doCreateUserWithEmailAndPassword(email, password);
@@ -106,6 +111,7 @@ function Signup() {
                     program: student.program,
                     year_level: student.year_level, 
                     section: student.section,
+                    student_number: student.student_number,
                     question_1: questions.question_1, 
                     question_2: questions.question_2, 
                     question_3: questions.question_3,
@@ -120,10 +126,10 @@ function Signup() {
                 
                 clear();
 
-                // redirect to home page after 5 seconds
+                // redirect to home page after 3 seconds
                 const timer = setTimeout(() => {
                     navigate("/");
-                }, 5000); // 5 seconds
+                }, 3000); // 3 seconds
 
                 return () => clearTimeout(timer); // cleanup on unmount
             } catch (error) {
@@ -145,14 +151,33 @@ function Signup() {
 
     const pages = [
         <Profile hasViewed={viewedPages.has(1)} setIsValid={setIsValid} setErrors={setErrors}/>,
+
         <Student hasViewed={viewedPages.has(2)} setIsValid={setIsValid} setErrors={setErrors}/>,
+
         <Questions hasViewed={viewedPages.has(3)} setIsValid={setIsValid} setErrors={setErrors}/>,
+
         <FinalSignup handleSubmit={handleSubmit} email={email} setEmail={setEmail} 
             password={password} setPassword={setPassword} errors={errors} success={success} setErrors={setErrors} validateField={validateField}/>        
     ]
 
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden bg-[#18230F] rounded-xl">
+            {/* "blur" background and have a modal thing here */}
+            {isRegistering && (
+                <div className="fixed inset-0 z-40 flex items-center justify-center text-black">
+                    <div className="absolute inset-0 bg-white/30 backdrop-blur-md"></div>
+
+                    <div className="relative z-50 w-96 p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center gap-4">
+                        <h2 className="text-xl font-bold mb-4">Please Wait</h2>
+
+                        <Loading />
+
+                        <p>Please wait while we process your information..</p>
+                        <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded" disabled={isRegistering}>Close</button>
+                    </div>
+                </div>
+            )}
+
             {/* Animated squares background */}
             <Squares
                 direction="diagonal"
