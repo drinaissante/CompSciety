@@ -41,7 +41,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
     const update = useStore((state) => state.update);
 
     useEffect(() => {
-        const isValid = name.trim() !== "" && middle_ini.trim() !== "" && lastName.trim() !== "";
+        const isValid = name.trim() !== "" && middle_ini.trim() !== "" && lastName.trim() !== "" && image;
 
         if (!isValid) {
             setErrors((prev) => ({...prev, auth: "Please fill all required fields."}))
@@ -50,7 +50,7 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
         }
         
         setIsValid(isValid); // report validity to parent
-    }, [name, middle_ini, lastName, setIsValid]);
+    }, [name, middle_ini, lastName, image, setIsValid]);
 
     const handleChange = async (field, e) => {
         const value = e.target.value;
@@ -87,14 +87,17 @@ function Profile({ hasViewed, setIsValid, setErrors }) {
                 <input type="text" name="text" value={name} onChange={(e) => handleChange("name", e)} placeholder="Enter your name" required className="p-3 bg-white text-black rounded-md" />
             </div>
             
-            <div className="flex flex-col text-center">
-                <h1>Middle Initial <span className="text-red-500">*</span> </h1>
-                <input type="text" name="text" value={middle_ini} onChange={(e) => handleChange("middle_ini", e)} placeholder="Enter your middle Initial" required className="p-3 bg-white text-black rounded-md" />
-            </div>
-
-            <div className="flex flex-col text-center">
-                <h1>Last Name <span className="text-red-500">*</span> </h1>
-                <input type="text" name="text" value={lastName} onChange={(e) => handleChange("last_name", e)} placeholder="Enter your last name" required className="p-3 bg-white text-black rounded-md" />
+            <div className="flex text-center gap-4">
+                <div>
+                    <h1>Middle Initial <span className="text-red-500">*</span> </h1>
+                    <input type="text" name="text" value={middle_ini} onChange={(e) => handleChange("middle_ini", e)} placeholder="Enter your middle Initial" required className="p-3 w-20 bg-white text-black rounded-md mx-auto" />
+                </div>
+                
+                <div>
+                    <h1>Last Name <span className="text-red-500">*</span> </h1>
+                    <input type="text" name="text" value={lastName} onChange={(e) => handleChange("last_name", e)} placeholder="Enter your last name" required className="p-3 bg-white text-black rounded-md" />
+                </div>
+                
             </div>
             
             <div className="flex flex-col text-center">
