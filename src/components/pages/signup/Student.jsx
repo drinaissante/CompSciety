@@ -2,38 +2,58 @@ import { useEffect, useState } from "react";
 import { MotionDivExit } from "../../MotionDiv.jsx";
 
 import useStore from "@/components/state/store.jsx";
+import { Dropdown } from "@/components/DropDown.jsx";
+import { collegeProgramsMap, colleges } from "@/lib/colleges.js";
 
 /*
 student: {
     college:
     year_level:
     section:
-
-    // TODO student_number
 }
 */
 
 
 // TODO: make year level and college a drop down
 
+const digit_rgx = /^\d+$/;
 
 function Student({ hasViewed, setIsValid, setErrors }) {
     const student = useStore((state) => state.student);
 
     const [college, setCollege] = useState(student.college || "");
     const [program, setProgram] = useState(student.program || "");
+
     const [yearLevel, setYearLevel] = useState(student.year_level || "");
     const [section, setSection] = useState(student.section || "");
-    const [studentNumber, setStudentNumber] = useState(student.student_number || ""); // tODO
+    const [studentNumber, setStudentNumber] = useState(student.student_number || "");
     
     const update = useStore((state) => state.update);
 
     useEffect(() => {
-        const isValid = college.trim() !== "" && program.trim() !== "" && yearLevel.trim() !== ""  && section.trim() !== "" && (studentNumber.trim() !== "" && studentNumber.length === 10) ;
+        let isValid = college.trim() !== "" && program.trim() !== "" && yearLevel.trim() !== ""  && section.trim() !== "" && studentNumber.trim() !== "" ;
 
         if (!isValid) {
             setErrors((prev) => ({...prev, auth: "Please fill all required fields."}))
-        } else {
+        } else if (!colleges.includes(college)) {
+            setErrors((prev) => ({...prev, auth: "Please select a valid college from the list."}))
+
+            isValid = false;
+        } else if (!collegeProgramsMap[college]?.includes(program)) {
+            setErrors((prev) => ({...prev, auth: "Please select a valid program from the list."}))
+
+            isValid = false;
+        } else if (!digit_rgx.test(studentNumber)) {
+            setErrors((prev) => ({ ...prev, auth: "Student Number must be a number."}));
+
+            isValid = false;
+        } else if (studentNumber.length !== 10) {
+            setErrors((prev) => ({ ...prev, auth: "Student Number should be 10 digits."}));
+
+            isValid = false;
+        }
+
+        if (isValid){
             setErrors("");
         }
 
@@ -53,16 +73,20 @@ function Student({ hasViewed, setIsValid, setErrors }) {
     }
 
     const handleChange = (field, e) => {
-        const value = e.target.value;
+        const value = e?.target?.value;
         
         if (field === "college") {
-            setCollege(value);
+            setCollege(e);
 
-            update("student", "college", value);
+            update("student", "college", e);
+
+             // reset program when college changes
+            setProgram("");
+            update("student", "program", "");
         } else if (field === "program") {
-            setProgram(value);
+            setProgram(e);
 
-            update("student", "program", value);
+            update("student", "program", e);
         } else if (field === "year_level") {
             setYearLevel(value);
 
@@ -85,14 +109,23 @@ function Student({ hasViewed, setIsValid, setErrors }) {
         <form onSubmit={handleSubmit} className="mt-2 flex flex-col lg:flex-row gap-8">
             <div className="flex flex-col text-center">
                 <h1>College <span className="text-red-500">*</span> </h1>
-                <input type="text" placeholder="Ex. College of Science" required value={college} onChange={(e) => handleChange("college", e)} 
-                className="p-3 bg-white text-black rounded-md" />
+
+                <Dropdown 
+                    options={colleges} 
+                    onChange={(e) => handleChange("college", e)} 
+                    placeholder="Ex. College of Science"
+                />
             </div>
             
             <div className="flex flex-col text-center">
                 <h1>Program <span className="text-red-500">*</span> </h1>
-                <input type="text" placeholder="Ex. BS Math" required value={program} onChange={(e) => handleChange("program", e)} 
-                className="p-3 bg-white text-black rounded-md" />
+
+                <Dropdown 
+                    options={college ? collegeProgramsMap[college] || []: []}
+                    value={program}
+                    onChange={(e) => handleChange("program", e)} 
+                    placeholder="Ex. BS Math"
+                />
             </div>
 
             <div className="flex flex-col text-center">

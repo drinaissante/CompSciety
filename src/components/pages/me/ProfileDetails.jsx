@@ -78,13 +78,11 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
 
         try {
             setLoading(true);
-            setLoadingMsg("Canva");
+            setLoadingMsg("Processing...");
 
             // todo
             const imageUrl = profile.props.imageUrl;
             const blob = await getProfileImageBlob(imageUrl, (progress) => setProgress(progress));
-
-            console.log("Uploading to canva..", imageUrl);
 
             const formData = new FormData();
             formData.append('image', blob);
@@ -95,7 +93,7 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
             formData.append("student_number", details.student_number); // TODO
 
             setProgress(0);
-            setLoadingMsg("Export");
+            setLoadingMsg("Exporting...");
 
 
             // add progress here
@@ -110,7 +108,7 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
                 throw new Error(errorData.error);
             }
 
-            setLoadingMsg("Retrieving url.");
+            setLoadingMsg("Retrieving url...");
 
             const data = await response.json();
 
@@ -207,12 +205,14 @@ export default function ProfileDetails({ profile, details, avatarUrl }) {
                 {/* FIX THE LAYOUT / DESIGN */}
                 <div className="flex justify-center gap-y-5 mt-10">
                     {loading && (
-                        <div className="flex flex-col text-center justify-center align-middle">
+                        <div className="flex flex-col text-center mx-auto justify-center justify-self-center gap-3">
                             <Loading />
+
                             <h1>{loadingMsg}</h1>
+
                             <progress value={prog} max="100" className="w-full h-3  rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-gray-200 [&::-webkit-progress-value]:bg-green-500 [&::-moz-progress-bar]:bg-green-500"/>
                         </div>
-                        )}
+                    )}
 
                     {cardImage && (
                         <img src={cardImage} alt="Preview"  />
