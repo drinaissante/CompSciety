@@ -1,6 +1,6 @@
-import { auth, getFirebaseAuthErrorMessage } from "./firebase.jsx";
+import { auth } from "./firebase.jsx";
 
-import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, updatePassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
