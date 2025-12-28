@@ -22,7 +22,7 @@ const navLinks = [
   { name: 'About', navTo: "/about",  type: "page", },
   { name: 'Events', navTo: "/events",  type: "page", },
   { name: 'Blog', navTo: "/blogs",  type: "page", },
-  { name: 'Contact', type: "section", }
+  { name: 'Contact', type: "section", },
 ];
 
 function NavBar() {
@@ -37,6 +37,9 @@ function NavBar() {
 
   const navigate = useNavigate();
   const { currentUser, userLoggedIn } = useAuth();
+
+
+  const [ activeLink, setActiveLink ] = useState(location.pathname.split("/")[1].toLowerCase()); // index
   
   const logout = (e) => {
     e.preventDefault();
@@ -44,6 +47,7 @@ function NavBar() {
     doSignOut().then(() => { navigate('/login') });
   }
 
+  // fetch profile
   useEffect(() => {
       async function fetchProfile() {
           try {
@@ -95,7 +99,6 @@ function NavBar() {
         setOpenMenu(false)
       }
     };
-    
 
     if (openMenu) {
       document.addEventListener('mousedown', handleClickOutsideMenu);
@@ -112,9 +115,10 @@ function NavBar() {
 
     if (type === "page") {
       if (location.pathname === link.navTo) {
-          window.scrollTo({ top: 0, behavior: "smooth"})
+        window.scrollTo({ top: 0, behavior: "smooth"})
       } else {
-          navigate(link.navTo);
+        setActiveLink(link.name);
+        navigate(link.navTo);
       }
 
     } else if (type === "section") {
@@ -198,19 +202,31 @@ function NavBar() {
               } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
+
+              setActiveLink("Home");
             }}
           />
         </div>
 
+        {/* MAIN NAV */}
         <nav className="hidden lg:flex gap-25 text-sm font-bold bg-[#18230F] border border-[#255F38] rounded-full px-8 py-5 lg:px-25">
           {navLinks.map((link, index) => (
-            <a key={index} className="hover:text-[#5e936c] transition cursor-pointer" target="_blank" rel="noopener noreferrer"
-              onClick={(event) => handleLink(event, link.type, link)}>
-                {link.name}
+            <a key={index} 
+              onClick={(event) => handleLink(event, link.type, link)}
+              className={
+                `hover:text-[#5e936c] transition-all duration-500 cursor-pointer 
+                ${activeLink === link.name
+                  ? "bg-green-700 rounded-2xl px-2 py-[5.5px]" 
+                  : ""}`
+              }
+              target="_blank" rel="noopener noreferrer"
+            >
+              {link.name}
             </a>
           ))}
         </nav>
         
+        {/* RIGHT SIDE */}
         <span className="lg:mr-20 flex items-center justify-start gap-8">
           <button className="cursor-pointer hover:text-[#1f7d53] transition" onClick={() => setIsDark(!isDark)} aria-label="Toggle Theme">
             {isDark ? <MdLightMode size={40} /> : <MdDarkMode size={40} />}
@@ -220,20 +236,21 @@ function NavBar() {
           <button 
             className="text-center border-3 border-solid border-green-400 opacity-90 rounded-lg py-2 px-6 cursor-pointer hover:bg-green-800 transition"
             onClick={(e) => {
-              if (!userLoggedIn) {
-                navigate("/login");
-              } else {
-                logout(e);
-              }
+              // if (!userLoggedIn) {
+              //   navigate("/login");
+              // } else {
+              //   logout(e);
+              // }
             }}
           >
-            { !userLoggedIn ? "Login"  : "Logout" }
+            {/* { !userLoggedIn ? "Login"  : "Logout" } */}
+            Coming Soon!
           </button>
-
         </span>
+        
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu || FIX THE WHOLE WIDTH GREEN THING ON CLICK */}
         <div className={`lg:hidden overflow-hidden transition-all duration-400 ease-in-out ${ openMenu ? 'max-h-96 py-4' : 'max-h-0' } bg-[#5e936c] text-white text-lg flex flex-col items-center gap-4 rounded`} >
         {navLinks.map((link, index) => (
           <a
