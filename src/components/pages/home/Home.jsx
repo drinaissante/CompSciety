@@ -37,9 +37,6 @@ function App() {
     <div className='min-h-screen flex flex-col scroll-smooth'>
         {/* animated cursor  ?? */}
 
-        {/* header with navbar */}
-        <NavBar />
-
         {/* hero */}
         <Hero />
 
@@ -47,7 +44,7 @@ function App() {
         <Announcements />
 
         {/* gradient container */}
-        <div className="bg-gradient-to-br from-[#18230F] via-[#2b5016] to-[#324d22]">
+        <div className="bg-linear-to-br from-[#18230F] via-[#2b5016] to-[#324d22]">
           {/* About CompSciety */}
           <About />
 
