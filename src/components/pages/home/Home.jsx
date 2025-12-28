@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import NavBar from '../../NavBar.jsx'
-
 import Footer from './sections/Footer.jsx';
 import Hero from './sections/Hero.jsx';
 import Partners from './sections/Partners.jsx';

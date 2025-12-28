@@ -48,31 +48,32 @@ function NavBar() {
   }
 
   // fetch profile
-  useEffect(() => {
-      async function fetchProfile() {
-          try {
-              const profile_link = await fetchProfileURL();
+  // useEffect(() => {
+  //     async function fetchProfile() {
+  //         try {
+  //             const profile_link = await fetchProfileURL();
 
-              setProfilePic(profile_link);
-          } catch (error) {
-              console.error(error);
-          }
-      }
+  //             setProfilePic(profile_link);
+  //         } catch (error) {
+  //             console.error(error);
+  //         }
+  //     }
 
-      const unsub = onAuthStateChanged(auth, async (currentUser) => {
-          if (currentUser) {
-              fetchProfile();
-          } else {
-              setProfilePic(null);
-          }
-      });
+  //     const unsub = onAuthStateChanged(auth, async (currentUser) => {
+  //         if (currentUser) {
+  //             fetchProfile();
+  //         } else {
+  //             setProfilePic(null);
+  //         }
+  //     });
 
-      fetchProfile();
+  //     fetchProfile();
 
-      return unsub;
-  });
+  //     return unsub;
+  // });
 
   // toggle theme
+  
   useEffect(() => {
     const html = document.documentElement;
     if (isDark) {
