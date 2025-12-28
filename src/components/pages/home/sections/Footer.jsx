@@ -64,7 +64,7 @@ function Footer() {
                     Navigation
                 </span>
 
-                <ul className="flex lg:flex-col gap-3 mt-1 [&_li]:text-gray-100/50 [&_li]:hover:text-white text-sm [&_li]:w-11">
+                <ul className="flex lg:flex-col gap-3 mt-1 [&_li]:text-gray-100/50 [&_li]:hover:text-white [&_li]:hover:underline text-sm [&_li]:w-11">
                     <li>
                         <Link 
                             to="/" 
@@ -97,8 +97,13 @@ function Footer() {
                 <span className="text-sm font-bold">
                     Contact Us
                 </span>
+
                 <span className="pt-2 text-sm text-gray-100/50">
                     compscietybulsu2025@gmail.com
+                </span>
+
+                <span className="mt-5 lg:mt-19 text-gray-200/70">
+                    © 2025 Computer Science Society. All Rights Reserved.
                 </span>
             </div>
         </div>

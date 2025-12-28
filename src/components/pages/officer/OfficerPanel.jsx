@@ -36,7 +36,6 @@ function OfficerPanel() {
     const [ prevDocs, setPrevDocs ] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
-
     const [ search, setSearch ] = useState("");
     const [ filter, setFilter ] = useState("name");
 
@@ -172,7 +171,7 @@ function OfficerPanel() {
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 onKeyDown={(e) => e.key === "Enter" && fetchMembers()}
-                                className="w--1/2"
+                                className="w-1/2"
                             />
                             <Button onClick={() => fetchMembers()} className="cursor-pointer">Refresh</Button>
                         </div>
@@ -204,14 +203,14 @@ function OfficerPanel() {
                                     members.map((m) => (
                                         <TableRow key={m.id}>
                                             <TableCell>{m.id}</TableCell>
-                                            <TableCell>{m.type ? m.type.toUpperCase() : "N/A"}</TableCell>
+                                            <TableCell>{m.type ? m.type.toUpperCase() : "MEMBER"}</TableCell>
                                             <TableCell>{m.name}</TableCell>
                                             <TableCell>{m.college}</TableCell>
                                             <TableCell>{m.program}</TableCell>
                                             <TableCell>{m.section}</TableCell>
                                             <TableCell>{m.email}</TableCell>
                                             <TableCell>{m.discord}</TableCell>
-                                            <TableCell>{m.discord_verified ? "✅ Yes" : "❌"}</TableCell>
+                                            <TableCell>{m.discord_verified ? "✅" : "❌"}</TableCell>
                                             <TableCell>
                                                 {m.createdAt?.toDate ? m.createdAt.toDate().toLocaleDateString() : "—"}
                                             </TableCell>
