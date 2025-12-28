@@ -42,16 +42,21 @@ createRoot(document.getElementById('root')).render(
           
           <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/me" element={<Me /> }/>
+
+              {/* <Route path="/me" element={<Me /> }/>
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/verify" element={<VerifyEmail />} />
+              <Route path="/signup" element={<Signup />} /> */}
+
+              {/* <Route path="/verify" element={<VerifyEmail />} />
               <Route path="resetpassword" element={<ResetPassword /> } />
-              <Route path="/action" element={<ActionHandler />} />
+              <Route path="/action" element={<ActionHandler />} /> */}
+              
               <Route path="/about" element={<AboutPage />} />
               <Route path="/blogs" element={<Blogs />}/>
               <Route path="/events" element={<Events />} />
-              <Route path="/officer" element={<OfficerPanel />} />
+
+              {/* <Route path="/officer" element={<OfficerPanel />} /> */}
+
               <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
