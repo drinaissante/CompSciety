@@ -1,7 +1,4 @@
-import Announcement from "../../../models/Announcement.jsx";
-import Event from "../../../models/Event.jsx";
-
-import MotionDiv from "../../MotionDiv.jsx";
+import Timeline from "@/models/Timeline.jsx";
 import Footer from "../home/sections/Footer.jsx";
 
 const events = [
@@ -27,23 +24,17 @@ const events = [
 
 function Events() {
     return (
-        <div className='flex flex-col scroll-smooth bg-linear-to-tr from-[#18230F] via-[#2b5016] to-[#324d22]'>  
+        <div className='flex flex-col bg-linear-to-b from-[#18230F] via-[#2b5016] to-[#324d22]'>  
                 
-            <main id="events" className="min-h-screen flex flex-col lg:flex-row justify-center mt-[5%] p-10 gap-4">
-                {/* Events Column */}
-                <div className="lg:w-1/2 text-2xl text-white font-bold">
+            <main id="events" className="justify-center mt-[5%] p-10 gap-4">
+                <span className="text-center flex justify-self-center flex-col m-10 p-5 bg-green-500 rounded-2xl">
                     Events
+                </span>
 
-                    <MotionDiv className="mt-5 text-xl flex flex-col justify-between gap-5 h-90">
-                        {events.map((event, index) => (
-                            <div key={index} className="flex rounded-xl overflow-hidden transform transition duration-300 hover:scale-101 shadow-xl/15">
-                                <div className="bg-[#0e6b11] w-4 rounded-l-xl"></div>
-                                <div className="bg-[#5e936c] p-4 flex-1">
-                                    <Event {...event} />
-                                </div>
-                            </div>
-                        ))}
-                    </MotionDiv>
+                <div>
+                    <div className="lg:w-1/2 text-2xl text-white font-bold text-center lg:justify-self-center">
+                        <Timeline events={events}/>
+                    </div>
                 </div>
 
             </main>
