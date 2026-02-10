@@ -38,9 +38,6 @@ function NavBar() {
   const navigate = useNavigate();
   const { currentUser, userLoggedIn } = useAuth();
 
-
-  const [ activeLink, setActiveLink ] = useState(location.pathname.split("/")[1].toLowerCase()); // index
-  
   const logout = (e) => {
     e.preventDefault();
   
@@ -118,7 +115,6 @@ function NavBar() {
       if (location.pathname === link.navTo) {
         window.scrollTo({ top: 0, behavior: "smooth"})
       } else {
-        setActiveLink(link.name);
         navigate(link.navTo);
       }
 
@@ -214,12 +210,7 @@ function NavBar() {
           {navLinks.map((link, index) => (
             <a key={index} 
               onClick={(event) => handleLink(event, link.type, link)}
-              className={
-                `hover:text-[#5e936c] transition-all duration-500 cursor-pointer 
-                ${activeLink === link.name
-                  ? "bg-green-700 rounded-2xl px-2 py-[5.5px]" 
-                  : ""}`
-              }
+              className="hover:text-[#5e936c] transition-all duration-500 cursor-pointer"
               target="_blank" rel="noopener noreferrer"
             >
               {link.name}
