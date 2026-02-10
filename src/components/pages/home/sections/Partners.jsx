@@ -83,6 +83,8 @@ function HoverPreview({ bb, partner }) {
                     src={partner.logoSrc}
                     alt={`${partner.name} hover`}
                     className="w-full h-36 object-contain bg-[#1a1a1a]"
+                    loading="lazy"
+                    decoding="async"
                 />
 
                 <div className="p-4 text-white text-center overflow-y-auto max-h-full">
@@ -125,7 +127,17 @@ function Partners() {
                 id="partners"
                 className="mt-20 mb-10 justify-self-center sm:w-[50%] w-[88%] h-auto rounded-4xl shadow-[0_0_10px_5px_rgba(0,255,0,0.2)] bg-[#18230F] overflow-visible text-white"
             >
-                <h2 className="absolute bottom-5/6 left-1/2 -translate-x-1/2 text-3xl font-extrabold p-10 w-65 sm:p-8 sm:w-90 sm:text-5xl">Our Partners</h2>
+                <MotionDiv 
+                    className="
+                        absolute bottom-5/6
+                        left-1/2 -translate-x-1/2
+                        text-3xl font-extrabold p-10 w-60
+                        lg:p-6 lg:text-5xl
+                        "
+                    >
+                            Partners
+                </MotionDiv>
+
                 <Swiper
                     modules={[Autoplay, Pagination]}
                     pagination={{ clickable: true }}
@@ -155,6 +167,8 @@ function Partners() {
                                         <img
                                             src={partner.logoSrc}
                                             alt={partner.name}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="mt-15 h-16 w-16 object-contain border-4 rounded-full cursor-pointer transition-transform duration-300 group-hover:scale-105"
                                             draggable="false"
                                         />

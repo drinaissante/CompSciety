@@ -21,7 +21,7 @@ function Footer() {
             {/* logo & social media*/}
             <div>
                 <div className="flex items-center">
-                    <img src={logo} width="100px" />
+                    <img src={logo} width="100px" loading="lazy" decoding="async" />
 
                     <div className="flex flex-col">
                         <span className="pt-2 pb-1">
