@@ -38,6 +38,8 @@ function AboutPage() {
                             alt="CompSciety Mascot"
                             className="sm:ml-20 w-32 sm:w-44 h-auto"
                             draggable={false}
+                            loading="lazy"
+                            decoding="async"
                         />
                     </MotionDiv>
 
