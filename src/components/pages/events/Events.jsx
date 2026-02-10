@@ -1,5 +1,6 @@
 import Timeline from "@/models/Timeline.jsx";
 import Footer from "../home/sections/Footer.jsx";
+import MotionDiv from "@/components/MotionDiv.jsx";
 
 const events = [
     {
@@ -34,22 +35,22 @@ function Events() {
                 <div className="lg:w-1/2 text-center lg:justify-self-center flex flex-col gap-11">
 
                     {/* 2025 events here */}
-                    <div className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/bg.jpg')] hover:text-white lg:p-15 cbg-center bg-cover rounded-full cursor-pointer">
+                    <MotionDiv className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/bg.jpg')] hover:text-white lg:p-15 cbg-center bg-cover rounded-full cursor-pointer">
                         <h1 className="relative text-5xl font-bold text-black">2025</h1>
-                    </div>
+                    </MotionDiv>
 
 
 
 
 
                     {/* next few years (?) */}
-                    <div className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/BG_COVER.jpg')] hover:text-white lg:p-15 p-6 bg-center bg-cover rounded-full cursor-pointer">
+                    <MotionDiv className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/BG_COVER.jpg')] hover:text-white lg:p-15 p-6 bg-center bg-cover rounded-full cursor-pointer">
                         <h1 className="relative text-5xl font-bold text-black">Coming Soon</h1>
-                    </div>
+                    </MotionDiv>
                     
-                    <div className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/BG_COVER.jpg')] hover:text-white lg:p-15 p-6 bg-center bg-cover rounded-full cursor-pointer">
+                    <MotionDiv className="hover:scale-105 hover:-translate-y-1 transition-transform duration-300 hover:inset-0 hover:bg-black/50 relative bg-[url('@assets/BG_COVER.jpg')] hover:text-white lg:p-15 p-6 bg-center bg-cover rounded-full cursor-pointer">
                         <h1 className="relative lg:text-5xl text-2xl font-bold text-black">Coming Soon</h1>
-                    </div>
+                    </MotionDiv>
                 </div>
 
             </main>
