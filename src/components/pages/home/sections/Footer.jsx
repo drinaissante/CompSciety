@@ -38,11 +38,11 @@ function Footer() {
                         <FaYoutube size={30}/>
                     </a>
 
-                    <a href="https://www.tiktok.com/@compscietybulsu" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.facebook.com/compscietybulsu2025" target="_blank" rel="noopener noreferrer">
                         <FaFacebook size={30}/>
                     </a>
                     
-                    <a href="https://www.youtube.com/@ComputerScienceSociety-BulSU" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.tiktok.com/@compscietybulsu" target="_blank" rel="noopener noreferrer">
                         <FaTiktok size={30}/>
                     </a>
 
