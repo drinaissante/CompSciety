@@ -134,8 +134,8 @@ function Partners() {
                     className="
                         absolute bottom-5/6
                         left-1/2 -translate-x-1/2
-                        text-3xl font-extrabold p-10 w-60
-                        lg:p-6 lg:text-5xl
+                        text-3xl font-extrabold p-10 w-50
+                        lg:p-9 lg:w-68 lg:text-5xl
                         "
                     >
                             Partners
