@@ -148,6 +148,8 @@ function Partners() {
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     loop={true}
                     loopPreventsSliding={true}
+                    lazyPreloadPrevNext={true}
+                    watchSlidesProgress={true}
                 >
                     {partners.map((partner, i) => (
                         <SwiperSlide key={i}>
@@ -172,7 +174,8 @@ function Partners() {
                                             className="mt-15 h-16 w-16 object-contain border-4 rounded-full cursor-pointer transition-transform duration-300 group-hover:scale-105"
                                             draggable="false"
                                         />
-
+                                        <div className="swiper-lazy-preloader" />
+                                        
                                         <span className="block mt-2 max-w-[15ch] text-center w-[20ch]">{partner.name}</span>
                                     </div>
                                 </a>
