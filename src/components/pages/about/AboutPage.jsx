@@ -4,6 +4,7 @@ import mascot from "@assets/mascot.png"
 
 import Footer from "../home/sections/Footer.jsx";
 import { useEffect } from "react";
+import Bobbing from "@/components/Bobbing.jsx";
 
 function AboutPage() {
     useEffect(() => {
@@ -33,14 +34,7 @@ function AboutPage() {
                             </p>
                         </div>
 
-                        <img
-                            src={mascot}
-                            alt="CompSciety Mascot"
-                            className="sm:ml-20 w-32 sm:w-44 h-auto"
-                            draggable={false}
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        <Bobbing logo={mascot} className="sm:ml-20 w-32 sm:w-44 h-auto" />
                     </MotionDiv>
 
                     <div className="flex flex-col lg:flex-row justify-center gap-6 w-full max-w-6xl">
