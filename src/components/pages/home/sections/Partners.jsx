@@ -121,6 +121,9 @@ function Partners() {
         swiperRef.current?.autoplay.start();
     }
 
+    // check if on mobile for faster loading time
+    const isMobile = window.innerWidth < 768;
+
     return (
         <div className="relative">
             <MotionDiv
@@ -143,13 +146,15 @@ function Partners() {
                     pagination={{ clickable: true }}
                     spaceBetween={50}
                     slidesPerView={3}
-                    autoplay={{ delay: 1000, disableOnInteraction: false }}
-                    speed={2000}
+
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
+
+                    autoplay={{ delay: 1000, disableOnInteraction: false }}
+                    speed={isMobile ? 1800 : 2000}
                     loop={true}
+
                     loopPreventsSliding={true}
                     lazyPreloadPrevNext={true}
-                    watchSlidesProgress={true}
                 >
                     {partners.map((partner, i) => (
                         <SwiperSlide key={i}>
@@ -186,7 +191,7 @@ function Partners() {
                     ))}
                 </Swiper>
                 
-                {hover && (
+                {!isMobile && hover && (
                     <HoverPreview bb={hover.bb} partner={hover.partner} />
                 )}
 
