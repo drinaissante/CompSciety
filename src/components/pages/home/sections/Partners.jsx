@@ -138,7 +138,7 @@ function Partners() {
                         lg:p-9 lg:w-68 lg:text-5xl
                         "
                     >
-                            Partners
+                        Partners
                 </MotionDiv>
 
                 <Swiper

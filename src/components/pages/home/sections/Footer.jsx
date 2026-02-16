@@ -103,7 +103,7 @@ function Footer() {
                 </span>
 
                 <span className="mt-5 lg:mt-19 text-gray-200/70">
-                    © 2025 Computer Science Society. All Rights Reserved.
+                    © 2026 Computer Science Society. All Rights Reserved.
                 </span>
             </div>
         </div>
