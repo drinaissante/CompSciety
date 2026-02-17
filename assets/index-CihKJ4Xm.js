@@ -2051,7 +2051,7 @@ ${T}`}class Ft extends Error{constructor({message:e,code:n,cause:r,name:s}){var 
                        \r
                         hover:border-green-400/80\r
                         p-13 lg:p-6 lg:m-2\r
-                        m-26 mt-10 mb-10 lg:mt-0 lg:mb-0 `,children:[G.jsx("img",{src:Wg,className:`w-40 h-40 object-cover rounded-full mx-auto \r
+                        m-20 mt-10 mb-10 lg:mt-0 lg:mb-0 `,children:[G.jsx("img",{src:Wg,className:`w-40 h-40 object-cover rounded-full mx-auto \r
                                     border-4 border-green-400/70`,alt:"Internal Vice President"}),G.jsx("p",{className:"text-green-300 font-mono text-lg tracking-[0.3em] mt-6",children:"INTERNAL VICE PRESIDENT"}),G.jsx("p",{className:"text-green-400 font-bold mt-2",children:"Name.exe"})]}),G.jsxs("div",{className:`bg-black/70 backdrop-blur-xl \r
                         border border-green-400/60\r
                         rounded-3xl text-center \r
@@ -2059,7 +2059,7 @@ ${T}`}class Ft extends Error{constructor({message:e,code:n,cause:r,name:s}){var 
                         scale-110 self-start\r
                        \r
                         hover:border-green-400/80\r
-                        p-10 m-28 lg:p-8\r
+                        p-10 m-17 lg:p-8\r
                         mt-10 mb-10 lg:mt-0 lg:mb-0 `,children:[G.jsx("img",{src:Wg,className:`w-44 h-44 object-cover rounded-full mx-auto \r
                                     border-4 border-green-400 \r
                                     shadow-[0_0_60px_#00ff41]`,alt:"President"}),G.jsx("p",{className:"text-green-300 font-mono text-lg tracking-[0.3em] mt-6",children:"PRESIDENT"}),G.jsx("p",{className:"text-green-400 font-bold mt-2",children:"Name.exe"})]}),G.jsxs("div",{className:`bg-black/60 backdrop-blur-xl \r
@@ -2070,7 +2070,7 @@ ${T}`}class Ft extends Error{constructor({message:e,code:n,cause:r,name:s}){var 
 \r
                         hover:border-green-400/80\r
                         p-13 lg:p-6 lg:m-2\r
-                        m-26 mt-10 mb-10 lg:mt-0 lg:mb-0 `,children:[G.jsx("img",{src:Wg,className:`w-40 h-40 object-cover rounded-full mx-auto \r
+                        m-20 mt-10 mb-10 lg:mt-0 lg:mb-0 `,children:[G.jsx("img",{src:Wg,className:`w-40 h-40 object-cover rounded-full mx-auto \r
                                     border-4 border-green-400/70`,alt:"External Vice President"}),G.jsx("p",{className:"text-green-300 font-mono text-lg tracking-[0.3em] mt-6",children:"EXTERNAL VICE PRESIDENT"}),G.jsx("p",{className:"text-green-400 font-bold mt-2",children:"Name.exe"})]})]}),G.jsxs("div",{className:"mx-auto mb-24 max-w-sm lg:max-w-6xl ",children:[G.jsx("h2",{className:"text-green-300 font-mono text-2xl tracking-widest mb-10 border-b border-green-500/20 pb-4 text-center ",children:"EXECUTIVES"}),G.jsx("div",{className:"grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-h-60 overflow-y-auto pr-2",children:[1,2,3,4,5,6,7,8,9].map(r=>G.jsxs("div",{className:`bg-black/40 backdrop-blur-md \r
                                 border border-green-500/10 \r
                                 rounded-xl p-6 \r
