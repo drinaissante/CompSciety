@@ -7,44 +7,52 @@ import adv2 from "@assets/adv2_temp.jpg"
 import temppfp from "@assets/temppfp.jpg"
 
 import Footer from "../home/sections/Footer.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Bobbing from "@/components/Bobbing.jsx";
 import Officers from "./Officers.jsx";
 
 import committees from "../../../lib/committees.json"
+import { AnimatePresence, motion } from "framer-motion";
 
 function AboutPage() {
+    const [ openId, setOpenId ] = useState(null);
+
     useEffect(() => {
         document.title = "About | BulSU Computer Science Society"
     }, []);
 
-    function showMembers(members) {
-        // members - array
+    function showMembers(committee, isOpen) {
+        
+        return (
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                        className="overflow-hidden"
+                    >
+                        <ul className="mt-4 space-y-2 text-sm text-green-300">
+                            <li className="font-semibold text-green-400 bg-green-800 rounded-full p-2 border">
+                                
+                                <p className="font-semibold text-green-400"> {committee.head} </p>
+                            </li>
 
-        for (let i = 0; i < members.length; i++) {
-            const member = members[i];
-            
-            // member has 'name' and 'role'
+                            <div className="mt-5 space-y-2">
+                                {committee.members.map((member, index) => (
+                                    <li key={index}>
+                                        {member.name}
+                                    </li>
+                                ))}
+                            </div>
+                        </ul>
 
-            <p>
-                {/* TODO: find a way how to sort the roles
-                
-                    in a committee, pwedeng maraming roles
+                    </motion.div>
+                )}
 
-                    like sa multimedia
-
-                    graphic designer:
-                       * name
-                       * name
-                       
-                    video editor:
-                       * name
-                       * name
-                    
-                    parang ganiyan ^^
-                */}
-            </p>
-        }
+            </AnimatePresence>
+        );
     }
 
     return (
@@ -298,22 +306,31 @@ function AboutPage() {
                         COMMITTEES
                     </h2>
                     
-                    <div className="mx-auto mb-24 max-w-sm lg:max-w-6xl ">
-                        {committees.map((committee) => (
-                            <div key={committee.id} className="p-6 border rounded-xl">
-                                <p>
-                                    {committee.name}
-                                </p>
+                    <div className="gap-8 mx-auto mb-24 grid grid-cols-2 lg:grid-cols-4">
+                        {committees.map((committee) => {
+                            const isOpen = openId === committee.id;
 
-                                <p>
-                                    Head: {committee.head}
-                                </p>
+                            return (
+                                <div key={committee.id} 
+                                    className="p-6 border rounded-xl text-center border-green-500/60 
+                                    hover:bg-green-500/20
+                                    hover:border-green-400/30
+                                    cursor-pointer
+                                    transition-all duration-200"
 
-                                {/* members = array */}
+                                    onClick={() => setOpenId(isOpen ? null : committee.id)}
+                                >
 
-                                {showMembers(committee.members)}
-                            </div>
-                        ))}
+                                    <p className="font-mono tracking-wide">
+                                        {committee.name}
+                                    </p>
+
+                                    {/* members = array */}
+
+                                    {showMembers(committee, isOpen)}
+                                </div>
+                            )
+                        })}
                     </div>
 
 
@@ -343,21 +360,6 @@ function AboutPage() {
                     */}
 
                 </div>
-
-
-
-                {/* officers pictures and such */}
-                {/* pwedeng org chart */}
-
-                {/* 
-                                org adv                 org adv
-                                            pres
-                                        ext      int
-
-                
-                
-                
-                */}
             </div>
             
             <Footer />
