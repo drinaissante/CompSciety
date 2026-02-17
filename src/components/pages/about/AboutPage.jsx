@@ -11,10 +11,41 @@ import { useEffect } from "react";
 import Bobbing from "@/components/Bobbing.jsx";
 import Officers from "./Officers.jsx";
 
+import committees from "../../../lib/committees.json"
+
 function AboutPage() {
     useEffect(() => {
         document.title = "About | BulSU Computer Science Society"
     }, []);
+
+    function showMembers(members) {
+        // members - array
+
+        for (let i = 0; i < members.length; i++) {
+            const member = array[i];
+            
+            // member has 'name' and 'role'
+
+            <p>
+                {/* TODO: find a way how to sort the roles
+                
+                    in a committee, pwedeng maraming roles
+
+                    like sa multimedia
+
+                    graphic designer:
+                       * name
+                       * name
+                       
+                    video editor:
+                       * name
+                       * name
+                    
+                    parang ganiyan ^^
+                */}
+            </p>
+        }
+    }
 
     return (
         <div className='min-h-screen flex flex-col scroll-smooth'>    
@@ -68,7 +99,7 @@ function AboutPage() {
                 </div>
                 
 
-                <div className="font-mono tracking-wide flex justify-center text-center mt-10 text-3xl">
+                <div className="font-mono tracking-wide flex justify-center text-center mt-10 text-3xl pb-4 max-w-[450px] lg:max-w-6xl mx-auto border-b border-green-500/30">
                     Advisers
                 </div>
 
@@ -125,7 +156,7 @@ function AboutPage() {
 
                 
 
-                <div className="font-mono tracking-wide flex justify-center text-center mt-10 text-3xl">
+                <div className="font-mono tracking-wide flex justify-center text-center mt-10 mb-15 text-3xl border-b pb-4 max-w-sm lg:max-w-6xl mx-auto border-green-500/20">
                     Officers
                 </div>
 
@@ -133,23 +164,28 @@ function AboutPage() {
 
                 {/* pres + vps*/}
                 <div className="relative justify-center items-center gap-20 mb-20
-                                lg:flex lg:gap-16 lg:mb-32">
-
+                                lg:flex lg:gap-0 lg:mb-32">
+                    
+                    {/* internal vice */}
                     <div className="bg-black/60 backdrop-blur-xl 
                         border border-green-400/30
-                        rounded-full p-12 text-center 
+                        rounded-3xl text-center 
                         shadow-[0_0_60px_rgba(0,255,65,0.2)]
-                        mt-10 opacity-90 self-end">
+                        opacity-90 self-end
+                       
+                        hover:border-green-400/80
+                        p-9 lg:p-4 lg:m-2
+                        m-30 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
                             src={temppfp}
                             className="w-40 h-40 object-cover rounded-full mx-auto 
                                     border-4 border-green-400/70"
-                            alt="Internal Vice"
+                            alt="Internal Vice President"
                         />
 
                         <p className="text-green-300 font-mono text-lg tracking-[0.3em] mt-6">
-                            INTERNAL VICE
+                            INTERNAL VICE PRESIDENT
                         </p>
 
                         <p className="text-green-400 font-bold mt-2">
@@ -157,11 +193,16 @@ function AboutPage() {
                         </p>
                     </div>
 
+                    {/* pres */}
                     <div className="bg-black/70 backdrop-blur-xl 
                         border border-green-400/60
-                        rounded-full p-14 text-center 
+                        rounded-3xl text-center 
                         shadow-[0_0_100px_rgba(0,255,65,0.4)]
-                        scale-105 self-start">
+                        scale-110 self-start
+                       
+                        hover:border-green-400/80
+                        p-10 m-28 lg:p-8
+                        mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
                             src={temppfp}
@@ -180,21 +221,26 @@ function AboutPage() {
                         </p>
                     </div>
 
+                    {/* external vice */}
                     <div className="bg-black/60 backdrop-blur-xl 
                         border border-green-400/30
-                        rounded-full p-12 text-center 
+                        rounded-3xl text-center 
                         shadow-[0_0_60px_rgba(0,255,65,0.2)]
-                        mt-10 opacity-90 self-end">
+                        opacity-90 self-end
+
+                        hover:border-green-400/80
+                        p-9 lg:p-4 lg:m-2
+                        m-32 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
                             src={temppfp}
                             className="w-40 h-40 object-cover rounded-full mx-auto 
                                     border-4 border-green-400/70"
-                            alt="External Vice"
+                            alt="External Vice President"
                         />
 
                         <p className="text-green-300 font-mono text-lg tracking-[0.3em] mt-6">
-                            EXTERNAL VICE
+                            EXTERNAL VICE PRESIDENT
                         </p>
 
                         <p className="text-green-400 font-bold mt-2">
@@ -206,16 +252,16 @@ function AboutPage() {
 
 
                 {/* executives / committees */}
-                <div className="max-w-6xl mx-auto mb-24">
+                <div className="mx-auto mb-24 max-w-sm lg:max-w-6xl ">
 
-                    <h2 className="text-green-300 font-mono text-2xl tracking-widest mb-10 border-b border-green-500/20 pb-4 text-center">
+                    <h2 className="text-green-300 font-mono text-2xl tracking-widest mb-10 border-b border-green-500/20 pb-4 text-center ">
                         EXECUTIVES
                     </h2>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-h-60 overflow-y-auto pr-2">
 
                         {/* change array to executives */}
-                        {[1,2,3,4].map((member) => (
+                        {[1,2,3,4,5,6,7,8,9].map((member) => (
                             <div key={member} className="bg-black/40 backdrop-blur-md 
                                 border border-green-500/10 
                                 rounded-xl p-6 
@@ -251,6 +297,25 @@ function AboutPage() {
                     <h2 className="text-green-300 font-mono text-2xl tracking-widest mb-10 border-b border-green-500/20 pb-4 text-center mt-10">
                         COMMITTEES
                     </h2>
+                    
+                    <div className="mx-auto mb-24 max-w-sm lg:max-w-6xl ">
+                        {committees.map((committee) => (
+                            <div key={committee.id} className="p-6 border rounded-xl">
+                                <p>
+                                    {committee.name}
+                                </p>
+
+                                <p>
+                                    Head: {committee.head}
+                                </p>
+
+                                {/* members = array */}
+
+                                {showMembers(committee.members)}
+                            </div>
+                        ))}
+                    </div>
+
 
                     {/* 
                         committees

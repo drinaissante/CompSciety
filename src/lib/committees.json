@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "Public Information Committee",
+    "head": "Cabigao, Kayleigh D.",
+    "members": [
+      { "name": "Maniacop, Zyrein Shen F.", "role": "PIC Associate" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Membership Committee",
+    "head": "Cruz, Jacque Daine A.",
+    "members": [
+      { "name": "Baltazar, Rigor Joseph M.", "role": "Membership Officer" },
+      { "name": "Atienza, Aldrick M.", "role": "Membership Officer" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Wellness & Engagement Committee",
+    "head": "Bahinting, Jan Krishien T.",
+    "members": [
+      { "name": "Viray, Angel Lorraine T.", "role": "Feedback and Evaluation Officer" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Financial Committee",
+    "head": "Teodoro, Jerome S.",
+    "members": [
+      { "name": "Manlapig, Jerol Liuz V.", "role": "Internal Auditor" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Multimedia Committee",
+    "head": "Jornal, Julliana Rojimherie B.",
+    "members": [
+      { "name": "Agustin, Dale Madison B.", "role": "Graphic Designer" },
+      { "name": "Villanueva, Mikaela Marie A.", "role": "Graphic Designer" },
+      { "name": "Delos Santos, Jiro Franco G.", "role": "Graphic Designer" },
+      { "name": "Panuncio, David James G.", "role": "Graphic Designer" },
+      { "name": "Santos, Evan Ernest S.", "role": "Video Editor" },
+      { "name": "Nicolas, Elsoh Lhorenz D.", "role": "Video Editor" },
+      { "name": "Tiongco, John Lloyd H.", "role": "Video Editor" },
+      { "name": "Domingo, Miguelito", "role": "Video Editor" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Technical Committee",
+    "head": "Peñafiel, Ryan Jerick G.",
+    "members": [
+      { "name": "Fedalquin, Nina Mycaella A.", "role": "Technical Associate" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Logistics Committee",
+    "head": "De Jose, Ezekiel Kely L.",
+    "members": [
+      { "name": "Santos, Lara Mae E.", "role": "Sponsor & Partnership Officer" },
+      { "name": "Repana, Jellian Q.", "role": "Sponsor & Partnership Officer" },
+      { "name": "Santos, John Carlo", "role": "External Officer" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Developer Core Committee",
+    "head": "Budaño, Gabriel C.",
+    "members": [
+      { "name": "Victoria, Aldrin C.", "role": "Developer Core Associate" },
+      { "name": "Gutierrez, Kirby Benj D.", "role": "Developer Core Associate" },
+      { "name": "Orlanda, Gabrielle Sebastian P.", "role": "Developer Core Associate" },
+      { "name": "Francisco, Alliah Leona M.", "role": "Programs Associate" },
+      { "name": "Nieva, Lester Loyd P.", "role": "Research and Data Associate" }
+
+    ]
+  }
+]
