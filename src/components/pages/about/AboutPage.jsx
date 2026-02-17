@@ -22,7 +22,7 @@ function AboutPage() {
         // members - array
 
         for (let i = 0; i < members.length; i++) {
-            const member = array[i];
+            const member = members[i];
             
             // member has 'name' and 'role'
 
