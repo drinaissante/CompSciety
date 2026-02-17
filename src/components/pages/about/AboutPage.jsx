@@ -12,6 +12,8 @@ import Bobbing from "@/components/Bobbing.jsx";
 import Officers from "./Officers.jsx";
 
 import committees from "../../../lib/committees.json"
+import executives from "../../../lib/executives.json"
+
 import { AnimatePresence, motion } from "framer-motion";
 
 function AboutPage() {
@@ -107,7 +109,9 @@ function AboutPage() {
                 </div>
                 
 
-                <div className="font-mono tracking-wide flex justify-center text-center mt-10 text-3xl pb-4 max-w-[450px] lg:max-w-6xl mx-auto border-b border-green-500/30">
+                <div className="font-mono tracking-wide 
+                                flex justify-center text-center 
+                                mt-10 text-3xl pb-4 max-w-sm lg:max-w-6xl mx-auto border-b border-green-500/30">
                     Advisers
                 </div>
 
@@ -182,8 +186,8 @@ function AboutPage() {
                         opacity-90 self-end
                        
                         hover:border-green-400/80
-                        p-9 lg:p-4 lg:m-2
-                        m-30 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
+                        p-13 lg:p-6 lg:m-2
+                        m-20 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
                             src={temppfp}
@@ -197,7 +201,7 @@ function AboutPage() {
                         </p>
 
                         <p className="text-green-400 font-bold mt-2">
-                            Name.exe
+                            Mico Andrei C. Gonzales
                         </p>
                     </div>
 
@@ -209,7 +213,7 @@ function AboutPage() {
                         scale-110 self-start
                        
                         hover:border-green-400/80
-                        p-10 m-28 lg:p-8
+                        p-10 m-17 lg:p-8
                         mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
@@ -225,7 +229,7 @@ function AboutPage() {
                         </p>
 
                         <p className="text-green-400 font-bold mt-2">
-                            Name.exe
+                            Ellah D. Benerado
                         </p>
                     </div>
 
@@ -237,8 +241,8 @@ function AboutPage() {
                         opacity-90 self-end
 
                         hover:border-green-400/80
-                        p-9 lg:p-4 lg:m-2
-                        m-32 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
+                        p-13 lg:p-6 lg:m-2
+                        m-20 mt-10 mb-10 lg:mt-0 lg:mb-0 ">
 
                         <img
                             src={temppfp}
@@ -252,7 +256,7 @@ function AboutPage() {
                         </p>
 
                         <p className="text-green-400 font-bold mt-2">
-                            Name.exe
+                            Trevor Basti G. Torres
                         </p>
                     </div>
 
@@ -269,20 +273,19 @@ function AboutPage() {
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-h-60 overflow-y-auto pr-2">
 
                         {/* change array to executives */}
-                        {[1,2,3,4,5,6,7,8,9].map((member) => (
-                            <div key={member} className="bg-black/40 backdrop-blur-md 
+                        {executives.map((member, index) => (
+                            <div key={index} className="bg-black/40 backdrop-blur-md 
                                 border border-green-500/10 
-                                rounded-xl p-6 
+                                rounded-xl p-6 text-center
                                 hover:border-green-400/40 
                                 transition-all duration-300">
 
-
                                 <p className="text-green-300 font-mono text-sm tracking-widest">
-                                    Development Core Committee
+                                    {member.role}
                                 </p>
 
                                 <p className="text-green-400 font-semibold">
-                                    Head: Gabriel Budano
+                                    {member.name}
                                 </p>
                             </div>
                         ))}
@@ -312,11 +315,14 @@ function AboutPage() {
 
                             return (
                                 <div key={committee.id} 
-                                    className="p-6 border rounded-xl text-center border-green-500/60 
+                                    className={`p-6 border rounded-xl text-center border-green-500/60 
                                     hover:bg-green-500/20
                                     hover:border-green-400/30
                                     cursor-pointer
-                                    transition-all duration-200"
+                                    transition-all duration-200 
+                                    `} 
+
+                                    // ADD IF isOpen = make "committee" role green
 
                                     onClick={() => setOpenId(isOpen ? null : committee.id)}
                                 >
